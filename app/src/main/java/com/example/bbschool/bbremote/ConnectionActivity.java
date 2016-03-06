@@ -10,7 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 public class ConnectionActivity extends AppCompatActivity {
-
+//test
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
