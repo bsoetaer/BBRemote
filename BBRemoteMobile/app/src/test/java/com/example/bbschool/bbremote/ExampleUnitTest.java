@@ -1,4 +1,4 @@
-package com.example.bbschool.bbremote;
+package com.example.bbschool.bbremotemobile;
 
 import org.junit.Test;
 
