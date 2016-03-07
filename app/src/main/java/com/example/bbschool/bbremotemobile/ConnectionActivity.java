@@ -1,4 +1,4 @@
-package com.example.bbschool.bbremote;
+package com.example.bbschool.bbremotemobile;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
