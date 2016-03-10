@@ -9,5 +9,14 @@
     tools:context=".KeyboardFragment"
     tools:showIn="@layout/activity_input">
 
+    <com.example.bbschool.bbremotemobile.KeyboardViewFix
+        android:id="@+id/keyboard_view"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:visibility="gone" />
 
 </RelativeLayout>

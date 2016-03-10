@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Keyboard xmlns:android="http://schemas.android.com/apk/res/android"
+    android:keyWidth="10%p"
+    android:keyHeight="10%p">
+
+    <Row android:keyWidth="16%p">
+        <Key
+            android:codes="@integer/key_esc"
+            android:keyLabel="ESC"
+            android:keyEdgeFlags="left"/>
+        <Key
+            android:codes="@integer/key_tab"
+            android:keyLabel="TAB"
+            android:isRepeatable="true" />
+        <Key
+            android:codes="@integer/key_win"
+            android:keyLabel="WIN"
+            android:isModifier="true"
+            android:isSticky="true" />
+        <Key
+            android:codes="@integer/key_ctrl"
+            android:keyLabel="CTRL"
+            android:isModifier="true"
+            android:isSticky="true" />
+        <Key
+            android:codes="@integer/key_alt"
+            android:keyLabel="ALT"
+            android:isModifier="true"
+            android:isSticky="true" />
+        <Key
+            android:codes="@integer/key_del"
+            android:keyLabel="DEL"
+            android:isRepeatable="true"
+            android:keyEdgeFlags="right" />
+    </Row>
+    <Row>
+        <Key
+            android:codes="@integer/key_0"
+            android:keyLabel="0"
+            android:keyEdgeFlags="left" />
+        <Key
+            android:codes="@integer/key_1"
+            android:keyLabel="1" />
+        <Key
+            android:codes="@integer/key_2"
+            android:keyLabel="2" />
+        <Key
+            android:codes="@integer/key_3"
+            android:keyLabel="3" />
+        <Key
+            android:codes="@integer/key_4"
+            android:keyLabel="4" />
+        <Key
+            android:codes="@integer/key_5"
+            android:keyLabel="5" />
+        <Key
+            android:codes="@integer/key_6"
+            android:keyLabel="6" />
+        <Key
+            android:codes="@integer/key_7"
+            android:keyLabel="7" />
+        <Key
+            android:codes="@integer/key_8"
+            android:keyLabel="8" />
+        <Key
+            android:codes="@integer/key_9"
+            android:keyLabel="9"
+            android:keyEdgeFlags="right"/>
+    </Row>
+    <Row>
+        <Key
+            android:codes="@integer/key_q"
+            android:keyLabel="q"
+            android:keyEdgeFlags="left" />
+        <Key
+            android:codes="@integer/key_w"
+            android:keyLabel="w" />
+        <Key
+            android:codes="@integer/key_e"
+            android:keyLabel="e" />
+        <Key
+            android:codes="@integer/key_r"
+            android:keyLabel="r" />
+        <Key
+            android:codes="@integer/key_t"
+            android:keyLabel="t" />
+        <Key
+            android:codes="@integer/key_y"
+            android:keyLabel="y" />
+        <Key
+            android:codes="@integer/key_u"
+            android:keyLabel="u" />
+        <Key
+            android:codes="@integer/key_i"
+            android:keyLabel="i" />
+        <Key
+            android:codes="@integer/key_o"
+            android:keyLabel="o" />
+        <Key
+            android:codes="@integer/key_p"
+            android:keyLabel="p"
+            android:keyEdgeFlags="right"/>
+    </Row>
+    <Row>
+        <Key
+            android:codes="@integer/key_a"
+            android:keyLabel="a"
+            android:keyEdgeFlags="left" />
+        <Key
+            android:codes="@integer/key_s"
+            android:keyLabel="s" />
+        <Key
+            android:codes="@integer/key_d"
+            android:keyLabel="d" />
+        <Key
+            android:codes="@integer/key_f"
+            android:keyLabel="f" />
+        <Key
+            android:codes="@integer/key_g"
+            android:keyLabel="g" />
+        <Key
+            android:codes="@integer/key_h"
+            android:keyLabel="h" />
+        <Key
+            android:codes="@integer/key_j"
+            android:keyLabel="j" />
+        <Key
+            android:codes="@integer/key_k"
+            android:keyLabel="k" />
+        <Key
+            android:codes="@integer/key_l"
+            android:keyLabel="l"
+            android:keyEdgeFlags="right"/>
+    </Row>
+    <Row>
+        <Key
+            android:codes="@integer/key_shift"
+            android:keyIcon="@drawable/ic_arrow_upward_white_48dp"
+            android:keyWidth="15%p"
+            android:keyEdgeFlags="left" />
+        <Key
+            android:codes="@integer/key_z"
+            android:keyLabel="z" />
+        <Key
+            android:codes="@integer/key_x"
+            android:keyLabel="x" />
+        <Key
+            android:codes="@integer/key_c"
+            android:keyLabel="c" />
+        <Key
+            android:codes="@integer/key_v"
+            android:keyLabel="v" />
+        <Key
+            android:codes="@integer/key_b"
+            android:keyLabel="b" />
+        <Key
+            android:codes="@integer/key_n"
+            android:keyLabel="n" />
+        <Key
+            android:codes="@integer/key_m"
+            android:keyLabel="m" />
+        <Key
+            android:codes="@integer/key_backspace"
+            android:keyIcon="@drawable/ic_backspace_white_48dp"
+            android:keyWidth="15%p"
+            android:keyEdgeFlags="right" />
+    </Row>
+    <Row>
+        <Key
+            android:codes="@integer/key_mode_change"
+            android:keyLabel="1/3"
+            android:keyWidth="15%p"
+            android:keyEdgeFlags="left" />
+        <Key
+            android:codes="@integer/key_space"
+            android:keyIcon="@drawable/ic_space_bar_white_48dp"
+            android:keyWidth="60%p"/>
+        <Key
+            android:codes="@integer/key_period"
+            android:keyLabel="."/>
+        <Key
+            android:codes="@integer/key_enter"
+            android:keyIcon="@drawable/ic_keyboard_return_white_48dp"
+            android:keyWidth="15%p"
+            android:keyEdgeFlags="right"/>
+    </Row>
+</Keyboard>
