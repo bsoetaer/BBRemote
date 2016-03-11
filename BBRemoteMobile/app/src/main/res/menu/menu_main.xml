@@ -1,0 +1,75 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.bbschool.bbremotemobile.ConnectionActivity">
+    <item
+        android:id="@+id/action_connection"
+        android:orderInCategory="10"
+        android:title="@string/action_connection"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/input_modes"
+        android:orderInCategory="20"
+        android:title="@string/menu_input_modes"
+        app:showAsAction="never">
+        <menu>
+            <item
+                android:id="@+id/action_keyboard"
+                android:orderInCategory="10"
+                android:title="@string/action_keyboard" />
+            <item
+                android:id="@+id/action_touchpad"
+                android:orderInCategory="20"
+                android:title="@string/action_touchpad" />
+            <item
+                android:id="@+id/action_optical"
+                android:orderInCategory="30"
+                android:title="@string/action_optical" />
+            <item
+                android:id="@+id/action_camera"
+                android:orderInCategory="40"
+                android:title="@string/action_camera" />
+            <item
+                android:id="@+id/action_mic"
+                android:orderInCategory="50"
+                android:title="@string/action_mic" />
+            <item
+                android:id="@+id/action_gamepad"
+                android:orderInCategory="60"
+                android:title="@string/action_gamepad" />
+        </menu>
+    </item>
+    <item
+        android:id="@+id/dual_modes"
+        android:orderInCategory="30"
+        android:title="@string/menu_dual_mode"
+        app:showAsAction="never">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/action_dual_camera"
+                    android:orderInCategory="10"
+                    android:title="@string/action_dual_camera" />
+                <item
+                    android:id="@+id/action_dual_mic"
+                    android:orderInCategory="20"
+                    android:title="@string/action_dual_mic" />
+                <item
+                    android:id="@+id/action_dual_none"
+                    android:orderInCategory="30"
+                    android:title="@string/action_dual_none"
+                    android:checked="true"/>
+            </group>
+        </menu>
+    </item>
+    <item
+        android:id="@+id/action_customize"
+        android:orderInCategory="40"
+        android:title="@string/action_customize"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_settings"
+        android:orderInCategory="100"
+        android:title="@string/action_settings"
+        app:showAsAction="never" />
+</menu>
