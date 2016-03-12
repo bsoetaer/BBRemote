@@ -4,11 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    android:id="@+id/input_mode_fragment"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.example.bbschool.bbremotemobile.InputActivity"
     tools:showIn="@layout/activity_input">
-
-    <FrameLayout
-        android:id="@+id/fragment_container"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
 </RelativeLayout>

@@ -3,133 +3,139 @@
     android:keyWidth="10%p"
     android:keyHeight="10%p">
 
-    <Row android:keyWidth="16%p">
+    <Row android:keyWidth="14.28%p">
         <Key
             android:codes="@integer/key_esc"
-            android:keyLabel="ESC"
+            android:keyLabel="@string/key_esc"
             android:keyEdgeFlags="left"/>
         <Key
             android:codes="@integer/key_tab"
-            android:keyLabel="TAB"
+            android:keyLabel="@string/key_tab"
             android:isRepeatable="true" />
         <Key
+            android:codes="@integer/key_caps"
+            android:keyLabel="@string/key_caps"
+            android:isModifier="true"
+            android:isSticky="true" />
+        <Key
             android:codes="@integer/key_win"
-            android:keyLabel="WIN"
+            android:keyLabel="@string/key_win"
             android:isModifier="true"
             android:isSticky="true" />
         <Key
             android:codes="@integer/key_ctrl"
-            android:keyLabel="CTRL"
+            android:keyLabel="@string/key_ctrl"
             android:isModifier="true"
             android:isSticky="true" />
         <Key
             android:codes="@integer/key_alt"
-            android:keyLabel="ALT"
+            android:keyLabel="@string/key_alt"
             android:isModifier="true"
             android:isSticky="true" />
         <Key
             android:codes="@integer/key_del"
-            android:keyLabel="DEL"
+            android:keyLabel="@string/key_del"
             android:isRepeatable="true"
             android:keyEdgeFlags="right" />
     </Row>
     <Row>
         <Key
             android:codes="@integer/key_0"
-            android:keyLabel="0"
+            android:keyLabel="@string/key_0"
             android:keyEdgeFlags="left" />
         <Key
             android:codes="@integer/key_1"
-            android:keyLabel="1" />
+            android:keyLabel="@string/key_1" />
         <Key
             android:codes="@integer/key_2"
-            android:keyLabel="2" />
+            android:keyLabel="@string/key_2" />
         <Key
             android:codes="@integer/key_3"
-            android:keyLabel="3" />
+            android:keyLabel="@string/key_3" />
         <Key
             android:codes="@integer/key_4"
-            android:keyLabel="4" />
+            android:keyLabel="@string/key_4" />
         <Key
             android:codes="@integer/key_5"
-            android:keyLabel="5" />
+            android:keyLabel="@string/key_5" />
         <Key
             android:codes="@integer/key_6"
-            android:keyLabel="6" />
+            android:keyLabel="@string/key_6" />
         <Key
             android:codes="@integer/key_7"
-            android:keyLabel="7" />
+            android:keyLabel="@string/key_7" />
         <Key
             android:codes="@integer/key_8"
-            android:keyLabel="8" />
+            android:keyLabel="@string/key_8" />
         <Key
             android:codes="@integer/key_9"
-            android:keyLabel="9"
+            android:keyLabel="@string/key_9"
             android:keyEdgeFlags="right"/>
     </Row>
     <Row>
         <Key
             android:codes="@integer/key_q"
-            android:keyLabel="q"
+            android:keyLabel="@string/key_q"
             android:keyEdgeFlags="left" />
         <Key
             android:codes="@integer/key_w"
-            android:keyLabel="w" />
+            android:keyLabel="@string/key_w" />
         <Key
             android:codes="@integer/key_e"
-            android:keyLabel="e" />
+            android:keyLabel="@string/key_e" />
         <Key
             android:codes="@integer/key_r"
-            android:keyLabel="r" />
+            android:keyLabel="@string/key_r" />
         <Key
             android:codes="@integer/key_t"
-            android:keyLabel="t" />
+            android:keyLabel="@string/key_t" />
         <Key
             android:codes="@integer/key_y"
-            android:keyLabel="y" />
+            android:keyLabel="@string/key_y" />
         <Key
             android:codes="@integer/key_u"
-            android:keyLabel="u" />
+            android:keyLabel="@string/key_u" />
         <Key
             android:codes="@integer/key_i"
-            android:keyLabel="i" />
+            android:keyLabel="@string/key_i" />
         <Key
             android:codes="@integer/key_o"
-            android:keyLabel="o" />
+            android:keyLabel="@string/key_o" />
         <Key
             android:codes="@integer/key_p"
-            android:keyLabel="p"
+            android:keyLabel="@string/key_p"
             android:keyEdgeFlags="right"/>
     </Row>
     <Row>
         <Key
             android:codes="@integer/key_a"
-            android:keyLabel="a"
+            android:keyLabel="@string/key_a"
+            android:horizontalGap="5%p"
             android:keyEdgeFlags="left" />
         <Key
             android:codes="@integer/key_s"
-            android:keyLabel="s" />
+            android:keyLabel="@string/key_s" />
         <Key
             android:codes="@integer/key_d"
-            android:keyLabel="d" />
+            android:keyLabel="@string/key_d" />
         <Key
             android:codes="@integer/key_f"
-            android:keyLabel="f" />
+            android:keyLabel="@string/key_f" />
         <Key
             android:codes="@integer/key_g"
-            android:keyLabel="g" />
+            android:keyLabel="@string/key_g" />
         <Key
             android:codes="@integer/key_h"
-            android:keyLabel="h" />
+            android:keyLabel="@string/key_h" />
         <Key
             android:codes="@integer/key_j"
-            android:keyLabel="j" />
+            android:keyLabel="@string/key_j" />
         <Key
             android:codes="@integer/key_k"
-            android:keyLabel="k" />
+            android:keyLabel="@string/key_k" />
         <Key
             android:codes="@integer/key_l"
-            android:keyLabel="l"
+            android:keyLabel="@string/key_l"
             android:keyEdgeFlags="right"/>
     </Row>
     <Row>
@@ -137,38 +143,41 @@
             android:codes="@integer/key_shift"
             android:keyIcon="@drawable/ic_arrow_upward_white_48dp"
             android:keyWidth="15%p"
-            android:keyEdgeFlags="left" />
+            android:isModifier="true"
+            android:isSticky="true" />
+        android:keyEdgeFlags="left" />
         <Key
             android:codes="@integer/key_z"
-            android:keyLabel="z" />
+            android:keyLabel="@string/key_z" />
         <Key
             android:codes="@integer/key_x"
-            android:keyLabel="x" />
+            android:keyLabel="@string/key_x" />
         <Key
             android:codes="@integer/key_c"
-            android:keyLabel="c" />
+            android:keyLabel="@string/key_c" />
         <Key
             android:codes="@integer/key_v"
-            android:keyLabel="v" />
+            android:keyLabel="@string/key_v" />
         <Key
             android:codes="@integer/key_b"
-            android:keyLabel="b" />
+            android:keyLabel="@string/key_b" />
         <Key
             android:codes="@integer/key_n"
-            android:keyLabel="n" />
+            android:keyLabel="@string/key_n" />
         <Key
             android:codes="@integer/key_m"
-            android:keyLabel="m" />
+            android:keyLabel="@string/key_m" />
         <Key
             android:codes="@integer/key_backspace"
             android:keyIcon="@drawable/ic_backspace_white_48dp"
+            android:scaleType="fitXY"
             android:keyWidth="15%p"
             android:keyEdgeFlags="right" />
     </Row>
     <Row>
         <Key
             android:codes="@integer/key_mode_change"
-            android:keyLabel="1/3"
+            android:keyLabel="@string/key_mode_1"
             android:keyWidth="15%p"
             android:keyEdgeFlags="left" />
         <Key
@@ -177,7 +186,7 @@
             android:keyWidth="60%p"/>
         <Key
             android:codes="@integer/key_period"
-            android:keyLabel="."/>
+            android:keyLabel="@string/key_period"/>
         <Key
             android:codes="@integer/key_enter"
             android:keyIcon="@drawable/ic_keyboard_return_white_48dp"

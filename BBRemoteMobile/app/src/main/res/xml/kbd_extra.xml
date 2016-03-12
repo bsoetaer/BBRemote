@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Keyboard xmlns:android="http://schemas.android.com/apk/res/android"
+    android:keyWidth="11.11%p"
+    android:keyHeight="10%p"
+    android:keyTextSize="50sp">
+
+    <Row android:keyWidth="14.28%p">
+        <Key
+            android:codes="@integer/key_esc"
+            android:keyLabel="@string/key_esc"
+            android:keyEdgeFlags="left"/>
+        <Key
+            android:codes="@integer/key_tab"
+            android:keyLabel="@string/key_tab"
+            android:isRepeatable="true" />
+        <Key
+            android:codes="@integer/key_caps"
+            android:keyLabel="@string/key_caps"
+            android:isModifier="true"
+            android:isSticky="true" />
+        <Key
+            android:codes="@integer/key_win"
+            android:keyLabel="@string/key_win"
+            android:isModifier="true"
+            android:isSticky="true" />
+        <Key
+            android:codes="@integer/key_ctrl"
+            android:keyLabel="@string/key_ctrl"
+            android:isModifier="true"
+            android:isSticky="true" />
+        <Key
+            android:codes="@integer/key_alt"
+            android:keyLabel="@string/key_alt"
+            android:isModifier="true"
+            android:isSticky="true" />
+        <Key
+            android:codes="@integer/key_del"
+            android:keyLabel="@string/key_del"
+            android:isRepeatable="true"
+            android:keyEdgeFlags="right" />
+    </Row>
+    <Row>
+        <Key
+            android:codes="@integer/key_insert"
+            android:keyLabel="@string/key_insert"
+            android:keyEdgeFlags="left" />
+        <Key
+            android:codes="@integer/key_up_arrow"
+            android:keyIcon="@drawable/ic_keyboard_arrow_up_white_48dp" />
+        <Key
+            android:codes="@integer/key_print_screen"
+            android:keyLabel="@string/key_print_screen" />
+        <Key
+            android:codes="@integer/key_scroll_lock"
+            android:keyLabel="@string/key_scroll_lock" />
+        <Key
+            android:codes="@integer/key_pause"
+            android:keyLabel="@string/key_pause" />
+        <Key
+            android:codes="@integer/key_home"
+            android:keyLabel="@string/key_home" />
+        <Key
+            android:codes="@integer/key_end"
+            android:keyLabel="@string/key_end" />
+        <Key
+            android:codes="@integer/key_page_up"
+            android:keyLabel="@string/key_page_up" />
+        <Key
+            android:codes="@integer/key_page_down"
+            android:keyLabel="@string/key_page_down"
+            android:keyEdgeFlags="right"/>
+    </Row>
+    <Row>
+        <Key
+            android:codes="@integer/key_left_arrow"
+            android:keyIcon="@drawable/ic_keyboard_arrow_left_white_48dp"
+            android:keyEdgeFlags="left" />
+        <Key
+            android:codes="@integer/key_down_arrow"
+            android:keyIcon="@drawable/ic_keyboard_arrow_down_white_48dp" />
+        <Key
+            android:codes="@integer/key_right_arrow"
+            android:keyIcon="@drawable/ic_keyboard_arrow_right_white_48dp" />
+        <Key
+            android:codes="@integer/key_f1"
+            android:keyLabel="@string/key_f1" />
+        <Key
+            android:codes="@integer/key_f2"
+            android:keyLabel="@string/key_f2" />
+        <Key
+            android:codes="@integer/key_f3"
+            android:keyLabel="@string/key_f3" />
+        <Key
+            android:codes="@integer/key_f4"
+            android:keyLabel="@string/key_f4" />
+        <Key
+            android:codes="@integer/key_f5"
+            android:keyLabel="@string/key_f5" />
+        <Key
+            android:codes="@integer/key_f6"
+            android:keyLabel="@string/key_f6"
+            android:keyEdgeFlags="right"/>
+    </Row>
+    <Row>
+        <Key
+            android:codes="@integer/key_shift"
+            android:keyIcon="@drawable/ic_arrow_upward_white_48dp"
+            android:keyWidth="16.66%p"
+            android:isModifier="true"
+            android:isSticky="true" />
+        android:keyEdgeFlags="left" />
+        <Key
+            android:codes="@integer/key_f7"
+            android:keyLabel="@string/key_f7" />
+        <Key
+            android:codes="@integer/key_f8"
+            android:keyLabel="@string/key_f8" />
+        <Key
+            android:codes="@integer/key_f9"
+            android:keyLabel="@string/key_f9" />
+        <Key
+            android:codes="@integer/key_f10"
+            android:keyLabel="@string/key_f10" />
+        <Key
+            android:codes="@integer/key_f11"
+            android:keyLabel="@string/key_f11" />
+        <Key
+            android:codes="@integer/key_f12"
+            android:keyLabel="@string/key_f12" />
+        <Key
+            android:codes="@integer/key_backspace"
+            android:keyIcon="@drawable/ic_backspace_white_48dp"
+            android:keyWidth="16.66%p"
+            android:keyEdgeFlags="right" />
+    </Row>
+    <Row>
+        <Key
+            android:codes="@integer/key_mode_change"
+            android:keyLabel="@string/key_mode_3"
+            android:keyWidth="16.67%p"
+            android:keyEdgeFlags="left" />
+        <Key
+            android:codes="@integer/key_space"
+            android:keyIcon="@drawable/ic_space_bar_white_48dp"
+            android:keyWidth="55.55%p"/>
+        <Key
+            android:codes="@integer/key_period"
+            android:keyLabel="@string/key_period"/>
+        <Key
+            android:codes="@integer/key_enter"
+            android:keyIcon="@drawable/ic_keyboard_return_white_48dp"
+            android:keyWidth="16.67%p"
+            android:keyEdgeFlags="right"/>
+    </Row>
+</Keyboard>

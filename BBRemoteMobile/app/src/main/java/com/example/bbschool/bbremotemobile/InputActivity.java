@@ -16,9 +16,23 @@ import android.view.View;
 
 import com.example.bbschool.bbremotemobile.R;
 
+import java.util.Dictionary;
+import java.util.HashMap;
+
 public class InputActivity extends AppCompatActivity {
 
     private MainMenu mainMenu;
+    private static final HashMap<Mode, String> fragmentTags;
+
+    static {
+        fragmentTags = new HashMap<Mode, String>();
+        fragmentTags.put(Mode.Keyboard, "KEYBOARD");
+        fragmentTags.put(Mode.Touchpad, "TOUCHPAD");
+        fragmentTags.put(Mode.Optical, "OPTICAL");
+        fragmentTags.put(Mode.Camera, "CAMERA");
+        fragmentTags.put(Mode.Mic, "MIC");
+        fragmentTags.put(Mode.Gamepad, "GAMEPAD");
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,8 +41,7 @@ public class InputActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         mainMenu = new MainMenu(this);
-        //loadStartFragment();
-        initialFragmentLoad(new myFragment());
+        loadStartFragment();
     }
 
     @Override
@@ -46,12 +59,9 @@ public class InputActivity extends AppCompatActivity {
             return super.onOptionsItemSelected(item);
     }
 
-    public void swapFragments(Fragment newFragment) {
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.fragment_container, newFragment);
-        fragmentTransaction.addToBackStack(null);
-        fragmentTransaction.commit();
+    public void swapFragments(Mode mode) {
+        Fragment newFragment = getFragment(mode);
+        fragmentLoad(newFragment, mode);
     }
 
     private void loadStartFragment() {
@@ -60,32 +70,42 @@ public class InputActivity extends AppCompatActivity {
         if ( intent.hasExtra("Mode") ) {
             mode = (Mode) intent.getSerializableExtra("Mode");
         }
-        switch( mode ) {
-            case Touchpad:
-                //TODO
-                break;
-            case Optical:
-                //TODO
-                break;
-            case Camera:
-                //TODO
-                break;
-            case Mic:
-                //TODO
-                break;
-            case Gamepad:
-                //TODO
-                break;
-            default:
-                initialFragmentLoad( new KeyboardFragment() );
-                break;
-        }
+        Fragment newFragment = getFragment(mode);
+        fragmentLoad(newFragment, mode);
     }
 
-    private void initialFragmentLoad(Fragment newFragment) {
+    private Fragment getFragment(Mode mode) {
+        Fragment newFragment = getSupportFragmentManager().findFragmentByTag(fragmentTags.get(mode));
+        if (newFragment == null) {
+            switch (mode) {
+                case Touchpad:
+                    //TODO
+                    break;
+                case Optical:
+                    //TODO
+                    break;
+                case Camera:
+                    //TODO
+                    break;
+                case Mic:
+                    //TODO
+                    break;
+                case Gamepad:
+                    //TODO
+                    break;
+                default:
+                    newFragment = new KeyboardFragment();
+                    break;
+            }
+        }
+        return newFragment;
+    }
+
+    private void fragmentLoad(Fragment newFragment, Mode mode) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.add(R.id.fragment_container,  newFragment);
+        fragmentTransaction.replace(R.id.input_mode_fragment, newFragment, fragmentTags.get(mode));
+        fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }
 

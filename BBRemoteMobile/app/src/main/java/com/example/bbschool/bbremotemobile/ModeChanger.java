@@ -21,26 +21,7 @@ public class ModeChanger {
     }
 
     public void changeInputMode(Mode mode) {
-        switch (mode) {
-            case Keyboard:
-                swapInputMode(KeyboardFragment.class, mode);
-                break;
-            case Touchpad:
-                //TODO
-                break;
-            case Optical:
-                //TODO
-                break;
-            case Camera:
-                //TODO
-                break;
-            case Mic:
-                //TODO
-                break;
-            case Gamepad:
-                //TODO
-                break;
-        }
+        swapInputMode(mode);
     }
 
     public void enableDualMic() {
@@ -59,16 +40,10 @@ public class ModeChanger {
 
     }
 
-    private void swapInputMode(Class newFragmentclass, Mode mode) {
+    private void swapInputMode(Mode mode) {
         //TODO Notify windows of mode change
         if (currentActivity.getClass() == InputActivity.class) {
-            try {
-                Constructor<? extends Runnable> ctor = newFragmentclass.getConstructor();
-                Fragment newFragment = (Fragment) ctor.newInstance();
-                ((InputActivity) currentActivity).swapFragments(newFragment);
-            } catch (Exception e) {
-                System.out.println(e.toString());
-            }
+            ((InputActivity) currentActivity).swapFragments(mode);
         } else {
             Intent intent = new Intent(currentActivity, InputActivity.class);
             intent.putExtra("Mode", mode);

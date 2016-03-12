@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <integer name="keyboard_1">1</integer>
+    <integer name="keyboard_2">2</integer>
+    <integer name="keyboard_3">3</integer>
     <integer name="key_0">0</integer>
     <integer name="key_1">1</integer>
     <integer name="key_2">2</integer>
@@ -103,4 +106,5 @@
     <integer name="key_back_slash">100</integer>
     <integer name="key_vertical_line">101</integer>
     <integer name="key_mode_change">102</integer>
+    <integer name="key_caps">103</integer>
 </resources>
