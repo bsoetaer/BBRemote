@@ -86,7 +86,7 @@ public class InputActivity extends AppCompatActivity {
                     newFragment = new OpticalFragment();
                     break;
                 case Camera:
-                    //TODO
+                    newFragment = new CameraFragment();
                     break;
                 case Mic:
                     //TODO
