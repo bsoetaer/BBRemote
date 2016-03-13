@@ -1,6 +1,7 @@
 package com.example.bbschool.bbremotemobile;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.os.Bundle;
@@ -37,6 +38,7 @@ public class InputActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
         setContentView(R.layout.activity_input);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -81,7 +83,7 @@ public class InputActivity extends AppCompatActivity {
                     newFragment = new TouchpadFragment();
                     break;
                 case Optical:
-                    //TODO
+                    newFragment = new OpticalFragment();
                     break;
                 case Camera:
                     //TODO

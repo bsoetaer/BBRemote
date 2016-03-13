@@ -7,13 +7,7 @@ import android.widget.Button;
 /**
  * Created by Braeden on 3/13/2016.
  */
-public class BBButtonListener implements Button.OnTouchListener {
-
-    private int keyCode;
-
-    public BBButtonListener(int keyCode) {
-        this.keyCode = keyCode;
-    }
+public class OpticalScrollListener implements Button.OnTouchListener {
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {
