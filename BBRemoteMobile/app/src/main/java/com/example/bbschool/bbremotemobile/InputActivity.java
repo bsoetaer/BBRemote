@@ -26,12 +26,12 @@ public class InputActivity extends AppCompatActivity {
 
     static {
         fragmentTags = new HashMap<Mode, String>();
-        fragmentTags.put(Mode.Keyboard, "KEYBOARD");
-        fragmentTags.put(Mode.Touchpad, "TOUCHPAD");
-        fragmentTags.put(Mode.Optical, "OPTICAL");
-        fragmentTags.put(Mode.Camera, "CAMERA");
-        fragmentTags.put(Mode.Mic, "MIC");
-        fragmentTags.put(Mode.Gamepad, "GAMEPAD");
+        fragmentTags.put(Mode.Keyboard, "Keyboard");
+        fragmentTags.put(Mode.Touchpad, "Touchpad Mouse");
+        fragmentTags.put(Mode.Optical, "Optical Mouse");
+        fragmentTags.put(Mode.Camera, "Camera");
+        fragmentTags.put(Mode.Mic, "Microphone");
+        fragmentTags.put(Mode.Gamepad, "Game Controller");
     }
 
     @Override
@@ -70,8 +70,7 @@ public class InputActivity extends AppCompatActivity {
         if ( intent.hasExtra("Mode") ) {
             mode = (Mode) intent.getSerializableExtra("Mode");
         }
-        Fragment newFragment = getFragment(mode);
-        fragmentLoad(newFragment, mode);
+        swapFragments(mode);
     }
 
     private Fragment getFragment(Mode mode) {
@@ -79,7 +78,7 @@ public class InputActivity extends AppCompatActivity {
         if (newFragment == null) {
             switch (mode) {
                 case Touchpad:
-                    //TODO
+                    newFragment = new TouchpadFragment();
                     break;
                 case Optical:
                     //TODO
@@ -102,6 +101,9 @@ public class InputActivity extends AppCompatActivity {
     }
 
     private void fragmentLoad(Fragment newFragment, Mode mode) {
+        if (newFragment == null)
+            return;
+        getSupportActionBar().setTitle(fragmentTags.get(mode));
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.input_mode_fragment, newFragment, fragmentTags.get(mode));

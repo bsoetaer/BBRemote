@@ -119,6 +119,9 @@
     <string name="key_mode_2">2/3</string>
     <string name="key_mode_3">3/3</string>
     <string name="key_caps">Caps</string>
+    <string name="key_left_click">L</string>
+    <string name="key_right_click">R</string>
+    <string name="key_middle_click">M</string>
 
     <!-- Strings related to Settings -->
 
