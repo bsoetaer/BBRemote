@@ -4,7 +4,7 @@
     <!-- Strings related to menu actions -->
     <string name="action_settings">Settings</string>
     <string name="title_activity_input">InputActivity</string>
-    <string name="menu_input_modes">Input Modes ></string>
+    <string name="menu_input_modes">Input Modes</string>
     <string name="action_keyboard">Keyboard</string>
     <string name="action_touchpad">Touchpad Mouse</string>
     <string name="action_optical">Optical Mouse</string>
@@ -12,7 +12,7 @@
     <string name="action_mic">Microphone</string>
     <string name="action_gamepad">Game Controller</string>
     <string name="action_customize">Customize Controller</string>
-    <string name="menu_dual_mode">Secondary Input Mode ></string>
+    <string name="menu_dual_mode">Secondary Input Mode</string>
     <string name="action_dual_mic">Background Mic</string>
     <string name="action_dual_camera">Background Camera</string>
     <string name="action_dual_none">None</string>

@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 
 /**
+ * TODO Reconsider separating listener from loading the keyboard into the view
  * Created by Braeden on 3/8/2016.
  */
 public class KeyListener implements KeyboardView.OnKeyboardActionListener {
@@ -20,8 +21,7 @@ public class KeyListener implements KeyboardView.OnKeyboardActionListener {
     int currentMode = 0;
 
     public KeyListener(KeyboardViewFix myKeyboardView, Context context) {
-        this.myKeyboardView = myKeyboardView;
-        this.myContext = context;
+        setKeyboardView(myKeyboardView, context);
         toggleableKeys.add(AndroidKeyCodes.lookupCode("SHIFT"));
         toggleableKeys.add(AndroidKeyCodes.lookupCode("CTRL"));
         toggleableKeys.add(AndroidKeyCodes.lookupCode("ALT"));
@@ -29,6 +29,7 @@ public class KeyListener implements KeyboardView.OnKeyboardActionListener {
         toggleableKeys.add(AndroidKeyCodes.lookupCode("CAPS"));
         loadKeyboard();
     }
+
     @Override
     public void onKey(int primaryCode, int[] keyCodes) {
     }
@@ -76,6 +77,20 @@ public class KeyListener implements KeyboardView.OnKeyboardActionListener {
     @Override public void swipeUp() {
     }
 
+    public void setKeyboardView(KeyboardViewFix myKeyboardView, Context context) {
+        this.myKeyboardView = myKeyboardView;
+        this.myContext = context;
+    }
+
+    public void loadKeyboard() {
+        int newMode = KeyboardModes[currentMode];
+        myKeyboard = new Keyboard(myContext, newMode);
+        myKeyboardView.setKeyboard(myKeyboard);
+        myKeyboardView.setPreviewEnabled(false);
+        setToggledKeys();
+        updateShiftState();
+    }
+
     private boolean toggleKey(int keyCode)
     {
         if(toggledKeys.contains(keyCode)){
@@ -90,26 +105,21 @@ public class KeyListener implements KeyboardView.OnKeyboardActionListener {
 
     // Clear all toggled keys except caps lock
     private void clearToggledKeys(){
+        boolean capsOn = toggledKeys.contains(AndroidKeyCodes.lookupCode("CAPS"));
         for (Keyboard.Key key : myKeyboard.getKeys()) {
             if (key.codes[0] != AndroidKeyCodes.lookupCode("CAPS")) {
                 key.on = false;
             }
         }
+        toggledKeys.clear();
+        if (capsOn)
+            toggledKeys.add(AndroidKeyCodes.lookupCode("CAPS"));
     }
 
     private void updateShiftState() {
         // Shift mode depends on both shift and caps
         myKeyboard.setShifted(toggledKeys.contains(AndroidKeyCodes.lookupCode("SHIFT")) ^ toggledKeys.contains(AndroidKeyCodes.lookupCode("CAPS")));
         myKeyboardView.invalidateAllKeys();
-    }
-
-    private void loadKeyboard() {
-        int newMode = KeyboardModes[currentMode];
-        myKeyboard = new Keyboard(myContext, newMode);
-        myKeyboardView.setKeyboard(myKeyboard);
-        myKeyboardView.setPreviewEnabled(false);
-        setToggledKeys();
-        updateShiftState();
     }
 
     private void setToggledKeys() {
