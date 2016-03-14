@@ -31,4 +31,7 @@
             android:label="@string/title_activity_settings"></activity>
     </application>
 
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+
 </manifest>
