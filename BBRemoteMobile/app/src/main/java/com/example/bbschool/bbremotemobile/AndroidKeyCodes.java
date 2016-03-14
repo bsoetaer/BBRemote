@@ -12,6 +12,7 @@ public final class AndroidKeyCodes {
     private static HashMap<String, Integer> KeyToCode = new HashMap<String, Integer>();
 
     //TODO Find some way to use the integers from the resource file instead of hard coding here
+    //TODO Make not strings on other side. Maybe an enum with reverse lookup somehow
     static {
         CodeToKey.put(0, "0");
         CodeToKey.put(1, "1");
@@ -117,6 +118,9 @@ public final class AndroidKeyCodes {
         CodeToKey.put(101, "|");
         CodeToKey.put(102, "CHANGE MODE");
         CodeToKey.put(103, "CAPS");
+        CodeToKey.put(104, "LEFT CLICK");
+        CodeToKey.put(105, "RIGHT CLICK");
+        CodeToKey.put(106, "MIDDLE CLICK");
 
         for (Integer i: CodeToKey.keySet()) {
             KeyToCode.put(CodeToKey.get(i), i);

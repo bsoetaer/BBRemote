@@ -1,6 +1,7 @@
 package com.example.bbschool.bbremotemobile;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.os.Bundle;
@@ -23,15 +24,17 @@ public class InputActivity extends AppCompatActivity {
 
     private MainMenu mainMenu;
     private static final HashMap<Mode, String> fragmentTags;
+    private static final String modeTag = "Mode";
+    private Mode mode;
 
     static {
         fragmentTags = new HashMap<Mode, String>();
-        fragmentTags.put(Mode.Keyboard, "KEYBOARD");
-        fragmentTags.put(Mode.Touchpad, "TOUCHPAD");
-        fragmentTags.put(Mode.Optical, "OPTICAL");
-        fragmentTags.put(Mode.Camera, "CAMERA");
-        fragmentTags.put(Mode.Mic, "MIC");
-        fragmentTags.put(Mode.Gamepad, "GAMEPAD");
+        fragmentTags.put(Mode.Keyboard, "Keyboard");
+        fragmentTags.put(Mode.Touchpad, "Touchpad Mouse");
+        fragmentTags.put(Mode.Optical, "Optical Mouse");
+        fragmentTags.put(Mode.Camera, "Camera");
+        fragmentTags.put(Mode.Mic, "Microphone");
+        fragmentTags.put(Mode.Gamepad, "Game Controller");
     }
 
     @Override
@@ -41,7 +44,13 @@ public class InputActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         mainMenu = new MainMenu(this);
-        loadStartFragment();
+        if (savedInstanceState != null ) {
+            mode = (Mode) savedInstanceState.getSerializable(modeTag);
+            swapFragments(mode);
+        }
+        else {
+            loadStartFragment();
+        }
     }
 
     @Override
@@ -59,19 +68,26 @@ public class InputActivity extends AppCompatActivity {
             return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        // Make sure to call the super method so that the states of our views are saved
+        super.onSaveInstanceState(outState);
+        // Save our own state now
+        outState.putSerializable(modeTag, mode);
+    }
+
     public void swapFragments(Mode mode) {
         Fragment newFragment = getFragment(mode);
         fragmentLoad(newFragment, mode);
     }
 
     private void loadStartFragment() {
+        mode = Mode.Keyboard;
         Intent intent = getIntent();
-        Mode mode = Mode.Keyboard;
         if ( intent.hasExtra("Mode") ) {
             mode = (Mode) intent.getSerializableExtra("Mode");
         }
-        Fragment newFragment = getFragment(mode);
-        fragmentLoad(newFragment, mode);
+        swapFragments(mode);
     }
 
     private Fragment getFragment(Mode mode) {
@@ -79,16 +95,16 @@ public class InputActivity extends AppCompatActivity {
         if (newFragment == null) {
             switch (mode) {
                 case Touchpad:
-                    //TODO
+                    newFragment = new TouchpadFragment();
                     break;
                 case Optical:
-                    //TODO
+                    newFragment = new OpticalFragment();
                     break;
                 case Camera:
-                    //TODO
+                    newFragment = new CameraFragment();
                     break;
                 case Mic:
-                    //TODO
+                    newFragment = new MicrophoneFragment();
                     break;
                 case Gamepad:
                     //TODO
@@ -102,6 +118,10 @@ public class InputActivity extends AppCompatActivity {
     }
 
     private void fragmentLoad(Fragment newFragment, Mode mode) {
+        if (newFragment == null)
+            return;
+        this.mode = mode;
+        getSupportActionBar().setTitle(fragmentTags.get(mode));
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.input_mode_fragment, newFragment, fragmentTags.get(mode));

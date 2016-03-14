@@ -20,8 +20,16 @@ public class ModeChanger {
         this.currentActivity = currentActivity;
     }
 
+    // Change input mode to selected mode
     public void changeInputMode(Mode mode) {
-        swapInputMode(mode);
+        //TODO Notify windows of mode change
+        if (currentActivity.getClass() == InputActivity.class) {
+            ((InputActivity) currentActivity).swapFragments(mode);
+        } else {
+            Intent intent = new Intent(currentActivity, InputActivity.class);
+            intent.putExtra("Mode", mode);
+            currentActivity.startActivity(intent);
+        }
     }
 
     public void enableDualMic() {
@@ -38,17 +46,6 @@ public class ModeChanger {
 
     public void disableDualCamera() {
 
-    }
-
-    private void swapInputMode(Mode mode) {
-        //TODO Notify windows of mode change
-        if (currentActivity.getClass() == InputActivity.class) {
-            ((InputActivity) currentActivity).swapFragments(mode);
-        } else {
-            Intent intent = new Intent(currentActivity, InputActivity.class);
-            intent.putExtra("Mode", mode);
-            currentActivity.startActivity(intent);
-        }
     }
 
     public void changeActivity(Class newActivityClass) {

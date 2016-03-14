@@ -4,7 +4,7 @@
     <!-- Strings related to menu actions -->
     <string name="action_settings">Settings</string>
     <string name="title_activity_input">InputActivity</string>
-    <string name="menu_input_modes">Input Modes ></string>
+    <string name="menu_input_modes">Input Modes</string>
     <string name="action_keyboard">Keyboard</string>
     <string name="action_touchpad">Touchpad Mouse</string>
     <string name="action_optical">Optical Mouse</string>
@@ -12,7 +12,7 @@
     <string name="action_mic">Microphone</string>
     <string name="action_gamepad">Game Controller</string>
     <string name="action_customize">Customize Controller</string>
-    <string name="menu_dual_mode">Secondary Input Mode ></string>
+    <string name="menu_dual_mode">Secondary Input Mode</string>
     <string name="action_dual_mic">Background Mic</string>
     <string name="action_dual_camera">Background Camera</string>
     <string name="action_dual_none">None</string>
@@ -119,6 +119,9 @@
     <string name="key_mode_2">2/3</string>
     <string name="key_mode_3">3/3</string>
     <string name="key_caps">Caps</string>
+    <string name="key_left_click">L</string>
+    <string name="key_right_click">R</string>
+    <string name="key_middle_click">M</string>
 
     <!-- Strings related to Settings -->
 
@@ -177,4 +180,7 @@
     <string name="pref_ringtone_silent">Silent</string>
 
     <string name="pref_title_vibrate">Vibrate</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

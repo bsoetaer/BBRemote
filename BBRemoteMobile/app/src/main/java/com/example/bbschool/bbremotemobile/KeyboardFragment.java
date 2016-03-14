@@ -15,7 +15,8 @@ import java.util.List;
  */
 public class KeyboardFragment extends Fragment {
 
-    private final ArrayList<Integer> keyboardXml = new ArrayList<Integer>();
+    KeyboardViewFix myKeyboardView = null;
+    KeyListener myKeyListener = null;
 
     public KeyboardFragment() {
         KeyboardViewFix.inEditMode = false;
@@ -24,6 +25,7 @@ public class KeyboardFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRetainInstance(true);
     }
 
     @Override
@@ -35,7 +37,14 @@ public class KeyboardFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        KeyboardViewFix myKeyboardView= (KeyboardViewFix)getView().findViewById(R.id.keyboard_view);
-        myKeyboardView.setOnKeyboardActionListener(new KeyListener(myKeyboardView, getContext()));
+        KeyboardViewFix myKeyboardView = (KeyboardViewFix) getView().findViewById(R.id.keyboard_view);
+        if (myKeyListener == null) {
+            myKeyListener = new KeyListener(myKeyboardView, getContext());
+        }
+        else {
+            myKeyListener.setKeyboardView(myKeyboardView, getContext());
+            myKeyListener.loadKeyboard();
+        }
+        myKeyboardView.setOnKeyboardActionListener(myKeyListener);
     }
 }
