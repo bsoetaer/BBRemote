@@ -24,6 +24,8 @@ public class InputActivity extends AppCompatActivity {
 
     private MainMenu mainMenu;
     private static final HashMap<Mode, String> fragmentTags;
+    private static final String modeTag = "Mode";
+    private Mode mode;
 
     static {
         fragmentTags = new HashMap<Mode, String>();
@@ -38,12 +40,17 @@ public class InputActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
         setContentView(R.layout.activity_input);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         mainMenu = new MainMenu(this);
-        loadStartFragment();
+        if (savedInstanceState != null ) {
+            mode = (Mode) savedInstanceState.getSerializable(modeTag);
+            swapFragments(mode);
+        }
+        else {
+            loadStartFragment();
+        }
     }
 
     @Override
@@ -61,14 +68,22 @@ public class InputActivity extends AppCompatActivity {
             return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        // Make sure to call the super method so that the states of our views are saved
+        super.onSaveInstanceState(outState);
+        // Save our own state now
+        outState.putSerializable(modeTag, mode);
+    }
+
     public void swapFragments(Mode mode) {
         Fragment newFragment = getFragment(mode);
         fragmentLoad(newFragment, mode);
     }
 
     private void loadStartFragment() {
+        mode = Mode.Keyboard;
         Intent intent = getIntent();
-        Mode mode = Mode.Keyboard;
         if ( intent.hasExtra("Mode") ) {
             mode = (Mode) intent.getSerializableExtra("Mode");
         }
@@ -89,7 +104,7 @@ public class InputActivity extends AppCompatActivity {
                     newFragment = new CameraFragment();
                     break;
                 case Mic:
-                    //TODO
+                    newFragment = new MicrophoneFragment();
                     break;
                 case Gamepad:
                     //TODO
@@ -105,6 +120,7 @@ public class InputActivity extends AppCompatActivity {
     private void fragmentLoad(Fragment newFragment, Mode mode) {
         if (newFragment == null)
             return;
+        this.mode = mode;
         getSupportActionBar().setTitle(fragmentTags.get(mode));
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();

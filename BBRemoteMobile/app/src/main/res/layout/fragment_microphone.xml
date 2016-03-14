@@ -1,6 +1,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.example.bbschool.bbremotemobile.CameraFragment"
+    tools:context="com.example.bbschool.bbremotemobile.MicrophoneFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center_vertical|center_horizontal"
@@ -19,9 +19,9 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="0.5"
-            android:src="@drawable/ic_videocam_off_black_48dp"
+            android:src="@drawable/ic_mic_off_black_48dp"
             android:background="@drawable/media_button_unpressed"
-            android:id="@+id/camera_toggle"/>
+            android:id="@+id/mic_toggle"/>
 
     </LinearLayout>
 

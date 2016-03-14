@@ -43,6 +43,7 @@ public class OpticalFragment extends Fragment {
         super.onStop();
         sensorManager = (SensorManager) getActivity().getSystemService(Context.SENSOR_SERVICE);
         sensorManager.unregisterListener(motionListener);
+        getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
     }
 
     // Setup listeners for 3 mouse buttons, scroll and motion sensors
