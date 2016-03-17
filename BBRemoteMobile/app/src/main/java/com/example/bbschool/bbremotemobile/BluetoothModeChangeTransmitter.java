@@ -9,7 +9,7 @@ public class BluetoothModeChangeTransmitter {
 
     private BluetoothModeChangeTransmitter() {}
 
-    public void changeMode(Mode mode) throws IOException {
+    public static void changeMode(Mode mode) throws IOException {
         byte[] data = new byte[2];
         data[0] = (byte) 255; // 0b11111111 is the special code for switching modes
         data[1] = (byte) mode.getVal();

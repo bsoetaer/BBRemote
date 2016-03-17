@@ -1,5 +1,7 @@
 package com.example.bbschool.bbremotemobile;
 
+import android.util.Log;
+
 import java.io.IOException;
 import java.util.Map;
 
@@ -8,11 +10,12 @@ import java.util.Map;
  */
 public final class ButtonBluetoothTransmitter{
 
+    private static final String TAG = "ButtonTransmitter";
     private ButtonBluetoothTransmitter() {}
 
-    public static void sendKeys(Map<Integer, Boolean> keyPresses) throws IOException {
+    public static void sendKeys(Map<Integer, Boolean> keyPresses) throws IOException{
         /* format of encoded bytes is: every evenly indexed byte is a key code, and every odd
-         inidexed byte is either 0 (key up) or 1 (key down)*/
+         indexed byte is either 0 (key up) or 1 (key down)*/
         byte[] bytes = new byte[keyPresses.size()*2];
 
         int index = 0;

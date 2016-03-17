@@ -1,17 +1,24 @@
 package com.example.bbschool.bbremotemobile;
 
+import android.app.Activity;
 import android.content.Context;
 import android.inputmethodservice.Keyboard;
 import android.inputmethodservice.KeyboardView;
+import android.util.Log;
+import android.widget.Toast;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 
 /**
  * TODO Reconsider separating listener from loading the keyboard into the view
  * Created by Braeden on 3/8/2016.
  */
 public class KeyListener implements KeyboardView.OnKeyboardActionListener {
+    private static final String TAG = "KeyListener";
     HashSet<Integer> toggledKeys = new HashSet<Integer>();
     HashSet<Integer> toggleableKeys = new HashSet<>();
     Keyboard myKeyboard;
@@ -39,13 +46,18 @@ public class KeyListener implements KeyboardView.OnKeyboardActionListener {
          if (toggleableKeys.contains(arg0)) {
             if (toggleKey(arg0)) {
                 // Send key down here for new key and all other toggled keys
+                sendToggledKeys(true);
             } else {
                 // Send toggle key up here for new key and down for all other toggled keys
+                sendOneKey(arg0, false);
+                sendToggledKeys(true);
             }
             updateShiftState();
         }
         else if (arg0 != AndroidKeyCodes.lookupCode("CHANGE MODE")) {
-            //Send key down here for new key and all toggled keys
+             //Send key down here for new key and all toggled keys
+             sendToggledKeys(true);
+             sendOneKey(arg0, true);
         }
 
     }
@@ -57,6 +69,8 @@ public class KeyListener implements KeyboardView.OnKeyboardActionListener {
         }
         else if (!toggleableKeys.contains(primaryCode)) {
             // Send key up here for key and all toggled keys
+            sendOneKey(primaryCode, false);
+            sendToggledKeys(false);
             clearToggledKeys();
             updateShiftState();
         }
@@ -127,6 +141,30 @@ public class KeyListener implements KeyboardView.OnKeyboardActionListener {
             if (toggledKeys.contains(key.codes[0])) {
                 key.on = true;
             }
+        }
+    }
+
+    private void sendToggledKeys(boolean pressed) {
+        Map<Integer, Boolean> keyPresses = new HashMap<>();
+        for(Integer code : toggledKeys) {
+            keyPresses.put(code,pressed);
+        }
+        sendKeys(keyPresses);
+    }
+
+    private void sendOneKey(int keyCode, boolean pressed) {
+        Map<Integer, Boolean> keyPresses = new HashMap<>();
+        keyPresses.put(keyCode,pressed);
+        sendKeys(keyPresses);
+    }
+
+    private void sendKeys(Map<Integer, Boolean> keyPresses) {
+        try {
+            ButtonBluetoothTransmitter.sendKeys(keyPresses);
+        }
+        catch (IOException e) {
+            Log.w(TAG, "Failed key press send: " + e.getMessage());
+            ModeChanger.disconnected(myContext);
         }
     }
 
