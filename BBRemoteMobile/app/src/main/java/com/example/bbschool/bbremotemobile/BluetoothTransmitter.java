@@ -9,15 +9,10 @@ import java.io.OutputStream;
  */
 public abstract class BluetoothTransmitter {
 
-    private InputStream inStream;
-    private OutputStream outStream;
+    private BluetoothTransmitter() {}
 
-    public BluetoothTransmitter() throws IOException {
-        inStream = InitialConnectionTranscever.globalSocket.getInputStream();
-        outStream = InitialConnectionTranscever.globalSocket.getOutputStream();
-    }
-
-    protected void sendData(byte[] data) throws IOException {
+    protected static void sendData(byte[] data) throws IOException {
+        OutputStream outStream = InitialConnectionTranscever.globalSocket.getOutputStream();
         outStream.write(data);
     }
 

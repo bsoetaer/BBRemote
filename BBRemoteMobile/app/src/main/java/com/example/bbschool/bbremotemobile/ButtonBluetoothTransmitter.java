@@ -6,13 +6,11 @@ import java.util.Map;
 /**
  * Created by Brendan on 3/13/2016.
  */
-public class ButtonBluetoothTransmitter extends BluetoothTransmitter {
+public final class ButtonBluetoothTransmitter{
 
-    public ButtonBluetoothTransmitter() throws IOException {
-        super();
-    }
+    private ButtonBluetoothTransmitter() {}
 
-    public void sendKeys(Map<Integer, Boolean> keyPresses) throws IOException {
+    public static void sendKeys(Map<Integer, Boolean> keyPresses) throws IOException {
         /* format of encoded bytes is: every evenly indexed byte is a key code, and every odd
          inidexed byte is either 0 (key up) or 1 (key down)*/
         byte[] bytes = new byte[keyPresses.size()*2];
@@ -23,10 +21,10 @@ public class ButtonBluetoothTransmitter extends BluetoothTransmitter {
             bytes[index++] = booleanToByte(keyPresses.get(key));
         }
 
-        sendData(bytes);
+        BluetoothTransmitter.sendData(bytes);
     }
 
-    private byte booleanToByte(Boolean bool) {
+    private static byte booleanToByte(Boolean bool) {
         return (byte) (bool ? 1 : 0);
     }
 }
