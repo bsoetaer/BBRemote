@@ -10,7 +10,6 @@ import java.util.Map;
  */
 public final class ButtonBluetoothTransmitter{
 
-    private static final String TAG = "ButtonTransmitter";
     private ButtonBluetoothTransmitter() {}
 
     public static void sendKeys(Map<Integer, Boolean> keyPresses) throws IOException{

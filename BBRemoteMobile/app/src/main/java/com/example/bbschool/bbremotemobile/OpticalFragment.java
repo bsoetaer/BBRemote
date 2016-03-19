@@ -49,12 +49,12 @@ public class OpticalFragment extends Fragment {
     // Setup listeners for 3 mouse buttons, scroll and motion sensors
     private void setupListeners() {
         Button leftClick = (Button) getView().findViewById(R.id.optical_left_click);
-        leftClick.setOnTouchListener(new BBButtonListener(AndroidKeyCodes.lookupCode("LEFT CLICK")));
+        leftClick.setOnTouchListener(new BBButtonListener(AndroidKeyCodes.lookupCode("LEFT CLICK"), getContext()));
         Button rightClick = (Button) getView().findViewById(R.id.optical_right_click);
-        rightClick.setOnTouchListener(new BBButtonListener(AndroidKeyCodes.lookupCode("RIGHT CLICK")));
+        rightClick.setOnTouchListener(new BBButtonListener(AndroidKeyCodes.lookupCode("RIGHT CLICK"), getContext()));
         Button middleClick = (Button) getView().findViewById(R.id.optical_middle_click);
         //TODO verfiy this works when doing functionality (2 ontouch listeners on the same button)
-        middleClick.setOnTouchListener(new BBButtonListener(AndroidKeyCodes.lookupCode("MIDDLE CLICK")));
+        middleClick.setOnTouchListener(new BBButtonListener(AndroidKeyCodes.lookupCode("MIDDLE CLICK"), getContext()));
         middleClick.setOnTouchListener(new OpticalScrollListener());
         sensorManager = (SensorManager) getActivity().getSystemService(Context.SENSOR_SERVICE);
         motionListener = new OpticalMotionListener();
