@@ -55,7 +55,7 @@ public class OpticalFragment extends Fragment {
         Button middleClick = (Button) getView().findViewById(R.id.optical_middle_click);
         //TODO verfiy this works when doing functionality (2 ontouch listeners on the same button)
         middleClick.setOnTouchListener(new BBButtonListener(AndroidKeyCodes.lookupCode("MIDDLE CLICK"), getContext()));
-        middleClick.setOnTouchListener(new OpticalScrollListener());
+        middleClick.setOnTouchListener(new OpticalScrollListener(getContext()));
         sensorManager = (SensorManager) getActivity().getSystemService(Context.SENSOR_SERVICE);
         motionListener = new OpticalMotionListener();
         sensorManager.registerListener(motionListener, sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), SensorManager.SENSOR_DELAY_UI);
