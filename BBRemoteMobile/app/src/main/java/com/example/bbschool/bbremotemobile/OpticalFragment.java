@@ -58,6 +58,6 @@ public class OpticalFragment extends Fragment {
         middleClick.setOnTouchListener(new OpticalScrollListener(getContext()));
         sensorManager = (SensorManager) getActivity().getSystemService(Context.SENSOR_SERVICE);
         motionListener = new OpticalMotionListener();
-        sensorManager.registerListener(motionListener, sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), SensorManager.SENSOR_DELAY_UI);
+        sensorManager.registerListener(motionListener, sensorManager.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION), SensorManager.SENSOR_DELAY_GAME);
     }
 }
