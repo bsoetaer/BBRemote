@@ -18,6 +18,7 @@ public class DeviceScanner {
     public void getPairedDevices(FindDeviceCallback callback) {
         Set<BluetoothDevice> pairedDevices = bluetoothAdapter.getBondedDevices();
         for (BluetoothDevice device : pairedDevices)
+            device.
             callback.call(device);
     }
 
