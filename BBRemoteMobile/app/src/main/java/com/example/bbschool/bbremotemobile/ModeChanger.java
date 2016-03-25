@@ -27,6 +27,11 @@ public class ModeChanger {
 
     // Change input mode to selected mode
     public void changeInputMode(Mode mode) {
+        if (!ConnectionState.isConnected()) {
+            disconnected(currentActivity);
+            return;
+        }
+
         changeWindowsMode(mode);
         if (currentActivity.getClass() == InputActivity.class) {
             ((InputActivity) currentActivity).swapFragments(mode);
@@ -38,19 +43,31 @@ public class ModeChanger {
     }
 
     public void enableDualMic() {
-
+        if (!ConnectionState.isConnected()) {
+            disconnected(currentActivity);
+            return;
+        }
     }
 
     public void disableDualMic() {
-
+        if (!ConnectionState.isConnected()) {
+            disconnected(currentActivity);
+            return;
+        }
     }
 
     public void enableDualCamera() {
-
+        if (!ConnectionState.isConnected()) {
+            disconnected(currentActivity);
+            return;
+        }
     }
 
     public void disableDualCamera() {
-
+        if (!ConnectionState.isConnected()) {
+            disconnected(currentActivity);
+            return;
+        }
     }
 
     public void changeActivity(Class newActivityClass) {

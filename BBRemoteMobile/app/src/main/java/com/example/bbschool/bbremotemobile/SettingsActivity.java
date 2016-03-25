@@ -17,12 +17,9 @@ import android.support.v7.app.ActionBar;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.preference.RingtonePreference;
-import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
-
-import com.example.bbschool.bbremotemobile.R;
 
 import java.util.List;
 
@@ -125,6 +122,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mainMenu = new MainMenu(this);
         setupActionBar();
     }
 
@@ -132,8 +130,8 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
      * Set up the {@link android.app.ActionBar}, if the API is available.
      */
     private void setupActionBar() {
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        //setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             // Show the Up button in the action bar.
@@ -145,7 +143,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
-        mainMenu.hideItems(menu);
+        mainMenu.hideModes(menu);
         return true;
     }
 
@@ -153,6 +151,10 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         if ( mainMenu.menuItemSelected(item) )
             return true;
+        else if (item.getItemId() == android.R.id.home) {
+            onBackPressed();
+            return true;
+        }
         else
             return super.onOptionsItemSelected(item);
     }

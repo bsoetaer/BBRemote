@@ -1,28 +1,13 @@
 package com.example.bbschool.bbremotemobile;
 
-import android.app.AlertDialog;
-import android.bluetooth.BluetoothAdapter;
-import android.bluetooth.BluetoothDevice;
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.AdapterView;
-import android.widget.ListView;
 
-import java.io.IOException;
-import java.util.Set;
-
-public class ConnectionActivity extends AppCompatActivity implements ListView.OnItemClickListener {
+public class ConnectionActivity extends AppCompatActivity  {
 
     private MainMenu mainMenu;
 
@@ -54,7 +39,7 @@ public class ConnectionActivity extends AppCompatActivity implements ListView.On
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
-        mainMenu.hideItems(menu);
+        mainMenu.hideModes(menu);
         return true;
     }
 
@@ -65,12 +50,5 @@ public class ConnectionActivity extends AppCompatActivity implements ListView.On
         else
             return super.onOptionsItemSelected(item);
     }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        unregisterReceiver(mReceiver);
-    }
-
 
 }

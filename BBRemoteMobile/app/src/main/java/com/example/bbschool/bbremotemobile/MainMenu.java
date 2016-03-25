@@ -20,8 +20,11 @@ public class MainMenu {
         modeChanger = new ModeChanger(currentActivity);
     }
 
-    public void hideItems(Menu menu) {
-        //TODO add hiding input modes when no connection
+    public void hideModes(Menu menu) {
+        if ( !ConnectionState.isConnected()) {
+            menu.findItem(R.id.input_modes).setVisible(false);
+            menu.findItem(R.id.dual_modes).setVisible(false);
+        }
         SensorManager mSensorManager = (SensorManager) currentActivity.getSystemService(Context.SENSOR_SERVICE);
         if (mSensorManager.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION) == null){
             menu.findItem(R.id.action_optical).setVisible(false);

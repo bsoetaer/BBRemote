@@ -16,6 +16,10 @@ public class InitialConnectionTranscever {
     public static BluetoothSocket globalSocket;
 
     public static void connect(BluetoothDevice device) throws IOException {
+        if( ConnectionState.isConnected() ) {
+            globalSocket.close();
+            ConnectionState.setConnected(false);
+        }
         globalSocket = device.createRfcommSocketToServiceRecord(BB_REMOTE_UUID);
         globalSocket.connect();
     }

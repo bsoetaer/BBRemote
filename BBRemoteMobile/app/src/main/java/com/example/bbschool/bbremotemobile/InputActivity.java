@@ -1,23 +1,15 @@
 package com.example.bbschool.bbremotemobile;
 
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
-import com.example.bbschool.bbremotemobile.R;
-
-import java.util.Dictionary;
 import java.util.HashMap;
 
 public class InputActivity extends AppCompatActivity {
@@ -44,6 +36,7 @@ public class InputActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         mainMenu = new MainMenu(this);
+        ConnectionReceiver.register(this);
         if (savedInstanceState != null ) {
             mode = (Mode) savedInstanceState.getSerializable(modeTag);
             swapFragments(mode);
@@ -57,7 +50,7 @@ public class InputActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
-        mainMenu.hideItems(menu);
+        mainMenu.hideModes(menu);
         return true;
     }
 
@@ -75,6 +68,12 @@ public class InputActivity extends AppCompatActivity {
         super.onSaveInstanceState(outState);
         // Save our own state now
         outState.putSerializable(modeTag, mode);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        ConnectionReceiver.unregister(this);
     }
 
     public void swapFragments(Mode mode) {

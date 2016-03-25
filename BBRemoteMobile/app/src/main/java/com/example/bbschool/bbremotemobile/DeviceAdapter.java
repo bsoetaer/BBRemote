@@ -10,6 +10,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.Set;
+
 /**
  * Created by Braeden on 3/23/2016.
  */
@@ -21,7 +24,7 @@ public class DeviceAdapter extends ArrayAdapter<BluetoothDevice>{
         this.layoutResourceId = layoutResourceId;
     }
 
-    public DeviceAdapter(Context context, int layoutResourceId, BluetoothDevice[] data) {
+    public DeviceAdapter(Context context, int layoutResourceId, ArrayList<BluetoothDevice> data) {
         super(context, layoutResourceId, data);
         this.layoutResourceId = layoutResourceId;
     }

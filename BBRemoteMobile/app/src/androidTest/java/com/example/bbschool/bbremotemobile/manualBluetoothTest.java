@@ -15,7 +15,7 @@ public class manualBluetoothTest extends InstrumentationTestCase {
 
     public void setUp() throws Exception {
         ConnectionFragment scanner = new ConnectionFragment();
-        scanner.getPairedDevices(new TestCallback());
+        //scanner.getPairedDevices(new TestCallback());
         InitialConnectionTranscever.connect(device);
     }
 
