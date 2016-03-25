@@ -10,8 +10,6 @@ import java.util.Map;
  */
 public final class ButtonBluetoothTransmitter{
 
-    private ButtonBluetoothTransmitter() {}
-
     public static void sendKeys(Map<Integer, Boolean> keyPresses) throws IOException{
         /* format of encoded bytes is:
         - The first byte is a special code: -1 is change mode, 0 is button press, and 1 is axis

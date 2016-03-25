@@ -16,6 +16,6 @@ private:
 	static const map<char, char> bbRemoteButtonToHID;
 	UCHAR lastMovement[2] = { 0 };
 	UCHAR lastButtonPresses = 0;
-	UCHAR * handleButton(char *data, int bytes);
-	UCHAR * handleAxis(char *data, int bytes);
+	void handleButton(_Out_ UCHAR *formattedData, char *data, int bytes);
+	void handleAxis(_Out_ UCHAR *formattedData, char *data, int bytes);
 };

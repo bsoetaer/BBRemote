@@ -4,7 +4,7 @@ const int DriverProxy::DATA_TYPE_MODE_CHANGE = -1;
 const int DriverProxy::DATA_TYPE_BUTTON = 0;
 const int DriverProxy::DATA_TYPE_AXIS = 1;
 
-DriverProxy::DriverProxy(char *bufferFileName)
+DriverProxy::DriverProxy(wchar_t *bufferFileName)
 {
 	createBufferFile(bufferFileName);
 }
@@ -20,7 +20,7 @@ void DriverProxy::sendDataToDriver(UCHAR *data, int dataSize)
 		);
 
 	// write data to the buffer file
-	WriteFile(
+	BOOL status = WriteFile(
 		bufferFileHandle,
 		data,
 		dataSize,
@@ -29,7 +29,7 @@ void DriverProxy::sendDataToDriver(UCHAR *data, int dataSize)
 		);
 }
 
-void DriverProxy::createBufferFile(char *bufferFileName)
+void DriverProxy::createBufferFile(wchar_t *bufferFileName)
 {
 	wchar_t filePath[MAX_PATH];
 	wchar_t fullFilePath[MAX_PATH];
@@ -39,7 +39,7 @@ void DriverProxy::createBufferFile(char *bufferFileName)
 		MAX_PATH
 		);
 
-	wprintf_s(fullFilePath, MAX_PATH, "%s\\Temp\\%s", filePath, bufferFileName);
+	swprintf_s(fullFilePath,MAX_PATH, L"%s\\Temp\\%s", filePath, bufferFileName);
 
 	bufferFileHandle = CreateFile(
 		fullFilePath,

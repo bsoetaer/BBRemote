@@ -1,6 +1,6 @@
 #include "KeyboardProxy.hpp"
 
-KeyboardProxy::KeyboardProxy() : DriverProxy("bbKeyboardBuffer") {}
+KeyboardProxy::KeyboardProxy() : DriverProxy(L"bbKeyboardBuffer") {}
 
 KeyboardProxy::~KeyboardProxy() {}
 

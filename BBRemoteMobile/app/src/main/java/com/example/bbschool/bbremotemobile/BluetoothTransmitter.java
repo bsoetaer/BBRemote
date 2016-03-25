@@ -22,6 +22,7 @@ public class BluetoothTransmitter {
         }
         OutputStream outStream = InitialConnectionTranscever.globalSocket.getOutputStream();
         outStream.write(data);
+        outStream.flush();
     }
 
 }

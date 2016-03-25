@@ -6,23 +6,23 @@ const map<char,char> MouseProxy::bbRemoteButtonToHID = {
 	{ 2, 0b00000100 }
 };
 
-MouseProxy::MouseProxy() : DriverProxy("bbMouseBuffer") {}
+MouseProxy::MouseProxy() : DriverProxy(L"bbMouseBuffer") {}
 
 MouseProxy::~MouseProxy() {}
 
 void MouseProxy::handleData(char *data, int bytes)
 {
-	UCHAR *inputData;
+	UCHAR inputData[3] = { 0 };
 	if (data[0] == DATA_TYPE_BUTTON)
-		inputData = handleButton(data + 1, bytes - 1);
+		handleButton(inputData, data + 1, bytes - 1);
 	else if (data[0] == DATA_TYPE_AXIS)
-		inputData = handleAxis(data + 1, bytes - 1);
+		handleAxis(inputData, data + 1, bytes - 1);
 	else
 		return;
 	sendDataToDriver(inputData, 3);
 }
 
-UCHAR * MouseProxy::handleAxis(char *data, int bytes)
+void MouseProxy::handleAxis(_Out_ UCHAR formattedData[3], char *data, int bytes)
 {
 	UCHAR inputData[3] = { lastButtonPresses, lastMovement[0], lastMovement[1] };
 	for (int i = 0; i < bytes; i += 2)
@@ -31,10 +31,10 @@ UCHAR * MouseProxy::handleAxis(char *data, int bytes)
 	lastMovement[0] = inputData[0];
 	lastMovement[1] = inputData[1];
 
-	return inputData;
+	memcpy(formattedData, inputData, 3);
 }
 
-UCHAR * MouseProxy::handleButton(char *data, int bytes)
+void MouseProxy::handleButton(_Out_ UCHAR *formattedData, char *data, int bytes)
 {
 	UCHAR inputData[3] = { lastButtonPresses, lastMovement[0], lastMovement[1] };
 
@@ -45,5 +45,5 @@ UCHAR * MouseProxy::handleButton(char *data, int bytes)
 
 	lastButtonPresses = inputData[0];
 
-	return inputData;
+	memcpy(formattedData, inputData, 3);
 }

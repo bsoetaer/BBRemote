@@ -10,11 +10,11 @@ public:
 	static const int DATA_TYPE_BUTTON;
 	static const int DATA_TYPE_AXIS;
 
-	DriverProxy(char *bufferFileName);
+	DriverProxy(wchar_t *bufferFileName);
 	virtual void handleData(char *data, int bytes) = 0;
 protected:
 	void sendDataToDriver(UCHAR *data, int dataSize);
 private:
 	HANDLE bufferFileHandle;
-	void createBufferFile(char *bufferFileName);
+	void createBufferFile(wchar_t *bufferFileName);
 };
