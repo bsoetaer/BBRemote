@@ -7,5 +7,5 @@ class KeyboardProxy : public DriverProxy
 public:
 	KeyboardProxy();
 	~KeyboardProxy();
-	void handleData(char *data);
+	void handleData(char *data, int bytes);
 };

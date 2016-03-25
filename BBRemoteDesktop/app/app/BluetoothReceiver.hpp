@@ -28,5 +28,5 @@ public:
 	BluetoothReceiver();
 	~BluetoothReceiver();
 	void receiveData();
-	void handleData(char*);
+	void handleData(char*,int);
 };

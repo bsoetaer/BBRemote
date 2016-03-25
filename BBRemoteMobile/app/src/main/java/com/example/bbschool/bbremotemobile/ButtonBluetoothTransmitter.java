@@ -13,11 +13,15 @@ public class ButtonBluetoothTransmitter extends BluetoothTransmitter {
     }
 
     public void sendKeys(Map<Integer, Boolean> keyPresses) throws IOException {
-        /* format of encoded bytes is: every evenly indexed byte is a key code, and every odd
-         inidexed byte is either 0 (key up) or 1 (key down)*/
-        byte[] bytes = new byte[keyPresses.size()*2];
+        /* format of encoded bytes is:
+        - The first byte is a special code: -1 is change mode, 0 is button press, and 1 is axis
+        - for button press, every evenly indexed byte (past the first)
+            is a key code, and every odd indexed byte is either 0 (key up) or -1 (key down)
+        */
+        byte[] bytes = new byte[1+keyPresses.size()*2];
+        bytes[0] = 0;
 
-        int index = 0;
+        int index = 1;
         for (Integer key : keyPresses.keySet()) {
             bytes[index++] = (byte) key.intValue();
             bytes[index++] = booleanToByte(keyPresses.get(key));
@@ -27,6 +31,6 @@ public class ButtonBluetoothTransmitter extends BluetoothTransmitter {
     }
 
     private byte booleanToByte(Boolean bool) {
-        return (byte) (bool ? 1 : 0);
+        return (byte) (bool ? 1 : -1);
     }
 }
