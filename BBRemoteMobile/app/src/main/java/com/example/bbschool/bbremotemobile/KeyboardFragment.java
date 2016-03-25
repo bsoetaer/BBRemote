@@ -15,7 +15,6 @@ import java.util.List;
  */
 public class KeyboardFragment extends Fragment {
 
-    KeyboardViewFix myKeyboardView = null;
     KeyListener myKeyListener = null;
 
     public KeyboardFragment() {
