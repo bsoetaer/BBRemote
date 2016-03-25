@@ -90,7 +90,7 @@ void BluetoothReceiver::receiveData()
 
 	while (true)
 	{
-
+		printf("bye\n");
 		clientSocket = accept(localSocket, NULL, NULL);
 		if (clientSocket == INVALID_SOCKET) {
 			// TODO: error handling
@@ -114,7 +114,8 @@ void BluetoothReceiver::receiveData()
 			else if (lengthReceived == 0) {
 				break;
 			}
-			handleData(dataBuffer);
+			handleData(dataBufferIndex, lengthReceived);
+			dataBufferIndex += lengthReceived;
 		}
 	}
 
@@ -135,10 +136,13 @@ void BluetoothReceiver::receiveData()
 	}
 }
 
-void BluetoothReceiver::handleData(char* data) {
-	if (-1 == *data) { // Special code for switching modes
-		currentProxy = ModeSwitcher::switchMode(data + 8);
+void BluetoothReceiver::handleData(char* data, int bytesInData) {
+	printf("hi\n");
+	if (DriverProxy::DATA_TYPE_MODE_CHANGE == *data) { // Special code for switching modes
+		currentProxy = ModeSwitcher::switchMode(data + 1);
 	} else {
-		currentProxy->handleData(data);
+		currentProxy->handleData(data, bytesInData);
 	}
 }
+
+void BluetoothReceiver::cleanup() {}

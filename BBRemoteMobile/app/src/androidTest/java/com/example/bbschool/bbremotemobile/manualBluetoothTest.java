@@ -1,6 +1,7 @@
 package com.example.bbschool.bbremotemobile;
 
 import android.bluetooth.BluetoothDevice;
+import android.os.SystemClock;
 import android.test.InstrumentationTestCase;
 
 import java.util.HashMap;
@@ -24,13 +25,22 @@ public class manualBluetoothTest extends InstrumentationTestCase {
         transmitter.changeMode(Mode.Keyboard);
     }*/
 
-    public void testSendKeyboardData() throws Exception {
+    public void testSendMouseData() throws Exception {
 
-        Map<Integer, Boolean> keyPresses = new HashMap<>();
-        keyPresses.put(1,Boolean.FALSE);
-        keyPresses.put(2,Boolean.TRUE);
+        BluetoothModeChangeTransmitter.changeMode(Mode.Optical);
 
-        ButtonBluetoothTransmitter.sendKeys(keyPresses);
+        Map<Integer, Byte> movement = new HashMap<>();
+        movement.put(MouseAxis.X.getVal(), Byte.decode("0x64"));
+        movement.put(MouseAxis.X.getVal(), Byte.decode("0x10"));
+
+        BluetoothAxisTransmitter.sendMovement(movement);
+
+        //BluetoothAxisTransmitter
+
+        //Map<Integer, Boolean> buttonPresses = new HashMap<>();
+        //buttonPresses.put(MouseButton.LEFT.getVal(), Boolean.TRUE);
+
+        //ButtonBluetoothTransmitter.sendKeys(buttonPresses);
     }
 
     private class TestCallback implements FindDeviceCallback {
