@@ -1,5 +1,7 @@
 package com.example.bbschool.bbremotemobile;
 
+import android.util.Log;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -7,17 +9,18 @@ import java.io.OutputStream;
 /**
  * Created by Brendan on 3/13/2016.
  */
-public abstract class BluetoothTransmitter {
+public class BluetoothTransmitter {
 
-    private InputStream inStream;
-    private OutputStream outStream;
+    private BluetoothTransmitter() {}
+    private static final String TAG = "BluetoothTransmitter";
 
-    public BluetoothTransmitter() throws IOException {
-        inStream = InitialConnectionTranscever.globalSocket.getInputStream();
-        outStream = InitialConnectionTranscever.globalSocket.getOutputStream();
-    }
-
-    protected void sendData(byte[] data) throws IOException {
+    protected static void sendData(byte[] data) throws IOException {
+        //TODO Make sure this if statement is never entered. Make sure that sendData is only called when connected.
+        if (InitialConnectionTranscever.globalSocket == null) {
+            Log.e(TAG, "Shouldn't be calling send data when not connected.");
+            return;
+        }
+        OutputStream outStream = InitialConnectionTranscever.globalSocket.getOutputStream();
         outStream.write(data);
     }
 

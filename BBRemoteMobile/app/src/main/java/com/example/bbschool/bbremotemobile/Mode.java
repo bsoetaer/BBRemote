@@ -9,7 +9,8 @@ public enum Mode {
     Optical(2),
     Camera(3),
     Mic(4),
-    Gamepad(5);
+    Gamepad(5),
+    None(6);
 
     private int val;
 

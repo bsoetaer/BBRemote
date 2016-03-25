@@ -1,18 +1,18 @@
 package com.example.bbschool.bbremotemobile;
 
+import android.util.Log;
+
 import java.io.IOException;
 import java.util.Map;
 
 /**
  * Created by Brendan on 3/13/2016.
  */
-public class ButtonBluetoothTransmitter extends BluetoothTransmitter {
+public final class ButtonBluetoothTransmitter{
 
-    public ButtonBluetoothTransmitter() throws IOException {
-        super();
-    }
+    private ButtonBluetoothTransmitter() {}
 
-    public void sendKeys(Map<Integer, Boolean> keyPresses) throws IOException {
+    public static void sendKeys(Map<Integer, Boolean> keyPresses) throws IOException{
         /* format of encoded bytes is:
         - The first byte is a special code: -1 is change mode, 0 is button press, and 1 is axis
         - for button press, every evenly indexed byte (past the first)
@@ -27,10 +27,10 @@ public class ButtonBluetoothTransmitter extends BluetoothTransmitter {
             bytes[index++] = booleanToByte(keyPresses.get(key));
         }
 
-        sendData(bytes);
+        BluetoothTransmitter.sendData(bytes);
     }
 
-    private byte booleanToByte(Boolean bool) {
+    private static byte booleanToByte(Boolean bool) {
         return (byte) (bool ? 1 : -1);
     }
 }

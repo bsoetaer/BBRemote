@@ -25,13 +25,12 @@ public class manualBluetoothTest extends InstrumentationTestCase {
     }*/
 
     public void testSendKeyboardData() throws Exception {
-        ButtonBluetoothTransmitter transmitter = new ButtonBluetoothTransmitter();
 
         Map<Integer, Boolean> keyPresses = new HashMap<>();
         keyPresses.put(1,Boolean.FALSE);
         keyPresses.put(2,Boolean.TRUE);
 
-        transmitter.sendKeys(keyPresses);
+        ButtonBluetoothTransmitter.sendKeys(keyPresses);
     }
 
     private class TestCallback implements FindDeviceCallback {

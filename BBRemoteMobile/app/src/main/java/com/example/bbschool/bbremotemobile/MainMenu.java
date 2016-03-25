@@ -1,7 +1,11 @@
 package com.example.bbschool.bbremotemobile;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.hardware.Sensor;
+import android.hardware.SensorManager;
+import android.view.Menu;
 import android.view.MenuItem;
 
 /**
@@ -14,6 +18,14 @@ public class MainMenu {
     public MainMenu(Activity currentActivity) {
         this.currentActivity = currentActivity;
         modeChanger = new ModeChanger(currentActivity);
+    }
+
+    public void hideItems(Menu menu) {
+        //TODO add hiding input modes when no connection
+        SensorManager mSensorManager = (SensorManager) currentActivity.getSystemService(Context.SENSOR_SERVICE);
+        if (mSensorManager.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION) == null){
+            menu.findItem(R.id.action_optical).setVisible(false);
+        }
     }
 
     public boolean menuItemSelected(MenuItem item) {
