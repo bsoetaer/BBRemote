@@ -17,5 +17,8 @@ private:
 	UCHAR lastMovement[2] = { 0 };
 	UCHAR lastButtonPresses = 0;
 	void handleButton(_Out_ UCHAR *formattedData, char *data, int bytes);
-	void handleAxis(_Out_ UCHAR *formattedData, char *data, int bytes);
+	void handleAxis(_Out_ UCHAR formattedData[3], char *data, int bytes);
+protected:
+	Mode modeId = Mode::OPTICAL;
+	const int packetSize = MOUSE_PACKET_SIZE;
 };

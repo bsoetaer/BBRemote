@@ -90,7 +90,6 @@ void BluetoothReceiver::receiveData()
 
 	while (true)
 	{
-		printf("bye\n");
 		clientSocket = accept(localSocket, NULL, NULL);
 		if (clientSocket == INVALID_SOCKET) {
 			// TODO: error handling
@@ -137,9 +136,8 @@ void BluetoothReceiver::receiveData()
 }
 
 void BluetoothReceiver::handleData(char* data, int bytesInData) {
-	printf("hi\n");
 	if (DriverProxy::DATA_TYPE_MODE_CHANGE == *data) { // Special code for switching modes
-		currentProxy = ModeSwitcher::switchMode(data + 1);
+		currentProxy = ModeSwitcher::switchMode(data + 1, currentProxy);
 	} else {
 		currentProxy->handleData(data, bytesInData);
 	}

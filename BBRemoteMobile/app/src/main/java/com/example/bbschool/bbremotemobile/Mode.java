@@ -4,13 +4,13 @@ package com.example.bbschool.bbremotemobile;
  * Created by Braeden on 3/10/2016.
  */
 public enum Mode {
-    Keyboard(0),
-    Touchpad(1),
-    Optical(2),
-    Camera(3),
-    Mic(4),
-    Gamepad(5),
-    None(6);
+    Keyboard(1),
+    Touchpad(2),
+    Optical(3),
+    Camera(4),
+    Mic(5),
+    Gamepad(6),
+    None(7);
 
     private int val;
 

@@ -1,6 +1,7 @@
 #pragma once
 #include <Windows.h>
 #include <stdio.h>
+#include "Modes.h"
 using namespace std;
 
 class DriverProxy
@@ -12,8 +13,12 @@ public:
 
 	DriverProxy(wchar_t *bufferFileName);
 	virtual void handleData(char *data, int bytes) = 0;
+	void deactivateDevice();
 protected:
-	void sendDataToDriver(UCHAR *data, int dataSize);
+	Mode modeId;
+	int packetSize;
+	void sendDataToDriver(UCHAR *data, int dataLen);
+	void sendDataToDriver(UCHAR *data, int dataLen, BOOL active);
 private:
 	HANDLE bufferFileHandle;
 	void createBufferFile(wchar_t *bufferFileName);

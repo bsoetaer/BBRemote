@@ -1,9 +1,9 @@
 package com.example.bbschool.bbremotemobile;
 
 import android.bluetooth.BluetoothDevice;
-import android.os.SystemClock;
 import android.test.InstrumentationTestCase;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,7 +17,6 @@ public class manualBluetoothTest extends InstrumentationTestCase {
     public void setUp() throws Exception {
         DeviceScanner scanner = new DeviceScanner();
         scanner.getPairedDevices(new TestCallback());
-        InitialConnectionTranscever.connect(device);
     }
 
     /*public void testChangeMode() throws Exception {
@@ -27,26 +26,31 @@ public class manualBluetoothTest extends InstrumentationTestCase {
 
     public void testSendMouseData() throws Exception {
 
-        BluetoothModeChangeTransmitter.changeMode(Mode.Optical);
+        //BluetoothModeChangeTransmitter.changeMode(Mode.Keyboard);
 
-        Map<Integer, Byte> movement = new HashMap<>();
-        movement.put(MouseAxis.X.getVal(), Byte.decode("0x64"));
-        movement.put(MouseAxis.X.getVal(), Byte.decode("0x10"));
+        //Map<Integer, Byte> movement = new HashMap<>();
+        //movement.put(MouseAxis.X.getVal(), Byte.decode("0x64"));
+        //movement.put(MouseAxis.Y.getVal(), Byte.decode("0x10"));
 
-        BluetoothAxisTransmitter.sendMovement(movement);
+        //BluetoothAxisTransmitter.sendMovement(movement);
 
-        //BluetoothAxisTransmitter
+        Map<Integer, Boolean> buttonPresses = new HashMap<>();
+        buttonPresses.put(4, Boolean.TRUE);
+        buttonPresses.put(5, Boolean.FALSE);
+        //buttonPresses.put(6, Boolean.TRUE);
 
-        //Map<Integer, Boolean> buttonPresses = new HashMap<>();
-        //buttonPresses.put(MouseButton.LEFT.getVal(), Boolean.TRUE);
-
-        //ButtonBluetoothTransmitter.sendKeys(buttonPresses);
+        ButtonBluetoothTransmitter.sendKeys(buttonPresses);
     }
 
     private class TestCallback implements FindDeviceCallback {
         @Override
         public Void call(BluetoothDevice bluetoothDevice) {
             device = bluetoothDevice;
+            try {
+                InitialConnectionTranscever.connect(device);
+            } catch (IOException e){
+                int a = 1;
+            }
             return null;
         }
     }
