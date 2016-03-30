@@ -18,6 +18,7 @@
     <string name="action_dual_none">None</string>
     <string name="action_connection">Connection</string>
     <string name="action_scan">Scan</string>
+    <string name="action_add_input">Add Input</string>
     <string name="title_activity_customize_gamepad">CustomizeGamepadActivity</string>
     <string name="title_activity_settings">Settings</string>
 

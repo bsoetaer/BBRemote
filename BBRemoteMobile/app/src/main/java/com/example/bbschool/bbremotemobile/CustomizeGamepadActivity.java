@@ -11,7 +11,9 @@ import android.view.MenuItem;
 
 import java.util.HashMap;
 
-public class CustomizeGamepadActivity extends AppCompatActivity {
+public class CustomizeGamepadActivity extends AppCompatActivity implements
+        SelectInputFragment.OnInputSelectedListener,
+        CustomizeLayoutFragment.OnSelectInputListener {
 
     private enum GamepadMode {Customize, SelectInput};
     private MainMenu mainMenu;
@@ -70,6 +72,18 @@ public class CustomizeGamepadActivity extends AppCompatActivity {
         ConnectionReceiver.unregister(this);
     }
 
+    public void onSelectInput() {
+        mode = GamepadMode.SelectInput;
+        loadFragment();
+    }
+
+    public void onInputSelected(GamepadInputView input) {
+        mode = GamepadMode.Customize;
+        CustomizeLayoutFragment customizeFragment = (CustomizeLayoutFragment) getFragment();
+        customizeFragment.addInput(input);
+        loadFragment();
+    }
+
     private void loadFragment() {
         Fragment newFragment = getFragment();
         if (newFragment == null)
@@ -87,7 +101,7 @@ public class CustomizeGamepadActivity extends AppCompatActivity {
         if (newFragment == null) {
             switch (mode) {
                 case SelectInput:
-                    //newFragment = new SelectInputFragment();
+                    newFragment = new SelectInputFragment();
                     break;
                 default:
                     newFragment = new CustomizeLayoutFragment();
