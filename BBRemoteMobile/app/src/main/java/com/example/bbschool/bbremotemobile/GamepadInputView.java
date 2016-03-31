@@ -7,6 +7,8 @@ import android.view.ScaleGestureDetector;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
+import java.io.Serializable;
+
 /**
  * Created by Braeden on 3/27/2016.
  */
@@ -17,17 +19,30 @@ public class GamepadInputView extends ImageView {
     int deltaX, deltaY;
     private float scaleFactor = 1f;
     private ScaleGestureDetector scaleDetector;
+    private boolean isEditable = true;
+
+    public GamepadInputView (Context context) {
+        super(context);
+        setup(context);
+    }
 
     public GamepadInputView (Context context, GamepadInput gamepadInput) {
         super(context);
-        this.gamepadInput = gamepadInput;
+        setup(context);
+        setGamepadInput(gamepadInput);
+    }
+
+    private void setup(Context context) {
         this.context = context;
-        setImageResource(GamepadInputImage.getImageId(gamepadInput));
         setFocusable(true); // necessary for getting the touch events
         setScaleType(ScaleType.FIT_CENTER);
         setBackgroundColor(Color.TRANSPARENT);
         scaleDetector = new ScaleGestureDetector(context, new ScaleListener());
+    }
 
+    public void setGamepadInput(GamepadInput input) {
+        this.gamepadInput = input;
+        setImageResource(GamepadInputImage.getImageId(gamepadInput));
     }
 
     public GamepadInput getGamepadInput() {
@@ -39,10 +54,17 @@ public class GamepadInputView extends ImageView {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+        super.onTouchEvent(event);
+        if (!isEditable) {
+            return false;
+        }
         scaleDetector.onTouchEvent(event);
         handleMove(event);
         return true;
+    }
 
+    public void setEditable( boolean isEditable) {
+        this.isEditable = isEditable;
     }
 
     private void handleMove(MotionEvent event) {
@@ -94,6 +116,4 @@ public class GamepadInputView extends ImageView {
             return true;
         }
     }
-
-
 }

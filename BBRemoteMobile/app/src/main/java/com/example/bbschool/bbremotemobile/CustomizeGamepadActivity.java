@@ -62,7 +62,7 @@ public class CustomizeGamepadActivity extends AppCompatActivity implements
     protected void onSaveInstanceState(Bundle outState) {
         // Make sure to call the super method so that the states of our views are saved
         super.onSaveInstanceState(outState);
-        // Save our own state now
+        // XMLParser our own state now
         outState.putSerializable(gamepadModeTag, mode);
     }
 

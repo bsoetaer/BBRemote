@@ -19,6 +19,10 @@
     <string name="action_connection">Connection</string>
     <string name="action_scan">Scan</string>
     <string name="action_add_input">Add Input</string>
+    <string name="action_save_layout">Save Layout</string>
+    <string name="action_load_layout">Load Layout</string>
+    <string name="action_delete_input">Delete Input</string>
+    <string name="action_cancel_delete">Cancel</string>
     <string name="title_activity_customize_gamepad">CustomizeGamepadActivity</string>
     <string name="title_activity_settings">Settings</string>
 

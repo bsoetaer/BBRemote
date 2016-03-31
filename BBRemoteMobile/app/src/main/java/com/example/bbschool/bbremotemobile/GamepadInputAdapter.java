@@ -22,7 +22,7 @@ public class GamepadInputAdapter extends ArrayAdapter<GamepadInput> {
         this.layoutResourceId = layoutResourceId;
     }
 
-    public GamepadInputAdapter(Context context, int layoutResourceId, GamepadInput[] data) {
+    public GamepadInputAdapter(Context context, int layoutResourceId, ArrayList<GamepadInput> data) {
         super(context, layoutResourceId, data);
         this.layoutResourceId = layoutResourceId;
     }

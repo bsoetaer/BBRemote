@@ -13,6 +13,9 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 /**
  * Created by Braeden on 3/30/2016.
  */
@@ -48,7 +51,11 @@ public class SelectInputFragment extends Fragment implements ListView.OnItemClic
     @Override
     public void onStart() {
         super.onStart();
-        GamepadInputAdapter adapter = new GamepadInputAdapter(getContext(), R.layout.input_item, GamepadInput.values());
+        ArrayList<GamepadInput> inputs = new ArrayList<GamepadInput>(Arrays.asList(GamepadInput.values()));
+        inputs.remove(GamepadInput.DOWN_DPAD);
+        inputs.remove(GamepadInput.LEFT_DPAD);
+        inputs.remove(GamepadInput.RIGHT_DPAD);
+        GamepadInputAdapter adapter = new GamepadInputAdapter(getContext(), R.layout.input_item, inputs);
         ListView v = (ListView) getView().findViewById(R.id.gamepadInputList);
         v.setAdapter(adapter);
         v.setOnItemClickListener(this);
