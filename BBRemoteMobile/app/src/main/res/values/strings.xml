@@ -21,10 +21,18 @@
     <string name="action_add_input">Add Input</string>
     <string name="action_save_layout">Save Layout</string>
     <string name="action_load_layout">Load Layout</string>
+    <string name="action_delete_layout">Delete Layout</string>
     <string name="action_delete_input">Delete Input</string>
     <string name="action_cancel_delete">Cancel</string>
+    <string name="customize_menu">Customize</string>
     <string name="title_activity_customize_gamepad">CustomizeGamepadActivity</string>
     <string name="title_activity_settings">Settings</string>
+    <string name="menu_customize_orientation">Orientation</string>
+    <string name="action_portrait">Portrait</string>
+    <string name="action_landscape">Landscape</string>
+    <string name="menu_customize_rotate">Rotate as Input</string>
+    <string name="action_rotate_enabled">Enabled</string>
+    <string name="action_rotate_disabled">Disabled</string>
 
     <!-- Strings related to keyboard key labels -->
     <string name="key_0">0</string>

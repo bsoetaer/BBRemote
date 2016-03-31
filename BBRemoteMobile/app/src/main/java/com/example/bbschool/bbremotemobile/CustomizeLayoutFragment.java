@@ -3,12 +3,10 @@ package com.example.bbschool.bbremotemobile;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.GestureDetectorCompat;
-import android.text.Editable;
-import android.util.Log;
-import android.view.ContextMenu;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -29,6 +27,7 @@ import java.io.File;
 public class CustomizeLayoutFragment extends Fragment {
 
     private OnSelectInputListener mListener;
+    private boolean deleteAvailable = false;
 
     public interface OnSelectInputListener {
         public void onSelectInput();
@@ -40,6 +39,7 @@ public class CustomizeLayoutFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         gamepadLayout = new GamepadLayout(getContext());
+        setOrientation(gamepadLayout.getPortrait());
         setRetainInstance(true);
         setHasOptionsMenu(true);
     }
@@ -48,18 +48,29 @@ public class CustomizeLayoutFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         RelativeLayout v = (RelativeLayout) inflater.inflate(R.layout.fragment_customize_layout, container, false);
-        clearLayoutParent();
-        v.addView(gamepadLayout);
-        for (GamepadInputView input : gamepadLayout.getGamepadInputs()) {
-            input.setOnTouchListener(new DeleteInputListener());
-        }
+        changeGamepadLayout(gamepadLayout, v);
         return v;
     }
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        menu.findItem(R.id.action_customize).setVisible(false);
         inflater.inflate(R.menu.customize_menu, menu);
         super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        menu.findItem(R.id.action_delete_layout).setVisible(deleteAvailable);
+        if(gamepadLayout.getPortrait())
+            menu.findItem(R.id.action_portrait).setChecked(true);
+        else
+            menu.findItem(R.id.action_landscape).setChecked(true);
+
+        if(gamepadLayout.getRotateAsInput())
+            menu.findItem(R.id.action_rotate_enabled).setChecked(true);
+        else
+            menu.findItem(R.id.action_rotate_disabled).setChecked(true);
     }
 
     @Override
@@ -73,6 +84,21 @@ public class CustomizeLayoutFragment extends Fragment {
                 return true;
             case R.id.action_load_layout:
                 loadDialog();
+                return true;
+            case R.id.action_delete_layout:
+                deleteDialog();
+                return true;
+            case R.id.action_portrait:
+                setOrientation(true);
+                return true;
+            case R.id.action_landscape:
+                setOrientation(false);
+                return true;
+            case R.id.action_rotate_enabled:
+                setRotateAsInput(true);
+                return true;
+            case R.id.action_rotate_disabled:
+                setRotateAsInput(false);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -89,16 +115,26 @@ public class CustomizeLayoutFragment extends Fragment {
         }
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
+    }
+
+    private void showDelete(boolean enabled) {
+        deleteAvailable = enabled;
+    }
+
     public void addInput(GamepadInputView input) {
         gamepadLayout.addGamepadInput(input);
     }
 
-    public void removeInput(GamepadInputView input) {
-        gamepadLayout.removeGamepadInput(input);
-    }
-
     public void changeGamepadLayout(GamepadLayout layout) {
         RelativeLayout v = (RelativeLayout) getView();
+        changeGamepadLayout(layout, v);
+    }
+
+    public void changeGamepadLayout(GamepadLayout layout, RelativeLayout v) {
         v.removeAllViews();
         this.gamepadLayout = layout;
         clearLayoutParent();
@@ -107,6 +143,19 @@ public class CustomizeLayoutFragment extends Fragment {
             input.setOnTouchListener(new DeleteInputListener());
             input.setEditable(true);
         }
+    }
+
+    private void setOrientation(boolean portrait) {
+        gamepadLayout.setPortrait(portrait);
+        if(portrait) {
+            getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        } else {
+            getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        }
+    }
+
+    private void setRotateAsInput(boolean enabled) {
+        gamepadLayout.setRotateAsInput(enabled);
     }
 
     private void clearLayoutParent() {
@@ -129,6 +178,7 @@ public class CustomizeLayoutFragment extends Fragment {
                 if (checkValidName(layoutName) && !checkNameAlreadyExists(layoutName)) {
                     gamepadLayout.setName(layoutName);
                     XMLParser.save(getContext(), gamepadLayout);
+                    showDelete(true);
                 }
             }
         });
@@ -182,6 +232,7 @@ public class CustomizeLayoutFragment extends Fragment {
         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
                 XMLParser.save(getContext(), gamepadLayout);
+                showDelete(true);
             }
         });
 
@@ -201,7 +252,7 @@ public class CustomizeLayoutFragment extends Fragment {
         for (File f : getActivity().getFilesDir().listFiles()) {
             arrayAdapter.add(f.getName().substring(0, f.getName().length() - 4)); //Remove .xml from the end
         }
-        builder.setNegativeButton("cancel",
+        builder.setNegativeButton("Cancel",
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -214,9 +265,34 @@ public class CustomizeLayoutFragment extends Fragment {
                 String layoutName = arrayAdapter.getItem(which);
                 GamepadLayout newLayout = XMLParser.load(getContext(), layoutName);
                 changeGamepadLayout(newLayout);
+                showDelete(true);
                 dialog.dismiss();
             }
         });
+
+        builder.show();
+    }
+
+    private void deleteDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle("Delete Layout");
+        builder.setMessage("Are you sure you want to delete the " + gamepadLayout.getName() + " layout?");
+
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                (new File(getActivity().getFilesDir(), gamepadLayout.getName() + ".xml")).delete();
+                changeGamepadLayout(new GamepadLayout(getContext()));
+                showDelete(false);
+            }
+        });
+
+        builder.setNegativeButton("Cancel",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
 
         builder.show();
     }
