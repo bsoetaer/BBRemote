@@ -1,0 +1,74 @@
+;
+; drivers.inf
+;
+
+[Version]
+Signature="$WINDOWS NT$"
+Class=HIDClass ; TODO: edit Class
+ClassGuid={745a17a0-74d3-11d0-b6fe-00a0c90f57da}
+Provider=%ManufacturerName%
+CatalogFile=BBDrivers.cat
+DriverVer=03/30/2016,21.35.55.813
+
+[DestinationDirs]
+DefaultDestDir = 12
+
+; ================= Class section =====================
+
+[SourceDisksNames]
+1 = %DiskName%,,,""
+
+[SourceDisksFiles]
+drivers.sys  = 1,,
+
+;*****************************************
+; Install Section
+;*****************************************
+
+[Manufacturer]
+%ManufacturerName%=Standard,NTamd64
+
+[Standard.NTamd64]
+%BBDrivers.DeviceDesc%=BBDrivers_Device, Root\BBDrivers ; TODO: edit hw-id
+
+[BBDrivers_Device.NT]
+CopyFiles=Drivers_Dir
+
+[Drivers_Dir]
+drivers.sys
+
+[BBDrivers_Device.NT.HW]  
+AddReg = BBDrivers_Device.NT.AddReg  
+  
+[BBDrivers_Device.NT.AddReg]  
+HKR,,"LowerFilters",0x00010000,"vhf"
+
+;-------------- Service installation
+[BBDrivers_Device.NT.Services]
+AddService = BBDrivers,%SPSVCINST_ASSOCSERVICE%, BBDrivers_Service_Inst
+
+; -------------- BBDrivers driver install sections
+[BBDrivers_Service_Inst]
+DisplayName    = %BBDrivers.SVCDESC%
+ServiceType    = 1               ; SERVICE_KERNEL_DRIVER
+StartType      = 3               ; SERVICE_DEMAND_START
+ErrorControl   = 1               ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %12%\BBDrivers.sys
+
+;
+;--- BBDrivers_Device Coinstaller installation ------
+;
+
+[BBDrivers_Device.NT.Wdf]
+KmdfService =  BBDrivers, BBDrivers_wdfsect
+[BBDrivers_wdfsect]
+KmdfLibraryVersion = 1.15
+
+[Strings]
+SPSVCINST_ASSOCSERVICE= 0x00000002
+ManufacturerName="<Your manufacturer name>" ;TODO: Replace with your manufacturer name
+ClassName="Samples" ; TODO: edit ClassName
+DiskName = "BBDrivers Installation Disk"
+BBDrivers.DeviceDesc = "BBDrivers Device"
+BBDrivers.SVCDESC = "BBDrivers Service"
+Media_Description = "BBRemote"

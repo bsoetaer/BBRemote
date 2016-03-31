@@ -21,7 +21,7 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{DB5A1E5B-075F-4326-AA60-B14480F41F23}</ProjectGuid>
     <RootNamespace>app</RootNamespace>
-    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.10586.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -129,6 +129,7 @@
     <ClInclude Include="BluetoothReceiver.hpp" />
     <ClInclude Include="DriverProxy.hpp" />
     <ClInclude Include="KeyboardProxy.hpp" />
+    <ClInclude Include="Modes.h" />
     <ClInclude Include="ModeSwitcher.hpp" />
     <ClInclude Include="MouseProxy.hpp" />
   </ItemGroup>
