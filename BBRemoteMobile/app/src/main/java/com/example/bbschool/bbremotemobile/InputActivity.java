@@ -107,7 +107,7 @@ public class InputActivity extends AppCompatActivity {
                     newFragment = new MicrophoneFragment();
                     break;
                 case Gamepad:
-                    //TODO
+                    newFragment = new GamepadFragment();
                     break;
                 default:
                     newFragment = new KeyboardFragment();
