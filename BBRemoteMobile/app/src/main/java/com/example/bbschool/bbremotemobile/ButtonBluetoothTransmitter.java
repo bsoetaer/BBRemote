@@ -29,6 +29,6 @@ public final class ButtonBluetoothTransmitter{
     }
 
     private static byte booleanToByte(Boolean bool) {
-        return (byte) (bool ? 1 : -1);
+        return (byte) (bool ? 0 : -1);
     }
 }

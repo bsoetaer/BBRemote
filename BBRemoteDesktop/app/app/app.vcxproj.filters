@@ -50,5 +50,8 @@
     <ClInclude Include="MouseProxy.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Modes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
