@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/action_touchpad_quick"
+        android:orderInCategory="3"
+        android:title="@string/action_touchpad"
+        android:icon="@drawable/ic_touch_app_black_24dp"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/action_optical_quick"
+        android:orderInCategory="6"
+        android:title="@string/action_optical"
+        android:icon="@drawable/ic_mouse_black_24dp"
+        app:showAsAction="always" />
+</menu>
