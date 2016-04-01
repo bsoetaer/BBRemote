@@ -1,18 +1,18 @@
 #include "MouseProxy.hpp"
 
-const map<char,char> MouseProxy::bbRemoteButtonToHID = {
+const map<char, char> MouseProxy::bbRemoteButtonToHID = {
 	{ 0, 0b00000001 },
 	{ 1, 0b00000010 },
 	{ 2, 0b00000100 }
 };
 
-MouseProxy::MouseProxy() : DriverProxy(L"bbMouBuffer") {}
+MouseProxy::MouseProxy() : DriverProxy(L"bbRemoteBuffer") {}
 
 MouseProxy::~MouseProxy() {}
 
 void MouseProxy::handleData(char *data, int bytes)
 {
-	UCHAR inputData[3] = { 0 };
+	UCHAR inputData[MOUSE_PACKET_SIZE] = { 0 };
 	if (data[0] == DATA_TYPE_BUTTON)
 		handleButton(inputData, data + 1, bytes - 1);
 	else if (data[0] == DATA_TYPE_AXIS)
@@ -22,14 +22,14 @@ void MouseProxy::handleData(char *data, int bytes)
 	sendDataToDriver(inputData, MOUSE_PACKET_SIZE);
 }
 
-void MouseProxy::handleAxis(_Out_ UCHAR formattedData[3], char *data, int bytes)
+void MouseProxy::handleAxis(_Out_ UCHAR formattedData[MOUSE_PACKET_SIZE], char *data, int bytes)
 {
 	UCHAR inputData[MOUSE_PACKET_SIZE] = { lastButtonPresses, lastMovement[0], lastMovement[1] };
 	for (int i = 0; i < bytes; i += 2)
-		inputData[data[i]] = data[i + 1];
+		inputData[data[i] + 1] = data[i + 1];
 
-	lastMovement[0] = inputData[0];
-	lastMovement[1] = inputData[1];
+	lastMovement[0] = inputData[1];
+	lastMovement[1] = inputData[2];
 
 	memcpy(formattedData, inputData, MOUSE_PACKET_SIZE);
 }

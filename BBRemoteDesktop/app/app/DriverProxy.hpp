@@ -1,7 +1,7 @@
 #pragma once
 #include <Windows.h>
 #include <stdio.h>
-#include "Modes.h"
+#include "Modes.hpp"
 using namespace std;
 
 class DriverProxy
@@ -18,7 +18,7 @@ protected:
 	Mode modeId;
 	int packetSize;
 	void sendDataToDriver(UCHAR *data, int dataLen);
-	void sendDataToDriver(UCHAR *data, int dataLen, BOOL active);
+	void sendDataToDriver(UCHAR *data, int dataLen, Mode activeMode);
 private:
 	HANDLE bufferFileHandle;
 	void createBufferFile(wchar_t *bufferFileName);

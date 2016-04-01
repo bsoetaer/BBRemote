@@ -160,12 +160,19 @@ public class KeyListener implements KeyboardView.OnKeyboardActionListener {
 
     private void sendKeys(Map<Integer, Boolean> keyPresses) {
         try {
-            ButtonBluetoothTransmitter.sendKeys(keyPresses);
+            ButtonBluetoothTransmitter.sendKeys(remapToHID(keyPresses));
         }
         catch (IOException e) {
             Log.w(TAG, "Failed key press send: " + e.getMessage());
             ModeChanger.disconnected(myContext);
         }
+    }
+
+    private Map<Integer, Boolean> remapToHID(Map<Integer, Boolean> keyPresses) {
+        Map<Integer, Boolean> remappedKeyPresses = new HashMap<>();
+        for (Integer key : keyPresses.keySet())
+            remappedKeyPresses.put(AndroidToWindowsKeyCodes.lookupCode(key), keyPresses.get(key));
+        return remappedKeyPresses;
     }
 
 }

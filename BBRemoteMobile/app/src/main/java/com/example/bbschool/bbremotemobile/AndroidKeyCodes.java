@@ -117,9 +117,6 @@ public final class AndroidKeyCodes {
         CodeToKey.put(101, "|");
         CodeToKey.put(102, "CHANGE MODE");
         CodeToKey.put(103, "CAPS");
-        CodeToKey.put(104, "LEFT CLICK");
-        CodeToKey.put(105, "RIGHT CLICK");
-        CodeToKey.put(106, "MIDDLE CLICK");
 
         for (Integer i: CodeToKey.keySet()) {
             KeyToCode.put(CodeToKey.get(i), i);

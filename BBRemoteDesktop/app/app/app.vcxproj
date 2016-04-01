@@ -120,6 +120,7 @@
   <ItemGroup>
     <ClCompile Include="BluetoothReceiver.cpp" />
     <ClCompile Include="DriverProxy.cpp" />
+    <ClCompile Include="GamepadProxy.cpp" />
     <ClCompile Include="KeyboardProxy.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ModeSwitcher.cpp" />
@@ -128,8 +129,9 @@
   <ItemGroup>
     <ClInclude Include="BluetoothReceiver.hpp" />
     <ClInclude Include="DriverProxy.hpp" />
+    <ClInclude Include="GamepadProxy.hpp" />
     <ClInclude Include="KeyboardProxy.hpp" />
-    <ClInclude Include="Modes.h" />
+    <ClInclude Include="Modes.hpp" />
     <ClInclude Include="ModeSwitcher.hpp" />
     <ClInclude Include="MouseProxy.hpp" />
   </ItemGroup>

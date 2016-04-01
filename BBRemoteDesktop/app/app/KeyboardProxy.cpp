@@ -1,9 +1,6 @@
 #include "KeyboardProxy.hpp"
 
-KeyboardProxy::KeyboardProxy() : DriverProxy(L"bbKbdBuffer")
-{
-	//lastKeysDown = new set<UCHAR>();
-}
+KeyboardProxy::KeyboardProxy() : DriverProxy(L"bbRemoteBuffer") {}
 
 KeyboardProxy::~KeyboardProxy() {}
 

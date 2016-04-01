@@ -9,7 +9,7 @@ DriverProxy::DriverProxy(wchar_t *bufferFileName)
 	createBufferFile(bufferFileName);
 }
 
-void DriverProxy::sendDataToDriver(UCHAR *data, int dataLen, BOOL active)
+void DriverProxy::sendDataToDriver(UCHAR *data, int dataLen, Mode activeMode)
 {
 	// make sure we are writing to the start of the file
 	SetFilePointer(
@@ -22,7 +22,7 @@ void DriverProxy::sendDataToDriver(UCHAR *data, int dataLen, BOOL active)
 	// include that this mode is active
 	UCHAR *writeData;
 	writeData = (UCHAR*)malloc(dataLen + 1);
-	writeData[0] = (UCHAR)active;
+	writeData[0] = (UCHAR)activeMode;
 	memcpy_s(writeData + 1, dataLen, data, dataLen);
 
 	// write data to the buffer file
@@ -37,13 +37,13 @@ void DriverProxy::sendDataToDriver(UCHAR *data, int dataLen, BOOL active)
 
 void DriverProxy::sendDataToDriver(UCHAR *data, int dataLen)
 {
-	sendDataToDriver(data, dataLen, TRUE);
+	sendDataToDriver(data, dataLen, modeId);
 }
 
 void DriverProxy::deactivateDevice()
 {
 	// To deactivate, we simply write the first byte as zero
-	sendDataToDriver(0, 0, FALSE);
+	sendDataToDriver(0, 0, modeId);
 }
 
 void DriverProxy::createBufferFile(wchar_t *bufferFileName)

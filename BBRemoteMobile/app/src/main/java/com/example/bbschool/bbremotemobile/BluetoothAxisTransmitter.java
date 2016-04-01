@@ -12,7 +12,7 @@ public class BluetoothAxisTransmitter {
         /* format of encoded bytes is:
         - The first byte is a special code: -1 is change mode, 0 is button press, and 1 is axis
         - for axis movement press, every evenly indexed byte (past the first)
-            is a the axis it represents, and every odd indexed byte the magnitude of the movement
+            is the axis it represents, and every odd indexed byte the magnitude of the movement
         */
         byte[] bytes = new byte[1+axisMovements.size()*2];
         bytes[0] = 1;

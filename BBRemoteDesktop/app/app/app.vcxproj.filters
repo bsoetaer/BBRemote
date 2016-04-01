@@ -33,6 +33,9 @@
     <ClCompile Include="DriverProxy.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="GamepadProxy.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BluetoothReceiver.hpp">
@@ -50,7 +53,10 @@
     <ClInclude Include="MouseProxy.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Modes.h">
+    <ClInclude Include="GamepadProxy.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Modes.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
