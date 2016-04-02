@@ -1,0 +1,1 @@
+devcon.exe install BBRemoteDrivers\x64\Release\BBRemoteDrivers.inf Root\BBRemoteDrivers
