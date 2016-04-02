@@ -66,7 +66,7 @@ public class InputActivity extends AppCompatActivity {
     protected void onSaveInstanceState(Bundle outState) {
         // Make sure to call the super method so that the states of our views are saved
         super.onSaveInstanceState(outState);
-        // Save our own state now
+        // XMLParser our own state now
         outState.putSerializable(modeTag, mode);
     }
 
@@ -107,7 +107,7 @@ public class InputActivity extends AppCompatActivity {
                     newFragment = new MicrophoneFragment();
                     break;
                 case Gamepad:
-                    //TODO
+                    newFragment = new GamepadFragment();
                     break;
                 default:
                     newFragment = new KeyboardFragment();

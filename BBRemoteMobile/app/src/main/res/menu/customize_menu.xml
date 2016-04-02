@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" >
+    <item
+        android:id="@+id/customize_menu"
+        android:orderInCategory="5"
+        android:title="@string/customize_menu"
+        app:showAsAction="never">
+        <menu>
+            <item
+                android:id="@+id/action_add_input"
+                android:orderInCategory="10"
+                android:title="@string/action_add_input"
+                android:icon="@drawable/ic_add_black_24dp"
+                app:showAsAction="always" />
+            <item
+                android:id="@+id/action_save_layout"
+                android:orderInCategory="20"
+                android:title="@string/action_save_layout"
+                android:icon="@drawable/ic_save_black_24dp"
+                app:showAsAction="ifRoom" />
+            <item
+                android:id="@+id/action_load_layout"
+                android:orderInCategory="30"
+                android:title="@string/action_load_layout"
+                android:icon="@drawable/ic_folder_open_black_24dp"
+                app:showAsAction="ifRoom" />
+            <item
+                android:id="@+id/action_delete_layout"
+                android:orderInCategory="40"
+                android:title="@string/action_delete_layout"
+                android:icon="@drawable/ic_delete_black_24dp"
+                app:showAsAction="ifRoom" />
+            <item
+                android:id="@+id/customize_orientation"
+                android:orderInCategory="50"
+                android:title="@string/menu_customize_orientation"
+                app:showAsAction="never">
+                <menu>
+                    <group android:checkableBehavior="single">
+                        <item
+                            android:id="@+id/action_portrait"
+                            android:orderInCategory="10"
+                            android:title="@string/action_portrait"
+                            android:checked="true"/>
+                        <item
+                            android:id="@+id/action_landscape"
+                            android:orderInCategory="20"
+                            android:title="@string/action_landscape" />
+                    </group>
+                </menu>
+            </item>
+            <item
+                android:id="@+id/customize_rotate"
+                android:orderInCategory="60"
+                android:title="@string/menu_customize_rotate"
+                app:showAsAction="never">
+                <menu>
+                    <group android:checkableBehavior="single">
+                        <item
+                            android:id="@+id/action_rotate_enabled"
+                            android:orderInCategory="10"
+                            android:title="@string/action_rotate_enabled" />
+                        <item
+                            android:id="@+id/action_rotate_disabled"
+                            android:orderInCategory="20"
+                            android:title="@string/action_rotate_disabled"
+                            android:checked="true"/>
+                    </group>
+                </menu>
+            </item>
+        </menu>
+    </item>
+
+</menu>
