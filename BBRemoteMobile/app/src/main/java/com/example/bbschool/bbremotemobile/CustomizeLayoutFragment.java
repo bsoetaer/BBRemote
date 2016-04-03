@@ -5,8 +5,10 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.GestureDetectorCompat;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -20,6 +22,10 @@ import android.widget.EditText;
 import android.widget.RelativeLayout;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.nio.channels.FileChannel;
 
 /**
  * Created by Braeden on 3/27/2016.
@@ -249,8 +255,8 @@ public class CustomizeLayoutFragment extends Fragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setTitle("Load Layout");
         final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1);
-        for (File f : getActivity().getFilesDir().listFiles()) {
-            arrayAdapter.add(f.getName().substring(0, f.getName().length() - 4)); //Remove .xml from the end
+        for (String name : XMLParser.getSavedLayouts(getContext())) {
+            arrayAdapter.add(name);
         }
         builder.setNegativeButton("Cancel",
                 new DialogInterface.OnClickListener() {

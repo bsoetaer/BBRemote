@@ -1,5 +1,6 @@
 package com.example.bbschool.bbremotemobile;
 
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -36,6 +37,19 @@ public class KeyboardFragment extends Fragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_keyboard, menu);
+        String defaultMouse = PreferenceManager.getDefaultSharedPreferences(getContext()).getString("DEFAULT_MOUSE_MODE", "-1");
+        MenuItem quickTouchpad = menu.findItem(R.id.action_touchpad_quick);
+        MenuItem quickOptical = menu.findItem(R.id.action_optical_quick);
+        if(defaultMouse.equals("0")) {
+            quickTouchpad.setVisible(false);
+            quickOptical.setVisible(true);
+        }else if(defaultMouse.equals("1")) {
+            quickTouchpad.setVisible(true);
+            quickOptical.setVisible(false);
+        } else {
+            quickTouchpad.setVisible(true);
+            quickOptical.setVisible(true);
+        }
         super.onCreateOptionsMenu(menu, inflater);
     }
 
