@@ -76,7 +76,6 @@ public class TouchpadTouchListener implements View.OnTouchListener {
     private void mouseMove(MotionEvent event) {
         float deltaX = lastX - event.getX();
         float deltaY = lastY - event.getY();
-        int sensitivity = PreferenceManager.getDefaultSharedPreferences(myContext).getInt("TOUCHPAD_SENSITIVITY", 50);
         // TODO Call MotionBluetoothTransmitter with deltaX and deltaY
         sendMovementData(deltaX, deltaY);
         updateLastPoint(event);
@@ -109,7 +108,9 @@ public class TouchpadTouchListener implements View.OnTouchListener {
     }
 
     private byte normalize(float val) {
-        return (byte)((int)Math.min(val, MAX_VELOCITY) / MAX_VELOCITY * -127);
+        int sensitivity = PreferenceManager.getDefaultSharedPreferences(myContext).getInt("TOUCHPAD_SENSITIVITY", 50);
+        float movementWithoutSensitivity = Math.min(val, MAX_VELOCITY) / MAX_VELOCITY * -127;
+        return (byte)(movementWithoutSensitivity * (float)sensitivity/(float)100);
     }
 
     private void updateLastPoint(MotionEvent event) {

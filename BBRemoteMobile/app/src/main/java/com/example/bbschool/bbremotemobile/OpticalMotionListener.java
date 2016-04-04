@@ -21,7 +21,7 @@ public class OpticalMotionListener implements SensorEventListener {
     private static final float velocityThreshold = 0.002f; // 2 mm/s
     private static final float accelerationThreshold = 0.1f; // 5 cm/s^2
     private static final float distanceThreshold = 0.0001f; // 1/10 mm
-    private static final double maxMovementVelocity = 0.3; // 3 cm/s
+    private static final float maxMovementVelocity = 0.3f; // 3 cm/s
     private static final String TAG = "OpticalMotionListener";
     private int[] noChangeCounter = {0,0,0};
     float[] oldA = {0,0,0};
@@ -79,8 +79,6 @@ public class OpticalMotionListener implements SensorEventListener {
                 if (Math.abs(newD[i]) < distanceThreshold )
                     newD[i] = 0;
             }
-            int sensitivity = PreferenceManager.getDefaultSharedPreferences(myContext).getInt("OPTICAL_SENSITIVITY", 50);
-            //TODO Call MotionBluetoothTransmitter here with distances moved
             //TODO Remove below code that is for testing only
             if (Math.abs(newD[0]) > distanceThreshold) {
                 currentlyMoving = true;
@@ -108,7 +106,9 @@ public class OpticalMotionListener implements SensorEventListener {
     }
 
     private byte normalize(float val) {
-        return (byte)(int)(Math.min(val, maxMovementVelocity) / maxMovementVelocity * -127);
+        int sensitivity = PreferenceManager.getDefaultSharedPreferences(myContext).getInt("OPTICAL_SENSITIVITY", 50);
+        float movementWithoutSensitivity = Math.min(val, maxMovementVelocity) / maxMovementVelocity * -127;
+        return (byte)(movementWithoutSensitivity * (float)sensitivity/(float)100);
     }
 
     private void updateOldValues(SensorEvent event, float[] newV) {

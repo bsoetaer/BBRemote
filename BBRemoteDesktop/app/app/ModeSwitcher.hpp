@@ -3,6 +3,7 @@
 #include "KeyboardProxy.hpp"
 #include "MouseProxy.hpp"
 #include "GamepadProxy.hpp"
+#include "NoInputProxy.hpp"
 #include "Modes.hpp"
 
 class ModeSwitcher

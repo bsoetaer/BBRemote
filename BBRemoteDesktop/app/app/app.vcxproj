@@ -126,6 +126,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ModeSwitcher.cpp" />
     <ClCompile Include="MouseProxy.cpp" />
+    <ClCompile Include="NoInputProxy.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BluetoothReceiver.hpp" />
@@ -136,6 +137,7 @@
     <ClInclude Include="Modes.hpp" />
     <ClInclude Include="ModeSwitcher.hpp" />
     <ClInclude Include="MouseProxy.hpp" />
+    <ClInclude Include="NoInputProxy.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

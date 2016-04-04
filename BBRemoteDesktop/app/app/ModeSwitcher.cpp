@@ -10,5 +10,5 @@ DriverProxy* ModeSwitcher::switchMode(char *data, DriverProxy *currentProxy)
 		return new MouseProxy();
 	else if ((int)Mode::GAMEPAD == *data)
 		return new GamepadProxy();
-	return NULL; //TODO: error handling
+	return new NoInputProxy();
 }

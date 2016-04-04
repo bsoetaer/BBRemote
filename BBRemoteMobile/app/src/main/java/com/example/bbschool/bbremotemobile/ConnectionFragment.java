@@ -106,7 +106,6 @@ public class ConnectionFragment extends Fragment implements ConnectAsyncTask.Con
         Set<BluetoothDevice> devices = BluetoothAdapter.getDefaultAdapter().getBondedDevices();
         for (BluetoothDevice device : devices)
             pairedDevices.add(device);
-        //task.execute((BluetoothDevice)BluetoothAdapter.getDefaultAdapter().getBondedDevices().toArray()[0]);
         setHasOptionsMenu(true);
     }
 

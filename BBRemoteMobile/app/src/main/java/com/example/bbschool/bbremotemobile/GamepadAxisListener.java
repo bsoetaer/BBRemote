@@ -67,7 +67,6 @@ public class GamepadAxisListener implements View.OnTouchListener {
     }
 
     private void stickMove(MotionEvent event) {
-        int sensitivity = PreferenceManager.getDefaultSharedPreferences(myContext).getInt("GAMEPAD_SENSITIVITY", 50);
         float deltaX = event.getX() - centerX;
         float deltaY = event.getY() - centerY;
         if(Math.abs(deltaX) < pixelError)
@@ -99,7 +98,9 @@ public class GamepadAxisListener implements View.OnTouchListener {
     }
 
     private Byte normalize(Float val) {
-        return (byte)((int)(Math.min(val, maxStickMovement)/maxStickMovement * 127));
+        int sensitivity = PreferenceManager.getDefaultSharedPreferences(myContext).getInt("GAMEPAD_SENSITIVITY", 50);
+        float movementWithoutSensitivity = Math.min(val, maxStickMovement)/maxStickMovement * 127;
+        return (byte)(movementWithoutSensitivity * (float)sensitivity/(float)100);
     }
 
     private void sendStickPressed(Boolean pressed) {
