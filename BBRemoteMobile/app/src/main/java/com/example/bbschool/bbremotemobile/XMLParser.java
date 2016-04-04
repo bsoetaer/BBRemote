@@ -1,8 +1,6 @@
 package com.example.bbschool.bbremotemobile;
 
 import android.content.Context;
-import android.text.Layout;
-import android.util.Log;
 import android.util.Xml;
 import android.widget.RelativeLayout;
 
@@ -13,7 +11,6 @@ import org.xml.sax.XMLReader;
 import org.xml.sax.helpers.DefaultHandler;
 import org.xmlpull.v1.XmlSerializer;
 
-import java.beans.*;
 import java.io.*;
 import java.util.ArrayList;
 
@@ -36,8 +33,6 @@ public class XMLParser {
         private static final String SCALE_X = "ScaleX";
         private static final String SCALE_Y = "ScaleY";
     }
-
-
 
     private XMLParser() {};
 
@@ -102,12 +97,29 @@ public class XMLParser {
 
     }
 
+    public static ArrayList<String> getSavedLayouts(Context context) {
+        ArrayList<String> layouts = new ArrayList<String>();
+        layouts.add("DefaultSimple");
+        layouts.add("DefaultComplex");
+        for( File file : context.getFilesDir().listFiles() ) {
+            layouts.add(file.getName().substring(0, file.getName().length() -4));
+        }
+        return layouts;
+    }
+
     public static GamepadLayout load(Context context, String layoutName) {
 
-        String filename = layoutName + ".xml";
+        InputStream fis = null;
         GamepadLayout returnLayout = null;
         try {
-            FileInputStream fis = context.openFileInput(filename);
+            if(layoutName.equals("DefaultSimple"))
+                fis = context.getResources().openRawResource(R.raw.layout_default_simple);
+            else if (layoutName.equals("DefaultComplex"))
+                fis = context.getResources().openRawResource(R.raw.layout_default_complex);
+            else {
+                String filename = layoutName + ".xml";
+                fis = context.openFileInput(filename);
+            }
             // create a XMLReader from SAXParser
             XMLReader xmlReader = SAXParserFactory.newInstance().newSAXParser().getXMLReader();
             // create a SAXXMLHandler
@@ -121,6 +133,11 @@ public class XMLParser {
 
         } catch (Exception ex) {
             ex.printStackTrace();
+        } finally {
+            if (fis != null) {
+                try { fis.close(); }
+                catch (IOException ignored) {}
+            }
         }
 
         // return Employee list

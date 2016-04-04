@@ -1,8 +1,10 @@
 package com.example.bbschool.bbremotemobile;
 
+import android.content.Context;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
+import android.preference.PreferenceManager;
 import android.util.Log;
 
 import java.io.IOException;
@@ -26,6 +28,11 @@ public class OpticalMotionListener implements SensorEventListener {
     float[] oldV = {0,0,0};
     long oldTime = 0;
     private boolean currentlyMoving = false;
+    Context myContext;
+
+    public OpticalMotionListener(Context myContext) {
+        this.myContext =  myContext;
+    }
 
     //TODO use right coords based on orientation, maybe this is okay already due to fixed orientation?
     @Override
@@ -72,6 +79,9 @@ public class OpticalMotionListener implements SensorEventListener {
                 if (Math.abs(newD[i]) < distanceThreshold )
                     newD[i] = 0;
             }
+            int sensitivity = PreferenceManager.getDefaultSharedPreferences(myContext).getInt("OPTICAL_SENSITIVITY", 50);
+            //TODO Call MotionBluetoothTransmitter here with distances moved
+            //TODO Remove below code that is for testing only
             if (Math.abs(newD[0]) > distanceThreshold) {
                 currentlyMoving = true;
                 sendCursorMovementData(newV);

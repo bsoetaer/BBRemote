@@ -1,6 +1,7 @@
 package com.example.bbschool.bbremotemobile;
 
 import android.content.Context;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -66,6 +67,7 @@ public class GamepadAxisListener implements View.OnTouchListener {
     }
 
     private void stickMove(MotionEvent event) {
+        int sensitivity = PreferenceManager.getDefaultSharedPreferences(myContext).getInt("GAMEPAD_SENSITIVITY", 50);
         float deltaX = event.getX() - centerX;
         float deltaY = event.getY() - centerY;
         if(Math.abs(deltaX) < pixelError)
@@ -77,7 +79,7 @@ public class GamepadAxisListener implements View.OnTouchListener {
         } catch (IOException e) {
             Log.w(TAG, "Failed axis movement: x: " + deltaX + ", y: " + deltaY);
         }
-        // TODO Call MotionBluetoothTransmitter with deltaX and deltaY for stick move
+        // TODO Call MotionBluetoothTransmitter with deltaX and deltaY and sensitivity for stick move
     }
 
     private Map<Integer, Byte> axisMovementMap(Float x, Float y) {

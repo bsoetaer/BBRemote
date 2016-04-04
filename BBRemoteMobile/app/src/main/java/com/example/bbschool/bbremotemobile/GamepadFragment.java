@@ -2,8 +2,10 @@ package com.example.bbschool.bbremotemobile;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -26,7 +28,9 @@ public class GamepadFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        gamepadLayout = new GamepadLayout(getContext());
+
+        String initialLayout = PreferenceManager.getDefaultSharedPreferences(getContext()).getString("DEFAULT_GAMEPAD_LAYOUT", "DefaultSimple");
+        gamepadLayout = XMLParser.load(getContext(), initialLayout);
         setRetainInstance(true);
         setHasOptionsMenu(true);
     }
@@ -110,8 +114,8 @@ public class GamepadFragment extends Fragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setTitle("Load Layout");
         final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1);
-        for (File f : getActivity().getFilesDir().listFiles()) {
-            arrayAdapter.add(f.getName().substring(0, f.getName().length() - 4)); //Remove .xml from the end
+        for (String name : XMLParser.getSavedLayouts(getContext())) {
+            arrayAdapter.add(name);
         }
         builder.setNegativeButton("Cancel",
                 new DialogInterface.OnClickListener() {
