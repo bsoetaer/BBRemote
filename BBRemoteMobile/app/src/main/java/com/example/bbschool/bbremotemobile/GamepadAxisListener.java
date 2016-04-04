@@ -1,6 +1,7 @@
 package com.example.bbschool.bbremotemobile;
 
 import android.content.Context;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -65,13 +66,14 @@ public class GamepadAxisListener implements View.OnTouchListener {
     }
 
     private void stickMove(MotionEvent event) {
+        int sensitivity = PreferenceManager.getDefaultSharedPreferences(myContext).getInt("GAMEPAD_SENSITIVITY", 50);
         float deltaX = event.getX() - centerX;
         float deltaY = event.getY() - centerY;
         if(Math.abs(deltaX) < pixelError)
             deltaX = 0;
         if(Math.abs(deltaY) < pixelError)
             deltaY = 0;
-        // TODO Call MotionBluetoothTransmitter with deltaX and deltaY for stick move
+        // TODO Call MotionBluetoothTransmitter with deltaX and deltaY and sensitivity for stick move
     }
 
     private void sendStickPressed(Boolean pressed) {

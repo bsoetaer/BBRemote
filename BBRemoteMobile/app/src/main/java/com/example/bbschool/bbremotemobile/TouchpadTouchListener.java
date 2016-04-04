@@ -1,6 +1,7 @@
 package com.example.bbschool.bbremotemobile;
 
 import android.content.Context;
+import android.preference.PreferenceManager;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
@@ -68,6 +69,7 @@ public class TouchpadTouchListener implements View.OnTouchListener {
     private void mouseMove(MotionEvent event) {
         float deltaX = lastX - event.getX();
         float deltaY = lastY - event.getY();
+        int sensitivity = PreferenceManager.getDefaultSharedPreferences(myContext).getInt("TOUCHPAD_SENSITIVITY", 50);
         // TODO Call MotionBluetoothTransmitter with deltaX and deltaY
         if( isScroll ) {
         } else {
