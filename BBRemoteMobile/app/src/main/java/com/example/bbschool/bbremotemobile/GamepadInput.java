@@ -19,8 +19,7 @@ public enum GamepadInput {
     UP_DPAD(12),
     DOWN_DPAD(13),
     LEFT_DPAD(14),
-    RIGHT_DPAD(15),
-    HOME(16);
+    RIGHT_DPAD(15);
 
     private int val;
 

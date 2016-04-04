@@ -6,7 +6,10 @@ const map<char, char> MouseProxy::bbRemoteButtonToHID = {
 	{ 2, 0b00000100 }
 };
 
-MouseProxy::MouseProxy() : DriverProxy(L"bbRemoteBuffer") {}
+MouseProxy::MouseProxy() : DriverProxy()
+{
+	modeId = Mode::OPTICAL;
+}
 
 MouseProxy::~MouseProxy() {}
 
@@ -24,27 +27,56 @@ void MouseProxy::handleData(char *data, int bytes)
 
 void MouseProxy::handleAxis(_Out_ UCHAR formattedData[MOUSE_PACKET_SIZE], char *data, int bytes)
 {
-	UCHAR inputData[MOUSE_PACKET_SIZE] = { lastButtonPresses, lastMovement[0], lastMovement[1] };
+	if (!validateAxisData(data, bytes))
+		return;
+
+	UCHAR inputData[MOUSE_PACKET_SIZE] = { lastButtonPresses, lastMovement[0], lastMovement[1], lastMovement[2] };
 	for (int i = 0; i < bytes; i += 2)
 		inputData[data[i] + 1] = data[i + 1];
 
 	lastMovement[0] = inputData[1];
 	lastMovement[1] = inputData[2];
+	lastMovement[2] = inputData[3];
 
 	memcpy(formattedData, inputData, MOUSE_PACKET_SIZE);
 }
 
 void MouseProxy::handleButton(_Out_ UCHAR *formattedData, char *data, int bytes)
 {
+	if (!validateButtonData(data, bytes))
+		return;
+
 	UCHAR inputData[MOUSE_PACKET_SIZE] = { lastButtonPresses, lastMovement[0], lastMovement[1] };
 
 	// For each button, if the button-pressed value is 1, include it in the inputData; else, exclude it.
 	// Since button-up is 0b00000000, and button-down is 0b11111111, we can "and" it with the HID mask to do this.
-
 	for (int i = 0; i < bytes; i += 2)
 		inputData[0] = ((inputData[0] | bbRemoteButtonToHID.at(data[i])) ^ bbRemoteButtonToHID.at(data[i])) | (bbRemoteButtonToHID.at(data[i]) & data[i + 1]); // the first or and xor clear the bit that was requested, and the last or writes the new bit
 
 	lastButtonPresses = inputData[0];
 
 	memcpy(formattedData, inputData, MOUSE_PACKET_SIZE);
+}
+
+bool MouseProxy::validateButtonData(char *data, int bytes)
+{
+	if (bytes % 2 != 0)
+		return false;
+	for (int i = 1; i < bytes; i+=2)
+		if (data[i] != 0 && data[i] != -1)
+			return false;
+	for (int i = 0; i < bytes; i+=2)
+		if (bbRemoteButtonToHID.find(data[i]) == bbRemoteButtonToHID.end())
+			return false;
+	return true;
+}
+
+bool MouseProxy::validateAxisData(char *data, int bytes)
+{
+	if (bytes % 2 != 0)
+		return false;
+	for (int i = 0; i < bytes; i+=2)
+		if (data[i] < 0 || data[i] > 2)
+			return false;
+	return true;
 }

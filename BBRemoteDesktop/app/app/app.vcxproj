@@ -48,7 +48,7 @@
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
-    <CharacterSet>MultiByte</CharacterSet>
+    <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -121,6 +121,7 @@
     <ClCompile Include="BluetoothReceiver.cpp" />
     <ClCompile Include="DriverProxy.cpp" />
     <ClCompile Include="GamepadProxy.cpp" />
+    <ClCompile Include="GlobalFile.cpp" />
     <ClCompile Include="KeyboardProxy.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ModeSwitcher.cpp" />
@@ -130,6 +131,7 @@
     <ClInclude Include="BluetoothReceiver.hpp" />
     <ClInclude Include="DriverProxy.hpp" />
     <ClInclude Include="GamepadProxy.hpp" />
+    <ClInclude Include="GlobalFile.hpp" />
     <ClInclude Include="KeyboardProxy.hpp" />
     <ClInclude Include="Modes.hpp" />
     <ClInclude Include="ModeSwitcher.hpp" />

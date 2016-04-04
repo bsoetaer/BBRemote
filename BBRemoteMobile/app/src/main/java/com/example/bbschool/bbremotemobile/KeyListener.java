@@ -33,7 +33,7 @@ public class KeyListener implements KeyboardView.OnKeyboardActionListener {
         toggleableKeys.add(AndroidKeyCodes.lookupCode("CTRL"));
         toggleableKeys.add(AndroidKeyCodes.lookupCode("ALT"));
         toggleableKeys.add(AndroidKeyCodes.lookupCode("WIN"));
-        toggleableKeys.add(AndroidKeyCodes.lookupCode("CAPS"));
+        //toggleableKeys.add(AndroidKeyCodes.lookupCode("CAPS"));
         loadKeyboard();
     }
 

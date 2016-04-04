@@ -16,11 +16,11 @@ EVT_WDF_DEVICE_SELF_MANAGED_IO_CLEANUP EvtDeviceSelfManagedIoCleanup;
 #define FILE_NAME_LEN 20
 #define MAX_PATH 260
 
-#define MOUSE_REPORT_ID 1
-#define KEYBOARD_REPORT_ID 2
-#define GAMEPAD_REPORT_ID 3
+#define MOUSE_REPORT_ID 3
+#define KEYBOARD_REPORT_ID 1
+#define GAMEPAD_REPORT_ID 6
 
-#define MOUSE_REPORT_SIZE 4
+#define MOUSE_REPORT_SIZE 5
 #define KEYBOARD_REPORT_SIZE 9
 #define GAMEPAD_REPORT_SIZE 7
 
@@ -65,10 +65,19 @@ UCHAR MouseReportDescriptor[] = {
 	0x75, 0x08,                    //     REPORT_SIZE (8)
 	0x95, 0x02,                    //     REPORT_COUNT (2)
 	0x81, 0x06,                    //     INPUT (Data,Var,Rel)
+	0xA1, 0x02,                    //     COLLECTION (Logical)
+	0x09, 0x38,                    //       USAGE (Wheel)
+	0x35, 0x00,                    //       PHYSICAL_MINIMUM (0)
+	0x45, 0x00,                    //       PHYSICAL_MAXIMUM (0)
+	0x15, 0x81,                    //       LOGICAL_MINIMUM (-127)
+	0x25, 0x7F,                    //       LOGICAL_MAXIMUM (127)
+	0x75, 0x08,                    //       REPORT_SIZE (8)
+	0x81, 0x06,                    //       INPUT (Data,Var,Rel)
+	0xC0,						   //     END_COLLECTION
 	0xc0,                          //   END_COLLECTION
 	0xc0,                          // END_COLLECTION
 
-								   // keyboard
+	// keyboard
 	0x05, 0x01,                    // USAGE_PAGE (Generic Desktop)
 	0x09, 0x06,                    // USAGE(Keyboard)
 	0xA1, 0x01,                    // COLLECTION(Application)
@@ -94,7 +103,7 @@ UCHAR MouseReportDescriptor[] = {
 	0x81, 0x00,                    //   INPUT(Data,Ary,Abs)
 	0xC0,                          // END_COLLECTION
 
-								   // gamepad
+	// gamepad
 	0x05, 0x01,                    // USAGE_PAGE(Generic Desktop)
 	0x09, 0x05,                    // USAGE(Game Pad)	
 	0xA1, 0x01,                    // COLLECTION(Application)	
@@ -253,8 +262,8 @@ getReportSize(
 		return MOUSE_REPORT_SIZE;
 	if (reportId == KEYBOARD_REPORT_ID)
 		return KEYBOARD_REPORT_SIZE;
-	if (reportId == MOUSE_REPORT_ID)
-		return MOUSE_REPORT_SIZE;
+	if (reportId == GAMEPAD_REPORT_ID)
+		return GAMEPAD_REPORT_SIZE;
 	return 0; //TODO: error handling
 }
 

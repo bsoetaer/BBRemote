@@ -16,6 +16,7 @@ public class GamepadAxisListener implements View.OnTouchListener {
 
     private static final String TAG = "GamepadAxisListener";
     private static final int pixelError = 25;
+    private static final int maxStickMovement = 250;
     Context myContext;
     long startTime = 0;
     boolean stickIsPressed = false;
@@ -71,7 +72,32 @@ public class GamepadAxisListener implements View.OnTouchListener {
             deltaX = 0;
         if(Math.abs(deltaY) < pixelError)
             deltaY = 0;
+        try {
+            BluetoothAxisTransmitter.sendMovement(axisMovementMap(deltaX, deltaY));
+        } catch (IOException e) {
+            Log.w(TAG, "Failed axis movement: x: " + deltaX + ", y: " + deltaY);
+        }
         // TODO Call MotionBluetoothTransmitter with deltaX and deltaY for stick move
+    }
+
+    private Map<Integer, Byte> axisMovementMap(Float x, Float y) {
+        if(stick == GamepadInput.LEFT_STICK)
+            return axisMovementMap(GamepadAxis.LEFT_X, x, GamepadAxis.LEFT_Y, y);
+        else if (stick == GamepadInput.RIGHT_STICK)
+            return axisMovementMap(GamepadAxis.RIGHT_X, x, GamepadAxis.RIGHT_Y, y);
+        Log.w(TAG, "Failed axis movement: x: " + x + ", y: " + y);
+        return new HashMap<>();
+    }
+
+    private Map<Integer, Byte> axisMovementMap(GamepadAxis xAxis, Float x, GamepadAxis yAxis, Float y) {
+        Map<Integer, Byte> retMap = new HashMap<>();
+        retMap.put(xAxis.getVal(), normalize(x));
+        retMap.put(yAxis.getVal(), normalize(y));
+        return retMap;
+    }
+
+    private Byte normalize(Float val) {
+        return (byte)((int)(Math.min(val, maxStickMovement)/maxStickMovement * 127));
     }
 
     private void sendStickPressed(Boolean pressed) {

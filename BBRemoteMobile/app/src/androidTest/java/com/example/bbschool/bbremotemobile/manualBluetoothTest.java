@@ -1,5 +1,6 @@
 package com.example.bbschool.bbremotemobile;
 
+import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.test.InstrumentationTestCase;
 
@@ -15,9 +16,9 @@ public class manualBluetoothTest extends InstrumentationTestCase {
     private BluetoothDevice device = null;
 
     public void setUp() throws Exception {
-        ConnectionFragment scanner = new ConnectionFragment();
+        //ConnectionFragment scanner = new ConnectionFragment();
         //scanner.getPairedDevices(new TestCallback());
-        InitialConnectionTranscever.connect(device);
+        InitialConnectionTranscever.connect((BluetoothDevice)BluetoothAdapter.getDefaultAdapter().getBondedDevices().toArray()[1]);
     }
 
     /*public void testChangeMode() throws Exception {

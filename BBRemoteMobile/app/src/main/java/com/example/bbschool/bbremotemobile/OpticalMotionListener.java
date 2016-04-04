@@ -5,19 +5,27 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.util.Log;
 
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Created by Braeden on 3/13/2016.
  */
 public class OpticalMotionListener implements SensorEventListener {
 
     //TODO evaluate validity of threshold with other devices
+    private static final float[] noInput = {0,0};
     private static final float velocityThreshold = 0.002f; // 2 mm/s
     private static final float accelerationThreshold = 0.1f; // 5 cm/s^2
     private static final float distanceThreshold = 0.0001f; // 1/10 mm
+    private static final double maxMovementVelocity = 0.3; // 3 cm/s
+    private static final String TAG = "OpticalMotionListener";
     private int[] noChangeCounter = {0,0,0};
     float[] oldA = {0,0,0};
     float[] oldV = {0,0,0};
     long oldTime = 0;
+    private boolean currentlyMoving = false;
 
     //TODO use right coords based on orientation, maybe this is okay already due to fixed orientation?
     @Override
@@ -38,7 +46,7 @@ public class OpticalMotionListener implements SensorEventListener {
         // no change counters are for dealing with the inaccuracies of the accelerometer and the fact
         // that it reports motion even when it is stationary
         for (int i = 0; i < newV.length; i++) {
-            if ( event.values[i] > accelerationThreshold) { //phone is accelerating
+            if ( Math.abs(event.values[i]) > accelerationThreshold) { //phone is accelerating
                 noChangeCounter[i] = 0;
                 newV[i] = oldV[i] + ((event.values[i] - oldA[i]) * interval);
                 newD[i] = oldV[i] * interval + 0.5f * (event.values[i] - oldA[i]) * interval * interval;
@@ -64,14 +72,33 @@ public class OpticalMotionListener implements SensorEventListener {
                 if (Math.abs(newD[i]) < distanceThreshold )
                     newD[i] = 0;
             }
-            //TODO Call MotionBluetoothTransmitter here with distances moved
-            //TODO Remove below code that is for testing only
             if (Math.abs(newD[0]) > distanceThreshold) {
-                Log.d("Optical Move", "Acceleration: " + event.values[0] + ", " + event.values[1] + ", " + event.values[2]);
-                Log.d("Optical Move", "Velocity: " + newV[0] + ", " + newV[1] + ", " + newV[2]);
-                Log.d("Optical Move", "Distance: " + newD[0] + ", " + newD[1] + ", " + newD[2]);
-            }
+                currentlyMoving = true;
+                sendCursorMovementData(newV);
+            } else if (currentlyMoving)
+                sendCursorMovementData(noInput);
+            else
+                currentlyMoving = false;
         }
+    }
+
+    private void sendCursorMovementData(float[] velocity) {
+        Map<Integer,Byte> normalizedMovement = new HashMap<>();
+        byte normalizedX = normalize(velocity[0]);
+        byte normalizedY = normalize(velocity[1]);
+        normalizedMovement.put(MouseAxis.X.getVal(), normalizedX);
+        normalizedMovement.put(MouseAxis.Y.getVal(), normalizedY);
+        Log.w(TAG, "movement: x: " + velocity[0] + ", y: " + velocity[1]);
+        Log.w(TAG, "NormalizedMovement: x: " + normalizedX + ", y: " + normalizedY);
+        try {
+            BluetoothAxisTransmitter.sendMovement(normalizedMovement);
+        } catch (IOException e) {
+            Log.w(TAG, "Failed to send movement: x: " + normalizedX + ", y: " + normalizedY + ": " + e.getMessage());
+        }
+    }
+
+    private byte normalize(float val) {
+        return (byte)(int)(Math.min(val, maxMovementVelocity) / maxMovementVelocity * -127);
     }
 
     private void updateOldValues(SensorEvent event, float[] newV) {

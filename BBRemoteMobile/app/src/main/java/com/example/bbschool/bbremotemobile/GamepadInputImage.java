@@ -25,7 +25,6 @@ public class GamepadInputImage {
         imageMap.put(GamepadInput.DOWN_DPAD, R.drawable.gamepad_dpad);
         imageMap.put(GamepadInput.LEFT_DPAD, R.drawable.gamepad_dpad);
         imageMap.put(GamepadInput.RIGHT_DPAD, R.drawable.gamepad_dpad);
-        imageMap.put(GamepadInput.HOME, R.drawable.gamepad_home);
     }
 
     public static Integer getImageId(GamepadInput gamepadInput) {

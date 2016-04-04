@@ -101,7 +101,12 @@ public class ConnectionFragment extends Fragment implements ConnectAsyncTask.Con
         filter.addAction(BluetoothDevice.ACTION_BOND_STATE_CHANGED);
         getActivity().registerReceiver(mReceiver, filter);
         bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-        bluetoothAdapter.startDiscovery();
+        //bluetoothAdapter.startDiscovery();
+        ConnectAsyncTask task = new ConnectAsyncTask(ConnectionFragment.this);
+        Set<BluetoothDevice> devices = BluetoothAdapter.getDefaultAdapter().getBondedDevices();
+        for (BluetoothDevice device : devices)
+            pairedDevices.add(device);
+        //task.execute((BluetoothDevice)BluetoothAdapter.getDefaultAdapter().getBondedDevices().toArray()[0]);
         setHasOptionsMenu(true);
     }
 

@@ -1,1 +1,1 @@
-devcon.exe install BBRemoteDrivers\x64\Release\BBRemoteDrivers.inf Root\BBRemoteDrivers
+"C:\Program Files (x86)\Windows Kits\10\Tools\x64\devcon.exe" install BBRemoteDrivers\x64\Release\BBRemoteDrivers.inf Root\BBRemoteDrivers

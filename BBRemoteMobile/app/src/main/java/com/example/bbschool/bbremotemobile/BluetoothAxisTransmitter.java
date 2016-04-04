@@ -1,12 +1,19 @@
 package com.example.bbschool.bbremotemobile;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
  * Created by Brendan on 3/24/2016.
  */
 public class BluetoothAxisTransmitter {
+
+    public static void sendSingleMovement(Integer axisId, Byte val) throws IOException {
+        Map<Integer, Byte> movements = new HashMap<>();
+        movements.put(axisId, val);
+        sendMovement(movements);
+    }
 
     public static void sendMovement(Map<Integer, Byte> axisMovements) throws IOException {
         /* format of encoded bytes is:

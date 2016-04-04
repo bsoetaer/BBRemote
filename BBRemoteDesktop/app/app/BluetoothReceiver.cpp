@@ -78,22 +78,19 @@ void BluetoothReceiver::receiveData()
 
 	if (WSASetService(&wsaQuerySet, RNRSERVICE_REGISTER, 0) == SOCKET_ERROR) {
 		// TODO: error handling
-		int i = GetLastError();
-		int b = 1;
 	}
 
 
 	if (listen(localSocket, LISTEN_BACKLOG_SIZE) == SOCKET_ERROR) {
 		// TODO: error handling
-		int i = 1;
 	}
 
 	while (true)
 	{
 		clientSocket = accept(localSocket, NULL, NULL);
+
 		if (clientSocket == INVALID_SOCKET) {
 			// TODO: error handling
-			int a = 1;
 		}
 
 		dataBuffer = (char *)HeapAlloc(GetProcessHeap(),

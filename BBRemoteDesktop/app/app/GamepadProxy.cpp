@@ -1,6 +1,9 @@
 #include "GamepadProxy.hpp"
 
-GamepadProxy::GamepadProxy() : DriverProxy(L"bbRemoteBuffer") {}
+GamepadProxy::GamepadProxy() : DriverProxy()
+{
+	modeId = Mode::GAMEPAD;
+}
 
 GamepadProxy::~GamepadProxy() {}
 
@@ -48,6 +51,29 @@ void GamepadProxy::handleButton(_Out_ UCHAR *formattedData, char *data, int byte
 	lastButtonPresses[1] = inputData[1];
 
 	memcpy(formattedData, inputData, GAMEPAD_PACKET_SIZE);
+}
+
+bool GamepadProxy::validateButtonData(char *data, int bytes)
+{
+	if (bytes % 2 != 0)
+		return false;
+	for (int i = 1; i < bytes; i += 2)
+		if (data[i] != 0 && data[i] != -1)
+			return false;
+	for (int i = 0; i < bytes; i += 2)
+		if (bbRemoteButtonToHID.find(data[i]) == bbRemoteButtonToHID.end())
+			return false;
+	return true;
+}
+
+bool GamepadProxy::validateAxisData(char *data, int bytes)
+{
+	if (bytes % 2 != 0)
+		return false;
+	for (int i = 0; i < bytes; i += 2)
+		if (data[i] < 0 || data[i] > 15)
+			return false;
+	return true;
 }
 
 const map<char, char> GamepadProxy::bbRemoteButtonToHID = {

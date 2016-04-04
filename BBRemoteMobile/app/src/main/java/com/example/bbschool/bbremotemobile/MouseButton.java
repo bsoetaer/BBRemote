@@ -5,8 +5,9 @@ package com.example.bbschool.bbremotemobile;
  */
 public enum MouseButton {
     LEFT(0),
-    MIDDLE(1),
-    RIGHT(2);
+    RIGHT(1),
+    MIDDLE(2);
+
 
     private int val;
 

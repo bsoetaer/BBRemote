@@ -1,6 +1,9 @@
 #include "KeyboardProxy.hpp"
 
-KeyboardProxy::KeyboardProxy() : DriverProxy(L"bbRemoteBuffer") {}
+KeyboardProxy::KeyboardProxy() : DriverProxy() 
+{
+	modeId = Mode::KEYBOARD;
+}
 
 KeyboardProxy::~KeyboardProxy() {}
 
@@ -14,6 +17,9 @@ void KeyboardProxy::handleData(char *data, int bytes)
 
 void KeyboardProxy::handleRawData(char *data, int bytes)
 {
+	if (!validateData(data, bytes))
+		return;
+
 	UCHAR inputData[KEYBOARD_PACKET_SIZE] = { 0 };
 	set<UCHAR> currentKeysDown;
 	copySet(&currentKeysDown, &lastKeysDown);
@@ -25,7 +31,7 @@ void KeyboardProxy::handleRawData(char *data, int bytes)
 
 	// Do the rest of the data; there is a 6 key cap
 	for (int i = 0; i < bytes && currentKeysDown.size() < 6; i += 2)
-		if (!data[i + 1])
+		if (data[i + 1])
 			currentKeysDown.insert(data[i]);
 
 	// create the data to send
@@ -41,6 +47,16 @@ void KeyboardProxy::handleRawData(char *data, int bytes)
 
 
 	copySet(&lastKeysDown, &currentKeysDown);
+}
+
+bool KeyboardProxy::validateData(char *data, int bytes)
+{
+	if (bytes % 2 != 0)
+		return false;
+	for (int i = 1; i < bytes; i++)
+		if (data[i] != 0 && data[i] != -1)
+			return false;
+	return true;
 }
 
 void KeyboardProxy::copySet(set<UCHAR> *to, set<UCHAR> *from)
