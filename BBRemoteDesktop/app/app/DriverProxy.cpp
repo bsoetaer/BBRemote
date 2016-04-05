@@ -30,7 +30,6 @@ void DriverProxy::sendDataToDriver(UCHAR *data, int dataLen, Mode activeMode)
 		NULL,
 		NULL
 		);
-	int a = 1;
 }
 
 void DriverProxy::sendDataToDriver(UCHAR *data, int dataLen)
@@ -42,4 +41,9 @@ void DriverProxy::deactivateDevice()
 {
 	// To deactivate, we simply write the first byte as zero
 	sendDataToDriver(0, 0, modeId);
+}
+
+Mode DriverProxy::getModeId()
+{
+	return modeId;
 }

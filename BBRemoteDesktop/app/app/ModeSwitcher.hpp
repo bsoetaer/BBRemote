@@ -9,5 +9,5 @@
 class ModeSwitcher
 {
 public:
-	static DriverProxy *switchMode(char *data, DriverProxy *currentProxy);
+	virtual DriverProxy *switchMode(char *data, DriverProxy *currentProxy);
 };

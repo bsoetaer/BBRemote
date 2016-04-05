@@ -7,18 +7,19 @@ KeyboardProxy::KeyboardProxy() : DriverProxy()
 
 KeyboardProxy::~KeyboardProxy() {}
 
-void KeyboardProxy::handleData(char *data, int bytes)
+int KeyboardProxy::handleData(char *data, int bytes)
 {
 	// Should always be a button press
 	if (data[0] == DATA_TYPE_AXIS)
-		return; // TODO: Error handling
-	handleRawData(data + 1, bytes - 1);
+		return ERROR_NOT_AXIS; // TODO: Error handling
+	return handleRawData(data + 1, bytes - 1);
 }
 
-void KeyboardProxy::handleRawData(char *data, int bytes)
+int KeyboardProxy::handleRawData(char *data, int bytes)
 {
-	if (!validateData(data, bytes))
-		return;
+	int error = validateData(data, bytes);
+	if (error != SUCCESS)
+		return error;
 
 	UCHAR inputData[KEYBOARD_PACKET_SIZE] = { 0 };
 	set<UCHAR> currentKeysDown;
@@ -45,18 +46,19 @@ void KeyboardProxy::handleRawData(char *data, int bytes)
 
 	sendDataToDriver(inputData, KEYBOARD_PACKET_SIZE);
 
-
 	copySet(&lastKeysDown, &currentKeysDown);
+
+	return SUCCESS;
 }
 
-bool KeyboardProxy::validateData(char *data, int bytes)
+int KeyboardProxy::validateData(char *data, int bytes)
 {
 	if (bytes % 2 != 0)
-		return false;
+		return ERROR_UNEVEN_BYTE_COUNT;
 	for (int i = 1; i < bytes; i++)
 		if (data[i] != 0 && data[i] != -1)
-			return false;
-	return true;
+			return ERROR_BUTTON_VALUE_INVALID;
+	return SUCCESS;
 }
 
 void KeyboardProxy::copySet(set<UCHAR> *to, set<UCHAR> *from)

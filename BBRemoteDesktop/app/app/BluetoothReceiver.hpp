@@ -24,9 +24,15 @@ class BluetoothReceiver {
 private:
 	DriverProxy *currentProxy;
 	void cleanup();
+	ModeSwitcher *switcher;
+	void init(ModeSwitcher*);
+	void init(ModeSwitcher*, DriverProxy*);
 public:
 	BluetoothReceiver();
+	BluetoothReceiver(ModeSwitcher *switcher);
+	BluetoothReceiver(ModeSwitcher *switcher, DriverProxy *initialProxy);
 	~BluetoothReceiver();
 	void receiveData();
-	void handleData(char*,int);
+	void handleData(char*, int);
+	DriverProxy *getCurrentProxy();
 };

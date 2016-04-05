@@ -7,7 +7,7 @@ NoInputProxy::NoInputProxy() : DriverProxy()
 
 NoInputProxy::~NoInputProxy() {}
 
-void NoInputProxy::handleData(char *data, int bytes)
+int NoInputProxy::handleData(char *data, int bytes)
 {
-	return;
+	return SUCCESS;
 }

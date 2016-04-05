@@ -71,5 +71,8 @@
     <ClInclude Include="NoInputProxy.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="HandleDataErrorCodes.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

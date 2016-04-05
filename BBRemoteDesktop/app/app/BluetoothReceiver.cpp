@@ -2,12 +2,33 @@
 
 BluetoothReceiver::BluetoothReceiver()
 {
-	currentProxy = new KeyboardProxy();
+	init(new ModeSwitcher());
+}
+
+BluetoothReceiver::BluetoothReceiver(ModeSwitcher *switcher)
+{
+	init(switcher);
+}
+
+BluetoothReceiver::BluetoothReceiver(ModeSwitcher *switcher, DriverProxy *initialProxy)
+{
+	init(switcher, initialProxy);
+}
+
+void BluetoothReceiver::init(ModeSwitcher *switcher)
+{
+	init(switcher, new KeyboardProxy());
+}
+
+void BluetoothReceiver::init(ModeSwitcher *switcher, DriverProxy *initialProxy)
+{
+	this->switcher = switcher;
+	currentProxy = initialProxy;
 }
 
 BluetoothReceiver::~BluetoothReceiver()
 {
-	delete &currentProxy;
+	//delete &currentProxy;
 }
 
 void BluetoothReceiver::receiveData()
@@ -134,10 +155,15 @@ void BluetoothReceiver::receiveData()
 
 void BluetoothReceiver::handleData(char* data, int bytesInData) {
 	if (DriverProxy::DATA_TYPE_MODE_CHANGE == *data) { // Special code for switching modes
-		currentProxy = ModeSwitcher::switchMode(data + 1, currentProxy);
+		currentProxy = switcher->switchMode(data + 1, currentProxy);
 	} else {
 		currentProxy->handleData(data, bytesInData);
 	}
 }
 
 void BluetoothReceiver::cleanup() {}
+
+DriverProxy *BluetoothReceiver::getCurrentProxy()
+{
+	return currentProxy;
+}

@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include "Modes.hpp"
 #include "GlobalFile.hpp"
+#include "HandleDataErrorCodes.hpp"
 using namespace std;
 
 class DriverProxy
@@ -13,8 +14,9 @@ public:
 	static const int DATA_TYPE_AXIS;
 
 	DriverProxy();
-	virtual void handleData(char *data, int bytes) = 0;
+	virtual int handleData(char *data, int bytes) = 0;
 	void deactivateDevice();
+	Mode getModeId();
 protected:
 	Mode modeId;
 	int packetSize;
