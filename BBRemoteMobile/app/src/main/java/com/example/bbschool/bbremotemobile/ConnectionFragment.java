@@ -51,6 +51,9 @@ public class ConnectionFragment extends Fragment implements ConnectAsyncTask.Con
             // When discovery finds a device
             if (BluetoothAdapter.ACTION_DISCOVERY_STARTED.equals(action)) {
                 clearLists();
+                Set<BluetoothDevice> devices = BluetoothAdapter.getDefaultAdapter().getBondedDevices();
+                for (BluetoothDevice device : devices)
+                    pairedDevices.add(device);
             } else if (BluetoothDevice.ACTION_FOUND.equals(action)) {
                 // Get the BluetoothDevice object from the Intent
                 BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
@@ -101,11 +104,7 @@ public class ConnectionFragment extends Fragment implements ConnectAsyncTask.Con
         filter.addAction(BluetoothDevice.ACTION_BOND_STATE_CHANGED);
         getActivity().registerReceiver(mReceiver, filter);
         bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-        //bluetoothAdapter.startDiscovery();
-        ConnectAsyncTask task = new ConnectAsyncTask(ConnectionFragment.this);
-        Set<BluetoothDevice> devices = BluetoothAdapter.getDefaultAdapter().getBondedDevices();
-        for (BluetoothDevice device : devices)
-            pairedDevices.add(device);
+        bluetoothAdapter.startDiscovery();
         setHasOptionsMenu(true);
     }
 
