@@ -13,7 +13,7 @@
 DEFINE_GUID(bbGUID,
 	0x223b9890, 0x2ff, 0x44b5, 0xad, 0x44, 0x9c, 0xf5, 0xc, 0xb3, 0xbc, 0xe6);
 
-#define DEFAULT_DATA_LENGTH 64
+#define DEFAULT_DATA_LENGTH 512
 #define LISTEN_BACKLOG_SIZE 1
 #define CXN_SUCCESS 0
 #define CXN_INSTANCE_STRING L"BBRemoteDesktopClient"

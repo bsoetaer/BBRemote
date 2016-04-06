@@ -19,6 +19,7 @@ public class TouchpadTouchListener implements View.OnTouchListener {
     private float lastX = 0;
     private float lastY = 0;
     private boolean isScroll = false;
+    public static final float maxScroll = 1500;
 
     private static final String TAG = "TouchpadTouchListener";
     private static final float MAX_VELOCITY = 150;
@@ -69,6 +70,7 @@ public class TouchpadTouchListener implements View.OnTouchListener {
     }
 
     private void scrollUp(MotionEvent event) {
+        sendMovementData(0,0);
         isScroll = false;
         updateLastPoint(event);
     }
@@ -76,7 +78,6 @@ public class TouchpadTouchListener implements View.OnTouchListener {
     private void mouseMove(MotionEvent event) {
         float deltaX = lastX - event.getX();
         float deltaY = lastY - event.getY();
-        // TODO Call MotionBluetoothTransmitter with deltaX and deltaY
         sendMovementData(deltaX, deltaY);
         updateLastPoint(event);
     }
@@ -89,7 +90,17 @@ public class TouchpadTouchListener implements View.OnTouchListener {
     }
 
     private void sendScrollData(float deltaX, float deltaY) {
+        try {
+            byte normalizedData = normalizeScroll(deltaY);
+            BluetoothAxisTransmitter.sendSingleMovement(MouseAxis.SCROLL.getVal(), normalizedData);
+            Log.w(TAG, "scroll: " + normalizedData);
+        } catch (IOException e) {
+            Log.w(TAG, "Failed touchpad scroll movement (value: " + deltaY + "). " + e.getMessage());
+        }
+    }
 
+    private byte normalizeScroll(float val) {
+        return (byte)((int)Math.min(val, maxScroll) / maxScroll * 127);
     }
 
     private void sendCursorMovementData(float deltaX, float deltaY) {
@@ -98,7 +109,6 @@ public class TouchpadTouchListener implements View.OnTouchListener {
         byte normalizedY = normalize(deltaY);
         normalizedMovement.put(MouseAxis.X.getVal(), normalizedX);
         normalizedMovement.put(MouseAxis.Y.getVal(), normalizedY);
-        Log.w(TAG, "movement: x: " + normalizedX + ", y: " + normalizedY);
         try {
             BluetoothAxisTransmitter.sendMovement(normalizedMovement);
         } catch (IOException e) {

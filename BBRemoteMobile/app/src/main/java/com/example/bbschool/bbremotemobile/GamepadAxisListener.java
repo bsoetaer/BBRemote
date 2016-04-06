@@ -17,7 +17,7 @@ public class GamepadAxisListener implements View.OnTouchListener {
 
     private static final String TAG = "GamepadAxisListener";
     private static final int pixelError = 25;
-    private static final int maxStickMovement = 250;
+    private static final int maxStickMovement = 100;
     Context myContext;
     long startTime = 0;
     boolean stickIsPressed = false;
@@ -63,7 +63,16 @@ public class GamepadAxisListener implements View.OnTouchListener {
             stickIsPressed = false;
             sendStickPressed(false);
         }
-        //TODO Call MotionBluetoothTransmitter with 0 displacement of stick
+        sendZeroMovement();
+    }
+
+    private void sendZeroMovement() {
+        try {
+            BluetoothAxisTransmitter.sendMovement(axisMovementMap(0f, 0f));
+        }
+        catch (IOException e) {
+            Log.w(TAG, "Failed axis movement of zero");
+        }
     }
 
     private void stickMove(MotionEvent event) {
@@ -82,6 +91,7 @@ public class GamepadAxisListener implements View.OnTouchListener {
     }
 
     private Map<Integer, Byte> axisMovementMap(Float x, Float y) {
+        x = -x; // the x is backwards
         if(stick == GamepadInput.LEFT_STICK)
             return axisMovementMap(GamepadAxis.LEFT_X, x, GamepadAxis.LEFT_Y, y);
         else if (stick == GamepadInput.RIGHT_STICK)
@@ -92,15 +102,24 @@ public class GamepadAxisListener implements View.OnTouchListener {
 
     private Map<Integer, Byte> axisMovementMap(GamepadAxis xAxis, Float x, GamepadAxis yAxis, Float y) {
         Map<Integer, Byte> retMap = new HashMap<>();
-        retMap.put(xAxis.getVal(), normalize(x));
-        retMap.put(yAxis.getVal(), normalize(y));
+        byte normalizedX = normalize(x);
+        byte normalizedY = normalize(y);
+        retMap.put(xAxis.getVal(), normalizedX);
+        retMap.put(yAxis.getVal(), normalizedY);
+        Log.w(TAG, "Axis movement: x: " + x + ", y: " + y);
+        Log.w(TAG, "normalizedX: " + normalizedX + ", normalizedY: " + normalizedY);
         return retMap;
     }
 
     private Byte normalize(Float val) {
-        int sensitivity = PreferenceManager.getDefaultSharedPreferences(myContext).getInt("GAMEPAD_SENSITIVITY", 50);
+        float maxSensitivityStickMovment = maxStickMovement * (1 - (float)PreferenceManager.getDefaultSharedPreferences(myContext).getInt("GAMEPAD_SENSITIVITY", 50) / 100f );
+        float clippedMovement = Math.max(Math.min(val, maxSensitivityStickMovment), -maxSensitivityStickMovment);
+        float normalizedMovement = clippedMovement / maxSensitivityStickMovment * 127;
+        return (byte) normalizedMovement;
+
+        /*int sensitivity = PreferenceManager.getDefaultSharedPreferences(myContext).getInt("GAMEPAD_SENSITIVITY", 50);
         float movementWithoutSensitivity = Math.min(val, maxStickMovement)/maxStickMovement * 127;
-        return (byte)(movementWithoutSensitivity * (float)sensitivity/(float)100);
+        return (byte)(movementWithoutSensitivity * (float)sensitivity/(float)100);*/
     }
 
     private void sendStickPressed(Boolean pressed) {
