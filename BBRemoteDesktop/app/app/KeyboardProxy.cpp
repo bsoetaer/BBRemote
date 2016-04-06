@@ -39,12 +39,19 @@ void KeyboardProxy::handleRawData(char *data, int bytes)
 	set<UCHAR>::iterator it;
 	for (it = currentKeysDown.begin(); it != currentKeysDown.end(); ++it)
 	{
+		if (*it == 226) // left alt
+			inputData[0] |= 0b00000100;
+		if (*it == 224) // left control
+			inputData[0] |= 0b00000001;
+		if (*it == 225) // left shift
+			inputData[0] |= 0b00000010;
+		if (*it == 231) // left GUI
+			inputData[0] |= 0b00001000;
 		inputData[index] = *it;
 		index++;
 	}
 
 	sendDataToDriver(inputData, KEYBOARD_PACKET_SIZE);
-
 
 	copySet(&lastKeysDown, &currentKeysDown);
 }
@@ -53,7 +60,7 @@ bool KeyboardProxy::validateData(char *data, int bytes)
 {
 	if (bytes % 2 != 0)
 		return false;
-	for (int i = 1; i < bytes; i++)
+	for (int i = 1; i < bytes; i+=2)
 		if (data[i] != 0 && data[i] != -1)
 			return false;
 	return true;

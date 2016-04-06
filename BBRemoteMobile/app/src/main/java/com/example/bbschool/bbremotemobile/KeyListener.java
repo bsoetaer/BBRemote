@@ -43,7 +43,7 @@ public class KeyListener implements KeyboardView.OnKeyboardActionListener {
 
     @Override
     public void onPress(int arg0) {
-         if (toggleableKeys.contains(arg0)) {
+        if (toggleableKeys.contains(arg0)) {
             if (toggleKey(arg0)) {
                 // Send key down here for new key and all other toggled keys
                 sendToggledKeys(true);
@@ -56,10 +56,21 @@ public class KeyListener implements KeyboardView.OnKeyboardActionListener {
         }
         else if (arg0 != AndroidKeyCodes.lookupCode("CHANGE MODE")) {
              //Send key down here for new key and all toggled keys
+             removeShiftForSpecialShiftKeys(arg0);
              sendToggledKeys(true);
              sendOneKey(arg0, true);
         }
+    }
 
+    private void removeShiftForSpecialShiftKeys(int keyCode) {
+        if (AndroidKeyCodes.isSpecialNoShiftKey(keyCode)) {
+            toggledKeys.remove(AndroidKeyCodes.lookupCode("SHIFT"));
+            sendOneKey(AndroidKeyCodes.lookupCode("SHIFT"), false);
+        }
+        else if (AndroidKeyCodes.isSpecialShiftKey(keyCode)) {
+            toggledKeys.add(AndroidKeyCodes.lookupCode("SHIFT"));
+            sendOneKey(AndroidKeyCodes.lookupCode("SHIFT"), true);
+        }
     }
 
     @Override public void onRelease(int primaryCode) {

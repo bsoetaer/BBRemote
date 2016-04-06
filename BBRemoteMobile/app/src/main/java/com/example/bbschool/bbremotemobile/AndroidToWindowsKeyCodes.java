@@ -54,7 +54,7 @@ public final class AndroidToWindowsKeyCodes {
         AndroidToWindows.put(38, 226); // left alt
         AndroidToWindows.put(39, 76);
         AndroidToWindows.put(40, 42);
-        AndroidToWindows.put(41, 101);
+        AndroidToWindows.put(41, 231);
         AndroidToWindows.put(42, 43);
         AndroidToWindows.put(43, 44);
         AndroidToWindows.put(44, 40);
@@ -83,36 +83,36 @@ public final class AndroidToWindowsKeyCodes {
         AndroidToWindows.put(67, 67);
         AndroidToWindows.put(68, 68);
         AndroidToWindows.put(69, 69);
-        AndroidToWindows.put(70, 207); // keypad !
-        AndroidToWindows.put(71, 206); // keypad @
-        AndroidToWindows.put(72, 204); // keypad #
-        AndroidToWindows.put(73, 180); // currency unit
-        AndroidToWindows.put(74, 84);
-        AndroidToWindows.put(75, 195); // keypad ^
-        AndroidToWindows.put(76, 199); // keypad &
-        AndroidToWindows.put(77, 85); // keypad *
-        AndroidToWindows.put(78, 182); // keypad (
-        AndroidToWindows.put(79, 183); // keypad )
+        AndroidToWindows.put(70, 30); // 1
+        AndroidToWindows.put(71, 31); // 2
+        AndroidToWindows.put(72, 32); // 3
+        AndroidToWindows.put(73, 33); // 4
+        AndroidToWindows.put(74, 56);
+        AndroidToWindows.put(75, 35); // 6
+        AndroidToWindows.put(76, 36); // 7
+        AndroidToWindows.put(77, 85);
+        AndroidToWindows.put(78, 38); // 9
+        AndroidToWindows.put(79, 39); // 0
         AndroidToWindows.put(80, 45);
         AndroidToWindows.put(81, 52);
-        AndroidToWindows.put(82, 56);
-        AndroidToWindows.put(83, 203); // keypad :
+        AndroidToWindows.put(82, 52); // '
+        AndroidToWindows.put(83, 51); // ;
         AndroidToWindows.put(84, 51);
         AndroidToWindows.put(85, 54);
-        AndroidToWindows.put(86, 56); // TODO: this is the / key; there is no explicit ? key.
+        AndroidToWindows.put(86, 56); // /
         AndroidToWindows.put(87, 55);
         AndroidToWindows.put(88, 87); // keypad +
         AndroidToWindows.put(89, 46);
-        AndroidToWindows.put(90, 197); // keypad <
-        AndroidToWindows.put(91, 198); // keypad >
-        AndroidToWindows.put(92, 184); // keypad {
-        AndroidToWindows.put(93, 185); // keypad }
+        AndroidToWindows.put(90, 54); // ,
+        AndroidToWindows.put(91, 55); // .
+        AndroidToWindows.put(92, 47); // [
+        AndroidToWindows.put(93, 48); // ]
         AndroidToWindows.put(94, 47);
         AndroidToWindows.put(95, 48);
-        AndroidToWindows.put(96, 196); // keypad %
-        AndroidToWindows.put(97, 50);
-        AndroidToWindows.put(98, 50); // TODO: this is the ~ key; there is no explicit ` key
-        AndroidToWindows.put(99, 45); // TODO: this is the - key; there is no explicit _ key
+        AndroidToWindows.put(96, 34); // 5
+        AndroidToWindows.put(97, 53);
+        AndroidToWindows.put(98, 53); // `
+        AndroidToWindows.put(99, 45); // -
         AndroidToWindows.put(100, 49);
         AndroidToWindows.put(101, 100);
         //AndroidToWindows.put(102, "CHANGE MODE"); // note: this doesn't exist on a keyboard

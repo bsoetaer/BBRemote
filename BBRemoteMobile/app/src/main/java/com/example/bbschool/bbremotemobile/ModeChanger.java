@@ -75,7 +75,7 @@ public class ModeChanger {
             if (newActivityClass == InputActivity.class) {
                 changeWindowsMode(Mode.Keyboard);
             } else {
-                changeWindowsMode(Mode.None);
+                //changeWindowsMode(Mode.None);
             }
             Intent intent = new Intent(currentActivity, newActivityClass);
             currentActivity.startActivity(intent);
