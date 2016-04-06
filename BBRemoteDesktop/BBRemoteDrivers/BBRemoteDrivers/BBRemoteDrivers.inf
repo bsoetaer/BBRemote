@@ -1,0 +1,96 @@
+;
+; BBRemoteDrivers.inf
+;
+
+[Version]
+Signature="$WINDOWS NT$"
+Class=Sample ; TODO: edit Class
+ClassGuid={78A1C341-4539-11d3-B88D-00C04FAD5171} ; TODO: edit ClassGuid
+Provider=%ManufacturerName%
+CatalogFile=BBRemoteDrivers.cat
+DriverVer= ; TODO: set DriverVer in stampinf property pages
+
+[DestinationDirs]
+DefaultDestDir = 12
+
+; ================= Class section =====================
+
+[ClassInstall32]
+Addreg=SampleClassReg
+
+[SampleClassReg]
+HKR,,,0,%ClassName%
+HKR,,Icon,,-5
+
+[SourceDisksNames]
+1 = %DiskName%,,,""
+
+[SourceDisksFiles]
+BBRemoteDrivers.sys  = 1,,
+
+;*****************************************
+; Install Section
+;*****************************************
+
+[Manufacturer]
+%ManufacturerName%=Standard,NT$ARCH$
+
+[Standard.NT$ARCH$]
+%BBRemoteDrivers.DeviceDesc%=BBRemoteDrivers_Device, Root\BBRemoteDrivers ; TODO: edit hw-id
+
+[BBRemoteDrivers_Device.NT]
+CopyFiles=Drivers_Dir
+
+[Drivers_Dir]
+BBRemoteDrivers.sys
+
+[BBRemoteDrivers_Device.NT.HW]  
+AddReg = BBRemoteDrivers_Device.NT.AddReg  
+  
+[BBRemoteDrivers_Device.NT.AddReg]  
+HKR,,"LowerFilters",0x00010000,"vhf"  
+
+;-------------- Service installation
+[BBRemoteDrivers_Device.NT.Services]
+AddService = BBRemoteDrivers,%SPSVCINST_ASSOCSERVICE%, BBRemoteDrivers_Service_Inst
+
+; -------------- BBRemoteDrivers driver install sections
+[BBRemoteDrivers_Service_Inst]
+DisplayName    = %BBRemoteDrivers.SVCDESC%
+ServiceType    = 1               ; SERVICE_KERNEL_DRIVER
+StartType      = 3               ; SERVICE_DEMAND_START
+ErrorControl   = 1               ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %12%\BBRemoteDrivers.sys
+
+;
+;--- BBRemoteDrivers_Device Coinstaller installation ------
+;
+
+[DestinationDirs]
+BBRemoteDrivers_Device_CoInstaller_CopyFiles = 11
+
+[BBRemoteDrivers_Device.NT.CoInstallers]
+AddReg=BBRemoteDrivers_Device_CoInstaller_AddReg
+CopyFiles=BBRemoteDrivers_Device_CoInstaller_CopyFiles
+
+[BBRemoteDrivers_Device_CoInstaller_AddReg]
+HKR,,CoInstallers32,0x00010000, "WdfCoInstaller$KMDFCOINSTALLERVERSION$.dll,WdfCoInstaller"
+
+[BBRemoteDrivers_Device_CoInstaller_CopyFiles]
+WdfCoInstaller$KMDFCOINSTALLERVERSION$.dll
+
+[SourceDisksFiles]
+WdfCoInstaller$KMDFCOINSTALLERVERSION$.dll=1 ; make sure the number matches with SourceDisksNames
+
+[BBRemoteDrivers_Device.NT.Wdf]
+KmdfService =  BBRemoteDrivers, BBRemoteDrivers_wdfsect
+[BBRemoteDrivers_wdfsect]
+KmdfLibraryVersion = $KMDFVERSION$
+
+[Strings]
+SPSVCINST_ASSOCSERVICE= 0x00000002
+ManufacturerName="<Your manufacturer name>" ;TODO: Replace with your manufacturer name
+ClassName="Samples" ; TODO: edit ClassName
+DiskName = "BBRemoteDrivers Installation Disk"
+BBRemoteDrivers.DeviceDesc = "BBRemoteDrivers Device"
+BBRemoteDrivers.SVCDESC = "BBRemoteDrivers Service"

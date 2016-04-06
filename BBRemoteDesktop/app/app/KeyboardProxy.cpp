@@ -1,8 +1,8 @@
 #include "KeyboardProxy.hpp"
 
-KeyboardProxy::KeyboardProxy() : DriverProxy(L"bbKbdBuffer")
+KeyboardProxy::KeyboardProxy() : DriverProxy() 
 {
-	//lastKeysDown = new set<UCHAR>();
+	modeId = Mode::KEYBOARD;
 }
 
 KeyboardProxy::~KeyboardProxy() {}
@@ -17,6 +17,9 @@ void KeyboardProxy::handleData(char *data, int bytes)
 
 void KeyboardProxy::handleRawData(char *data, int bytes)
 {
+	if (!validateData(data, bytes))
+		return;
+
 	UCHAR inputData[KEYBOARD_PACKET_SIZE] = { 0 };
 	set<UCHAR> currentKeysDown;
 	copySet(&currentKeysDown, &lastKeysDown);
@@ -28,7 +31,7 @@ void KeyboardProxy::handleRawData(char *data, int bytes)
 
 	// Do the rest of the data; there is a 6 key cap
 	for (int i = 0; i < bytes && currentKeysDown.size() < 6; i += 2)
-		if (!data[i + 1])
+		if (data[i + 1])
 			currentKeysDown.insert(data[i]);
 
 	// create the data to send
@@ -36,14 +39,31 @@ void KeyboardProxy::handleRawData(char *data, int bytes)
 	set<UCHAR>::iterator it;
 	for (it = currentKeysDown.begin(); it != currentKeysDown.end(); ++it)
 	{
+		if (*it == 226) // left alt
+			inputData[0] |= 0b00000100;
+		if (*it == 224) // left control
+			inputData[0] |= 0b00000001;
+		if (*it == 225) // left shift
+			inputData[0] |= 0b00000010;
+		if (*it == 231) // left GUI
+			inputData[0] |= 0b00001000;
 		inputData[index] = *it;
 		index++;
 	}
 
 	sendDataToDriver(inputData, KEYBOARD_PACKET_SIZE);
 
-
 	copySet(&lastKeysDown, &currentKeysDown);
+}
+
+bool KeyboardProxy::validateData(char *data, int bytes)
+{
+	if (bytes % 2 != 0)
+		return false;
+	for (int i = 1; i < bytes; i+=2)
+		if (data[i] != 0 && data[i] != -1)
+			return false;
+	return true;
 }
 
 void KeyboardProxy::copySet(set<UCHAR> *to, set<UCHAR> *from)

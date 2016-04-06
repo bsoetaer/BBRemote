@@ -1,16 +1,27 @@
 package com.example.bbschool.bbremotemobile;
 
-import android.util.Log;
-
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
  * Created by Brendan on 3/13/2016.
  */
-public final class ButtonBluetoothTransmitter{
+public final class ButtonBluetoothTransmitter {
 
-    public static void sendKeys(Map<Integer, Boolean> keyPresses) throws IOException{
+    public static void sendSingleKeyUp(Integer buttonValue) throws IOException {
+        Map<Integer, Boolean> map = new HashMap<>();
+        map.put(buttonValue, Boolean.FALSE);
+        sendKeys(map);
+    }
+
+    public static void sendSingleKeyDown(Integer buttonValue) throws IOException {
+        Map<Integer, Boolean> map = new HashMap<>();
+        map.put(buttonValue, Boolean.TRUE);
+        sendKeys(map);
+    }
+
+    public static void sendKeys(Map<Integer, Boolean> keyPresses) throws IOException {
         /* format of encoded bytes is:
         - The first byte is a special code: -1 is change mode, 0 is button press, and 1 is axis
         - for button press, every evenly indexed byte (past the first)
@@ -29,6 +40,6 @@ public final class ButtonBluetoothTransmitter{
     }
 
     private static byte booleanToByte(Boolean bool) {
-        return (byte) (bool ? 0 : -1);
+        return (byte) (bool ? -1 : 0);
     }
 }

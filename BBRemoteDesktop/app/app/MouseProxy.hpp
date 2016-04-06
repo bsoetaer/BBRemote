@@ -14,11 +14,12 @@ public:
 
 private:
 	static const map<char, char> bbRemoteButtonToHID;
-	UCHAR lastMovement[2] = { 0 };
+	UCHAR lastMovement[3] = { 0 };
 	UCHAR lastButtonPresses = 0;
 	void handleButton(_Out_ UCHAR *formattedData, char *data, int bytes);
-	void handleAxis(_Out_ UCHAR formattedData[3], char *data, int bytes);
+	void handleAxis(_Out_ UCHAR formattedData[MOUSE_PACKET_SIZE], char *data, int bytes);
+	bool validateButtonData(char *data, int bytes);
+	bool validateAxisData(char *data, int bytes);
 protected:
-	Mode modeId = Mode::OPTICAL;
 	const int packetSize = MOUSE_PACKET_SIZE;
 };

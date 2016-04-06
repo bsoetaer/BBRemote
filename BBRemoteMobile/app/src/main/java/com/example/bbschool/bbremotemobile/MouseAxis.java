@@ -5,7 +5,8 @@ package com.example.bbschool.bbremotemobile;
  */
 public enum MouseAxis {
     X(0),
-    Y(1);
+    Y(1),
+    SCROLL(2);
 
     private int val;
 

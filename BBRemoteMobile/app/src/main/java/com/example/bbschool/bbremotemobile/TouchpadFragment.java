@@ -61,9 +61,9 @@ public class TouchpadFragment extends Fragment {
     // Setup listeners for 2 mouse buttons and touch interactions
     private void setupListeners() {
         Button leftClick = (Button) getView().findViewById(R.id.touchpad_left_click);
-        leftClick.setOnTouchListener(new BBButtonListener(AndroidKeyCodes.lookupCode("LEFT CLICK"), getContext()));
+        leftClick.setOnTouchListener(new BBButtonListener(MouseButton.LEFT.getVal(), getContext()));
         Button rightClick = (Button) getView().findViewById(R.id.touchpad_right_click);
-        rightClick.setOnTouchListener(new BBButtonListener(AndroidKeyCodes.lookupCode("RIGHT CLICK"), getContext()));
+        rightClick.setOnTouchListener(new BBButtonListener(MouseButton.RIGHT.getVal(), getContext()));
         getView().setOnTouchListener(new TouchpadTouchListener(getContext()));
     }
 }

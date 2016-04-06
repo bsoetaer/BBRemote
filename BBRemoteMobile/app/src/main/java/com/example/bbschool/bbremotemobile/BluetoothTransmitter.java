@@ -3,7 +3,6 @@ package com.example.bbschool.bbremotemobile;
 import android.util.Log;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.OutputStream;
 
 /**

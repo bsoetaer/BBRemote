@@ -1,6 +1,8 @@
 package com.example.bbschool.bbremotemobile;
 
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by Braeden on 3/9/2016.
@@ -9,6 +11,8 @@ public final class AndroidKeyCodes {
 
     private static HashMap<Integer, String> CodeToKey = new HashMap<Integer, String>();
     private static HashMap<String, Integer> KeyToCode = new HashMap<String, Integer>();
+    private static Set<Integer> SpecialShiftKeys = new HashSet<>();
+    private static Set<Integer> SpecialNoShiftKeys = new HashSet<>();
 
     //TODO Find some way to use the integers from the resource file instead of hard coding here
     //TODO Make not strings on other side. Maybe an enum with reverse lookup somehow
@@ -117,13 +121,50 @@ public final class AndroidKeyCodes {
         CodeToKey.put(101, "|");
         CodeToKey.put(102, "CHANGE MODE");
         CodeToKey.put(103, "CAPS");
-        CodeToKey.put(104, "LEFT CLICK");
-        CodeToKey.put(105, "RIGHT CLICK");
-        CodeToKey.put(106, "MIDDLE CLICK");
 
         for (Integer i: CodeToKey.keySet()) {
             KeyToCode.put(CodeToKey.get(i), i);
         }
+
+        SpecialShiftKeys.add(lookupCode("!"));
+        SpecialShiftKeys.add(lookupCode("@"));
+        SpecialShiftKeys.add(lookupCode("#"));
+        SpecialShiftKeys.add(lookupCode("$"));
+        SpecialShiftKeys.add(lookupCode("%"));
+        SpecialShiftKeys.add(lookupCode("^"));
+        SpecialShiftKeys.add(lookupCode("&"));
+        SpecialShiftKeys.add(lookupCode("("));
+        SpecialShiftKeys.add(lookupCode(")"));
+        SpecialShiftKeys.add(lookupCode("_"));
+        SpecialShiftKeys.add(lookupCode("<"));
+        SpecialShiftKeys.add(lookupCode(">"));
+        SpecialShiftKeys.add(lookupCode("{"));
+        SpecialShiftKeys.add(lookupCode("}"));
+        SpecialShiftKeys.add(lookupCode("~"));
+        SpecialShiftKeys.add(lookupCode("|"));
+        SpecialShiftKeys.add(lookupCode(":"));
+        SpecialShiftKeys.add(lookupCode("?"));
+        SpecialShiftKeys.add(lookupCode("\""));
+
+        SpecialNoShiftKeys.add(lookupCode("`"));
+        SpecialNoShiftKeys.add(lookupCode("1"));
+        SpecialNoShiftKeys.add(lookupCode("2"));
+        SpecialNoShiftKeys.add(lookupCode("3"));
+        SpecialNoShiftKeys.add(lookupCode("4"));
+        SpecialNoShiftKeys.add(lookupCode("5"));
+        SpecialNoShiftKeys.add(lookupCode("6"));
+        SpecialNoShiftKeys.add(lookupCode("7"));
+        SpecialNoShiftKeys.add(lookupCode("8"));
+        SpecialNoShiftKeys.add(lookupCode("9"));
+        SpecialNoShiftKeys.add(lookupCode("0"));
+        SpecialNoShiftKeys.add(lookupCode("["));
+        SpecialNoShiftKeys.add(lookupCode("]"));
+        SpecialNoShiftKeys.add(lookupCode(";"));
+        SpecialNoShiftKeys.add(lookupCode("'"));
+        SpecialNoShiftKeys.add(lookupCode("\\"));
+        SpecialNoShiftKeys.add(lookupCode(","));
+        SpecialNoShiftKeys.add(lookupCode("."));
+        SpecialNoShiftKeys.add(lookupCode("="));
     }
 
     private AndroidKeyCodes(){}
@@ -134,6 +175,14 @@ public final class AndroidKeyCodes {
 
     public static String lookupKey(Integer code){
         return CodeToKey.get(code);
+    }
+
+    public static boolean isSpecialShiftKey(Integer code) {
+        return SpecialShiftKeys.contains(code);
+    }
+
+    public static boolean isSpecialNoShiftKey(Integer code) {
+        return SpecialNoShiftKeys.contains(code);
     }
     
 }
