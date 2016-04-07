@@ -149,6 +149,7 @@ public class CustomizeLayoutFragment extends Fragment {
             input.setOnTouchListener(new DeleteInputListener());
             input.setEditable(true);
         }
+        setOrientation(gamepadLayout.getPortrait());
     }
 
     private void setOrientation(boolean portrait) {
