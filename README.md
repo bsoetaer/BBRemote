@@ -2,7 +2,13 @@
 
 ## Setup Instructions
 
-### Desktop client
+### Mobile Client
+
+1. Install android apk from BBRemote/BBRemoteMobile/app/app-release.apk
+2. Turn on bluetooth on your android device
+3. Start the BBRemote app
+
+### Desktop Client
 
 1. BB Remote uses custom drivers that are unsigned. In order to install unsigned drivers, you must boot up your computer with special settings. Hold down Shift and restart your computer. When the menu comes up, press:
   1. Troubleshoot
@@ -31,3 +37,37 @@
   7. Click "Next"
   8. If a warning pops up, click allow.
 10. Run "BBRemote\BBRemoteDesktop\app\x64\Release\app.exe"
+
+## User Instructions
+
+### General
+
+1. Launch the desktop client's app.exe
+2. Launch the mobile client's BBRemote app
+3. Choose a paired device to connect to
+  1. If there are no paired devices, choose an unpaired device to pair to
+  2. Once paired, select the device to connect
+4. You will be taken to the Keyboard input mode
+5. Type in keyboard mode or use the menu in the top right corner to change input modes or change settings
+
+### Customize Gamepad
+
+1. Select Customize Gamepad from top right menu
+2. Add inputs by using the top right menu to select Customize -> Add Input
+3. Select the input you want to add from the displayed list
+4. Move the input by dragging it around
+5. Resize the input by performing a pinch gesture on the screen
+6. Delete an input by long-clicking on an input without moving it
+7. Save the layout by pressing Customize -> Save Layout from the menu
+  1. Input a name that does not include the word default or a space
+  2. Press save
+8. Delete a layout that you saved or loaded 
+  1. Press Customize -> Delete Layout from the menu
+  2. Confirm deletion
+9. Load a layout
+  1. Press Customize -> Load Layout from the menu
+  2. Choose layout to load
+
+## Test Plan
+
+### Android Side
