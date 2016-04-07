@@ -168,6 +168,7 @@
     <ClCompile Include="FileLoader.cpp" />
     <ClCompile Include="FileWriter.cpp" />
     <ClCompile Include="KeyboardDriverTest.cpp" />
+    <ClCompile Include="MouseDriverTest.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

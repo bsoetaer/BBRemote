@@ -3,8 +3,6 @@
 #include "../../app/app/ModeSwitcher.hpp"
 #include "StubDriverProxy.hpp"
 
-#define fileName L"bbRemoteBuffer"
-
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 namespace BBModeSwitcherTests

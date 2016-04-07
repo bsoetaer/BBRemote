@@ -7,7 +7,7 @@
 #include "FileLoader.hpp"
 
 #define GAMEPAD_PACKET_LENGTH 7
-#define fileName L"bbRemoteBuffer"
+#define fileName L"bbRemoteBufferTest"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 

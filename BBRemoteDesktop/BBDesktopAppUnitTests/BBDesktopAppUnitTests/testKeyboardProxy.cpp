@@ -6,7 +6,7 @@
 #include "../../app/app/Modes.hpp"
 #include "FileLoader.hpp"
 
-#define fileName L"bbRemoteBuffer"
+#define fileName L"bbRemoteBufferTest"
 #define KEYBOARD_BUFFER_SIZE 9
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;

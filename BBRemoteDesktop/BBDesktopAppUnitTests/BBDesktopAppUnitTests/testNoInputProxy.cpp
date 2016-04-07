@@ -6,7 +6,7 @@
 #include "../../app/app/Modes.hpp"
 #include "FileLoader.hpp"
 
-#define fileName L"bbRemoteBuffer"
+#define fileName L"bbRemoteBufferTest"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 

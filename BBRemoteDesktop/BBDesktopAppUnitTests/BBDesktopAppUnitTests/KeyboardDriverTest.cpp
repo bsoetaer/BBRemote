@@ -21,28 +21,29 @@ namespace BBKeyboardDriverTests
 
 	char hidReport[KEYBOARD_BUFFER_SIZE];
 
+	void clearBuffer()
+	{
+		hidReport[0] = (char)Mode::KEYBOARD;
+		for (int i = 1; i < KEYBOARD_BUFFER_SIZE; i++)
+			hidReport[i] = 0;
+		FileWriter::writeData(hidReport, KEYBOARD_BUFFER_SIZE);
+	}
+	
+	TEST_MODULE_INITIALIZE(Setup)
+	{
+		GlobalFile::createBufferFileHandle(fileName);
+		clearBuffer();
+	}
+
+	TEST_MODULE_CLEANUP(Cleanup)
+	{
+		clearBuffer();
+		GlobalFile::closeBufferFileHandle();
+	}
+
 	TEST_CLASS(TestKeyboardDriver)
 	{
 	public:
-
-		void clearBuffer()
-		{
-			hidReport[0] = (char)Mode::KEYBOARD;
-			for (int i = 1; i < KEYBOARD_BUFFER_SIZE; i++)
-				hidReport[i] = 0;
-			FileWriter::writeData(hidReport, KEYBOARD_BUFFER_SIZE);
-		}
-
-		void init()
-		{
-			GlobalFile::createBufferFileHandle(fileName);
-			clearBuffer();
-		}
-
-		void tearDown()
-		{
-			clearBuffer();
-		}
 
 		void assertKeyDown(SHORT keyState)
 		{
@@ -66,19 +67,15 @@ namespace BBKeyboardDriverTests
 
 		TEST_METHOD(TestBufferStartsCleared)
 		{
-			init();
 			char bufferData[KEYBOARD_BUFFER_SIZE];
 			FileLoader::readData(bufferData, fileName, KEYBOARD_BUFFER_SIZE);
 			Assert::AreEqual((char)Mode::KEYBOARD, bufferData[0]);
 			for (int i = 1; i < KEYBOARD_BUFFER_SIZE; i++)
 				Assert::AreEqual((char)0, bufferData[i]);
-			tearDown();
 		}
 		
 		TEST_METHOD(TestAKey)
 		{
-			init();
-			
 			// press the key down
 			hidReport[3] = 4; // the "A" key
 			FileWriter::writeData(hidReport, KEYBOARD_BUFFER_SIZE);
@@ -92,14 +89,10 @@ namespace BBKeyboardDriverTests
 			Sleep(WAIT_TIME);
 			keyState = GetKeyState(65); // A
 			assertKeyUp(keyState);
-
-			tearDown();
 		}
 
 		TEST_METHOD(TestCaps)
 		{
-			init();
-			
 			// press the key down
 			hidReport[3] = 57; // the "CAPS" key
 			FileWriter::writeData(hidReport, KEYBOARD_BUFFER_SIZE);
@@ -124,8 +117,71 @@ namespace BBKeyboardDriverTests
 			Sleep(WAIT_TIME);
 			keyState = GetKeyState(VK_CAPITAL);
 			assertKeyUntoggled(keyState);
+		}
 
-			tearDown();
+		TEST_METHOD(TestGui)
+		{
+			// toggle the key
+			hidReport[1] = 0b00001000; // the "GUI" key
+			FileWriter::writeData(hidReport, KEYBOARD_BUFFER_SIZE);
+			Sleep(WAIT_TIME);
+			SHORT keyState = GetKeyState(VK_LWIN);
+			assertKeyToggled(keyState);
+			
+
+			// untoggle the key
+			hidReport[1] = 0;
+			FileWriter::writeData(hidReport, KEYBOARD_BUFFER_SIZE);
+			Sleep(WAIT_TIME);
+			keyState = GetKeyState(VK_LWIN);
+			assertKeyUntoggled(keyState);
+		}
+
+		TEST_METHOD(TestSixDifferentKeysKey)
+		{
+			// press the key down
+			hidReport[3] = 4; // A
+			hidReport[4] = 5;
+			hidReport[5] = 6;
+			hidReport[6] = 7;
+			hidReport[7] = 8;
+			hidReport[8] = 9;
+			FileWriter::writeData(hidReport, KEYBOARD_BUFFER_SIZE);
+			Sleep(WAIT_TIME);
+			SHORT keyState = GetKeyState(65); // A
+			assertKeyDown(keyState);
+			keyState = GetKeyState(66); // A
+			assertKeyDown(keyState);
+			keyState = GetKeyState(67); // A
+			assertKeyDown(keyState);
+			keyState = GetKeyState(68); // A
+			assertKeyDown(keyState);
+			keyState = GetKeyState(69); // A
+			assertKeyDown(keyState);
+			keyState = GetKeyState(70); // A
+			assertKeyDown(keyState);
+			
+			// lift the key up
+			hidReport[3] = 0;
+			hidReport[4] = 0;
+			hidReport[5] = 0;
+			hidReport[6] = 0;
+			hidReport[7] = 0;
+			hidReport[8] = 0;
+			FileWriter::writeData(hidReport, KEYBOARD_BUFFER_SIZE);
+			Sleep(WAIT_TIME);
+			keyState = GetKeyState(65); // A
+			assertKeyUp(keyState);
+			keyState = GetKeyState(66); // A
+			assertKeyUp(keyState);
+			keyState = GetKeyState(67); // A
+			assertKeyUp(keyState);
+			keyState = GetKeyState(68); // A
+			assertKeyUp(keyState);
+			keyState = GetKeyState(69); // A
+			assertKeyUp(keyState);
+			keyState = GetKeyState(70); // A
+			assertKeyUp(keyState);
 		}
 
 	};

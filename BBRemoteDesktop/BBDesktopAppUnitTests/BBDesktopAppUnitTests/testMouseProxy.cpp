@@ -7,7 +7,7 @@
 #include "FileLoader.hpp"
 
 #define MOUSE_PACKET_LENGTH 5
-#define fileName L"bbRemoteBuffer"
+#define fileName L"bbRemoteBufferTest"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 

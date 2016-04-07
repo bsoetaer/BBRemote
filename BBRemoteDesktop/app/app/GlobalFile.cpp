@@ -31,3 +31,8 @@ void GlobalFile::createBufferFileHandle(wchar_t *fileName)
 
 		// TODO: error handling
 }
+
+void GlobalFile::closeBufferFileHandle()
+{
+	CloseHandle(bufferFileHandle);
+}
