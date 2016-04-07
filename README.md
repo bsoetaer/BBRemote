@@ -71,3 +71,25 @@
 ## Test Plan
 
 ### Android Side
+
+1. Install Android Studio from http://developer.android.com/sdk/index.html
+2. Open SDK Manager from Tools -> Android -> SDK Manager
+3. Select SDK Platforms from API level 19 to 23
+4. Install all selected platforms
+5. Under SDK Tools select
+  1. Android SDK Platform Tools
+  2. Android Support Library
+  3. Android SDK Build Tools
+  4. Android SDK Tools
+6. Install all selected tools
+7. Open the BBRemoteMobile project
+8. On your android device
+  1. Open developer options
+  2. Enable USB debugging
+  3. Disable Window animation scale
+  4. Disable Transition animation scale
+  5. Disable Animator duration scale
+9. Plug you android device into your computer via a USB cable
+10. In Android studio's project explorer got to app -> java -> com.example.bbschool.bbremotemobile(androidTest)
+11. Right click any test and choose to run it
+12. Test results will be displayed in the bottorm windows.
