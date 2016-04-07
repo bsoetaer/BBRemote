@@ -60,7 +60,8 @@ public class OpticalFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        if( getActivity().getRequestedOrientation() != ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
+            getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setupListeners();
     }
 
@@ -69,6 +70,11 @@ public class OpticalFragment extends Fragment {
         super.onStop();
         sensorManager = (SensorManager) getActivity().getSystemService(Context.SENSOR_SERVICE);
         sensorManager.unregisterListener(motionListener);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
         getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
     }
 

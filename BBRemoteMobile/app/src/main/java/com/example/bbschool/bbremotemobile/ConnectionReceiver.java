@@ -26,13 +26,13 @@ public class ConnectionReceiver extends BroadcastReceiver implements ConnectAsyn
     public void onReceive(Context context, Intent intent) {
         this.context = context;
         String action = intent.getAction();
-        // Safety net in case this gets called while we are already trying to reconnect
-        if ( tryReconnect )
-            return;
-        tryReconnect = true;
 
         // When discovery finds a device
         if (BluetoothDevice.ACTION_ACL_DISCONNECTED.equals(action)) {
+            // Safety net in case this gets called while we are already trying to reconnect
+            if ( tryReconnect || !ConnectionState.isConnected() )
+                return;
+            tryReconnect = true;
             ConnectionState.setConnected(false);
             startTime = System.currentTimeMillis()/1000;
             device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
@@ -51,8 +51,12 @@ public class ConnectionReceiver extends BroadcastReceiver implements ConnectAsyn
         if (e != null) {
             if( ((System.currentTimeMillis()/1000) - startTime) > RECONNECT_TIME)
                 cancelRetry();
-            else
+            else {
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException ignore) {}
                 retryConnection(device);
+            }
         } else {
             ConnectionState.setConnected(true);
             dialog.dismiss();

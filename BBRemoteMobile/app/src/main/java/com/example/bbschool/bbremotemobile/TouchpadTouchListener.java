@@ -119,8 +119,12 @@ public class TouchpadTouchListener implements View.OnTouchListener {
 
     private byte normalize(float val) {
         int sensitivity = PreferenceManager.getDefaultSharedPreferences(myContext).getInt("TOUCHPAD_SENSITIVITY", 50);
-        float movementWithoutSensitivity = Math.min(val, MAX_VELOCITY) / MAX_VELOCITY * -127;
-        return (byte)(movementWithoutSensitivity * (float)sensitivity/(float)100);
+        float v = Math.min(val, MAX_VELOCITY);
+        v = Math.max(v, -MAX_VELOCITY);
+        float movementWithoutSensitivity = (v / MAX_VELOCITY) * -127;
+        int movementWithSensitivity = (int) (movementWithoutSensitivity * (float)sensitivity/(float)100);
+        //float movementWithoutSensitivity = Math.min(val, MAX_VELOCITY) / MAX_VELOCITY * -127;
+        return (byte) movementWithSensitivity;//movementWithoutSensitivity * (float)sensitivity/(float)100);
     }
 
     private void updateLastPoint(MotionEvent event) {

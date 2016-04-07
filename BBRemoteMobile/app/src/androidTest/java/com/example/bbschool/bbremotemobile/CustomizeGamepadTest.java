@@ -1,31 +1,29 @@
 package com.example.bbschool.bbremotemobile;
 
-import android.app.Activity;
 import android.app.Instrumentation;
-import android.location.Location;
+import android.content.pm.ActivityInfo;
 import android.os.SystemClock;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.espresso.ViewAction;
-import android.support.test.espresso.ViewInteraction;
 import android.support.test.espresso.action.GeneralLocation;
 import android.support.test.espresso.action.GeneralSwipeAction;
 import android.support.test.espresso.action.Press;
 import android.support.test.espresso.action.Swipe;
 import android.support.test.rule.ActivityTestRule;
 import android.view.MotionEvent;
-import android.view.View;
-import android.test.ViewAsserts;
-import 	android.test.ActivityInstrumentationTestCase2.*;
 import android.widget.RelativeLayout;
 
-import static android.support.test.espresso.action.ViewActions.swipeRight;
+import static android.support.test.espresso.action.ViewActions.longClick;
+import static android.support.test.espresso.action.ViewActions.typeText;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
 
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
 import java.io.File;
+import java.util.ArrayList;
 
 import static android.support.test.espresso.Espresso.*;
 import static android.support.test.espresso.Espresso.openActionBarOverflowOrOptionsMenu;
@@ -78,9 +76,8 @@ public class CustomizeGamepadTest {
         testInput.getLocationOnScreen(coords);
         //drag(InstrumentationRegistry.getInstrumentation(), coords[0] + 5, coords[1] + 5, coords[0] + 105, coords[1] + 105, 10);
         onView(withClassName(endsWith("GamepadInputView"))).perform(swipeCenter());
-        testInput.getLocationOnScreen(coords);
-        assertTrue(testInput.getX() == coords[0] + 100);
-        assertTrue(testInput.getY() == coords[1] + 100);
+        assertTrue(testInput.getLeft() != 0);
+        assertTrue(testInput.getRight() != 0);
 
         //onInput.perform(swipeCenter());
         //((CustomizeGamepadActivity) mActivityRule.getActivity()).get
@@ -88,22 +85,85 @@ public class CustomizeGamepadTest {
     }
 
     @Test
-    public void deleteInput() {}
+    public void deleteInput() {
+        addInput();
+        onView(withClassName(endsWith("GamepadInputView"))).perform(longClick());
+        onView(withText("OK")).perform(click());
+        GamepadLayout gamepadLayout = getGamepadLayout();
+        assertTrue(gamepadLayout.getGamepadInputs().size() == 0);
+    }
 
     @Test
-    public void saveLayout() {}
+    public void saveLayout() {
+        addInput();
+        openActionBarOverflowOrOptionsMenu(InstrumentationRegistry.getTargetContext());
+        onView(withText("Customize")).perform(click());
+        onView(withText("Save Layout")).perform(click());
+        onView(withClassName(endsWith("EditText"))).perform(typeText("testLayout"));
+        onView(withText("OK")).perform(click());
+        ArrayList<String> layouts = XMLParser.getSavedLayouts(mActivityRule.getActivity());
+        assertTrue(layouts.contains("testLayout"));
+    }
 
     @Test
-    public void loadLayout() {}
+    public void loadLayout() {
+        saveLayout();
+        openActionBarOverflowOrOptionsMenu(InstrumentationRegistry.getTargetContext());
+        onView(withText("Customize")).perform(click());
+        onView(withText("Load Layout")).perform(click());
+        onView(withText("DefaultComplex")).perform(click());
+        verifyComplex();
+        openActionBarOverflowOrOptionsMenu(InstrumentationRegistry.getTargetContext());
+        onView(withText("Customize")).perform(click());
+        onView(withText("Load Layout")).perform(click());
+        onView(withText("testLayout")).perform(click());
+        assertTrue(getGamepadLayout().getGamepadInputs().size() == 1);
+        assertTrue(getGamepadLayout().getName().equals("testLayout"));
+        assertTrue(mActivityRule.getActivity().getRequestedOrientation() == ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        assertFalse(getGamepadLayout().getPortrait());
+
+    }
 
     @Test
-    public void deleteLayout() {}
+    public void deleteLayout() {
+        saveLayout();
+        openActionBarOverflowOrOptionsMenu(InstrumentationRegistry.getTargetContext());
+        onView(withText("Customize")).perform(click());
+        onView(withText("Delete Layout")).perform(click());
+        onView(withText("Yes")).perform(click());
+        ArrayList<String> layouts = XMLParser.getSavedLayouts(mActivityRule.getActivity());
+        assertFalse(layouts.contains("testLayout"));
+    }
 
     @Test
-    public void changeOrientation() {}
+    public void changeOrientation() {
+        openActionBarOverflowOrOptionsMenu(InstrumentationRegistry.getTargetContext());
+        onView(withText("Customize")).perform(click());
+        onView(withText("Orientation")).perform(click());
+        onView(withText("Landscape")).perform(click());
+        assertFalse(getGamepadLayout().getPortrait());
+        assertTrue(mActivityRule.getActivity().getRequestedOrientation() == ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        openActionBarOverflowOrOptionsMenu(InstrumentationRegistry.getTargetContext());
+        onView(withText("Customize")).perform(click());
+        onView(withText("Orientation")).perform(click());
+        onView(withText("Portrait")).perform(click());
+        assertTrue(getGamepadLayout().getPortrait());
+        assertTrue(mActivityRule.getActivity().getRequestedOrientation() == ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+    }
 
     @Test
-    public void setRotateAsInput() {}
+    public void setRotateAsInput() {
+        openActionBarOverflowOrOptionsMenu(InstrumentationRegistry.getTargetContext());
+        onView(withText("Customize")).perform(click());
+        onView(withText("Rotate as Input")).perform(click());
+        onView(withText("Enabled")).perform(click());
+        assertTrue(getGamepadLayout().getRotateAsInput());
+        openActionBarOverflowOrOptionsMenu(InstrumentationRegistry.getTargetContext());
+        onView(withText("Customize")).perform(click());
+        onView(withText("Rotate as Input")).perform(click());
+        onView(withText("Disabled")).perform(click());
+        assertFalse(getGamepadLayout().getRotateAsInput());
+    }
 
     public GamepadLayout getGamepadLayout() {
         RelativeLayout fragmentLayout =  (RelativeLayout) ((RelativeLayout) mActivityRule.getActivity().findViewById(R.id.customize_gamepad_fragment)).getChildAt(0);
@@ -114,6 +174,14 @@ public class CustomizeGamepadTest {
     public static ViewAction swipeCenter() {
         return new GeneralSwipeAction(Swipe.SLOW, GeneralLocation.TOP_LEFT,
                 GeneralLocation.BOTTOM_RIGHT, Press.PINPOINT);
+    }
+
+    private void verifyComplex() {
+        GamepadLayout layout = getGamepadLayout();
+        assertTrue(layout.getGamepadInputs().size() == 8);
+        assertTrue(layout.getName().equals("DefaultComplex"));
+        assertTrue(mActivityRule.getActivity().getRequestedOrientation() == ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        assertFalse(layout.getPortrait());
     }
 
     public static void drag(Instrumentation inst, float fromX, float toX, float fromY,

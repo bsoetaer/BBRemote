@@ -1,7 +1,6 @@
 package com.example.bbschool.bbremotemobile;
 
 import android.bluetooth.BluetoothAdapter;
-import android.support.test.InstrumentationRegistry;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
@@ -9,21 +8,12 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
-import java.util.regex.Pattern;
 
-import static android.support.test.espresso.matcher.ViewMatchers.assertThat;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import static android.support.test.espresso.Espresso.onView;
-import static android.support.test.espresso.Espresso.openActionBarOverflowOrOptionsMenu;
 import static android.support.test.espresso.action.ViewActions.click;
-import static android.support.test.espresso.assertion.ViewAssertions.matches;
-import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
-import static android.support.test.espresso.matcher.ViewMatchers.withText;
-import static org.hamcrest.Matchers.*;
 
 /**
  * Created by Braeden on 4/3/2016.
@@ -39,11 +29,10 @@ public class ConnectionTest {
     @Before
     public void setConnected() {
         bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-        //ConnectionState.setConnected(true);
     }
 
     @Test
-    public void initialScan() throws Exception {
+    public void initialScan() {
         assertTrue(bluetoothAdapter.isDiscovering());
     }
 
@@ -57,8 +46,8 @@ public class ConnectionTest {
         assertTrue(bluetoothAdapter.isDiscovering());
     }
 
-    //TODO test that we actually connect
-    /*public void testConnect() {
 
-    }*/
+    public void testConnect() {
+        //TODO test that we actually connect, maybe with dagger injection
+    }
 }
