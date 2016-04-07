@@ -42,6 +42,8 @@ int GamepadProxy::handleAxis(_Out_ UCHAR formattedData[GAMEPAD_PACKET_SIZE], cha
 	lastMovement[3] = inputData[5];
 
 	memcpy(formattedData, inputData, GAMEPAD_PACKET_SIZE);
+	
+	return SUCCESS;
 }
 
 int GamepadProxy::handleButton(_Out_ UCHAR *formattedData, char *data, int bytes)

@@ -15,7 +15,7 @@ public:
 
 	DriverProxy();
 	virtual int handleData(char *data, int bytes) = 0;
-	void deactivateDevice();
+	virtual void deactivateDevice();
 	Mode getModeId();
 protected:
 	Mode modeId;

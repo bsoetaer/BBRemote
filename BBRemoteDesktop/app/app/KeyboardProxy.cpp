@@ -10,8 +10,8 @@ KeyboardProxy::~KeyboardProxy() {}
 int KeyboardProxy::handleData(char *data, int bytes)
 {
 	// Should always be a button press
-	if (data[0] == DATA_TYPE_AXIS)
-		return ERROR_NOT_AXIS; // TODO: Error handling
+	if (data[0] != DATA_TYPE_BUTTON)
+		return ERROR_NOT_BUTTON; // TODO: Error handling
 	return handleRawData(data + 1, bytes - 1);
 }
 
