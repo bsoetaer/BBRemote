@@ -11,6 +11,11 @@ import android.widget.Button;
 import android.widget.ImageButton;
 
 /**
+ * Camera input mode for sending video/audio device as a webcam.
+ * This class is not fully implemented and is only a button currently. TODO update this line when functional
+ * 3.2.10. Camera Input
+ * 3.2.10.2.1. Send Video
+ * 3.2.10.2.2. Send Audio
  * Created by Braeden on 3/13/2016.
  */
 public class CameraFragment extends Fragment implements View.OnClickListener {

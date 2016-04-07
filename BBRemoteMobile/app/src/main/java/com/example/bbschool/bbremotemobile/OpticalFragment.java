@@ -15,6 +15,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 /**
+ * Fragment for containing the optical mouse input mode.
+ * 3.2.5. Optical Mouse Input
+ * and all sub requirements
  * Created by Braeden on 3/13/2016.
  */
 public class OpticalFragment extends Fragment {

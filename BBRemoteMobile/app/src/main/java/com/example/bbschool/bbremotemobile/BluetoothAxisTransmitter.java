@@ -5,6 +5,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * Class to transmit axis movements for the mouse and gamepad sticks across to Windows.
+ * 3.2.4.2.1. Send Mouse Movement
+ * 3.2.5.2.1. Send Mouse Movement
+ * 3.2.7.2.3. Press Toggle Button
  * Created by Brendan on 3/24/2016.
  */
 public class BluetoothAxisTransmitter {

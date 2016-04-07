@@ -15,6 +15,18 @@ import android.view.ViewGroup;
 /**
  * A {@link android.preference.PreferenceActivity} which implements and proxies the necessary calls
  * to be used with AppCompat.
+ * Auto generated code to make the prefence activity more compatible. Needed for the settings requirements
+ * 3.2.4.2.6. Change Mouse Sensitivity
+ * 3.2.5.2.7. Change Mouse Sensitivity
+ * 3.2.6.2.5. Configure Default Mouse Choice
+ * 3.2.7.2.8. Change Analog Stick Sensitivity
+ * 3.2.7.2.5. Change Gamepad Layout
+ * And to be added if mic/camera working:
+ * 3.2.9.2.3. Adjust threshold
+ * 3.2.9.2.4. Adjust Volume
+ * 3.2.9.2.5. Choose Speakerphone or Regular Microphone
+ * 3.2.10.2.4. Adjust threshold
+ * 3.2.10.2.5. Choose Front/Back Camera
  */
 public abstract class AppCompatPreferenceActivity extends PreferenceActivity {
 

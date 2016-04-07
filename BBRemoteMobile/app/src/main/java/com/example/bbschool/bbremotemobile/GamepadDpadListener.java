@@ -10,6 +10,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * Listener for presses on a Dpad gamepad input. Determines which Dpad button is currently being pressed and then sends that data to Windows.
+ * 3.2.7.2.1. Press Gamepad Button
  * Created by Braeden-MSI on 3/31/2016.
  */
 public class GamepadDpadListener implements View.OnTouchListener{

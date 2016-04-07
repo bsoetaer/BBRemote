@@ -4,9 +4,10 @@ import android.content.Context;
 import android.content.ContextWrapper;
 
 /**
+ * Class to workaround bug in Android for the custom keyboard as the getSystemService call breaks
+ * when requesting audio service.
+ * 3.2.3. Touchscreen Keyboard Input
  * Created by Braeden on 3/8/2016.
- * TODO reference properly
- * http://stackoverflow.com/questions/11090629/android-unsupported-service-audio/34809518#34809518
  */
 public class ContextWrapperFix extends ContextWrapper {
     private boolean editMode;

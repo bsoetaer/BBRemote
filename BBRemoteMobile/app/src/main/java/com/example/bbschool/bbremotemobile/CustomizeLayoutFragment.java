@@ -28,6 +28,9 @@ import java.io.IOException;
 import java.nio.channels.FileChannel;
 
 /**
+ * Fragment for customizing gamepad layouts.
+ * 3.2.8. Customize Gamepad Layout
+ * and all sub requirements of it
  * Created by Braeden on 3/27/2016.
  */
 public class CustomizeLayoutFragment extends Fragment {

@@ -56,6 +56,13 @@ import static android.support.test.espresso.intent.matcher.IntentMatchers.*;
 import static 	android.support.test.espresso.intent.Checks.*;
 
 /**
+ * Test settings
+ * 3.2.4.2.6. Change Mouse Sensitivity
+ * 3.2.5.2.7. Change Mouse Sensitivity
+ * 3.2.6.2.5. Configure Default Mouse Choice
+ * 3.2.7.2.6. Default Gamepad Layouts
+ * 3.2.7.2.5. Change Gamepad Layout
+ * 3.2.7.2.2. Adjust Gamepad Axis
  * Created by Braeden on 4/3/2016.
  */
 public class SettingsTest {

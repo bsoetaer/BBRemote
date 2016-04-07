@@ -14,6 +14,8 @@ import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 
 /**
+ * Tests of the optical mouse UI
+ * 3.2.6.2.4. Swap to Keyboard from Optical Mouse
  * Created by Braeden on 4/3/2016.
  */
 public class OpticalTest {

@@ -16,6 +16,8 @@ import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 
 /**
+ * Tests navigation of connection activity.
+ * 3.2.1.2.4. Scan for Devices
  * Created by Braeden on 4/3/2016.
  */
 @RunWith(AndroidJUnit4.class)

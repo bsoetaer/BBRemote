@@ -17,6 +17,9 @@ import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 
 /**
+ * Tests of the touchpad mouse UI
+ * 3.2.6.2.3. Swap to Keyboard from Touchpad Mouse
+ *
  * Created by Braeden on 4/3/2016.
  */
 public class TouchpadTest {

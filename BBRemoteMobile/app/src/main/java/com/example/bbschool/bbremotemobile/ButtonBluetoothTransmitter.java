@@ -5,6 +5,16 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * Class to transmit button presses and releases on the Android device to the Windows system
+ * 3.2.3.2.1. Send Key Input
+ * 3.2.3.2.4. Multiple Key Press
+ * 3.2.4.2.3. Left Click
+ * 3.2.4.2.4. Right Click
+ * 3.2.5.2.4. Left Click
+ * 3.2.5.2.5. Right Click
+ * 3.2.5.2.8. Middle Mouse Button
+ * 3.2.7.2.1. Press Gamepad Button
+ * 3.2.7.2.7. Multiple Input Press
  * Created by Brendan on 3/13/2016.
  */
 public final class ButtonBluetoothTransmitter {

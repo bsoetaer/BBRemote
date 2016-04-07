@@ -11,6 +11,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * Listener for mouse movements on the touchpad input mode
+ * 3.2.4.2.1. Send Mouse Movement
+ * 3.2.4.2.5. Scrolling
+ * 3.2.4.2.6. Change Mouse Sensitivity
  * Created by Braeden on 3/13/2016.
  */
 public class TouchpadTouchListener implements View.OnTouchListener {

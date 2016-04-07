@@ -8,6 +8,9 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 
 /**
+ * Fragment for the microphone input mode.
+ * Currently only a button.
+ * 3.2.9.2.1. Send Sound
  * Created by Braeden on 3/13/2016.
  */
 public class MicrophoneFragment extends Fragment implements View.OnClickListener {

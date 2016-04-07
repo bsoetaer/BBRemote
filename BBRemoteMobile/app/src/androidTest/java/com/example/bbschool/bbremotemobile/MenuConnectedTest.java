@@ -28,6 +28,8 @@ import static android.support.test.espresso.intent.matcher.IntentMatchers.*;
 //import static android.support.test.espresso.Espresso.openActionBarOverflowOrOptionsMenu;
 
 /**
+ * Tests for navigating menus
+ * 3.2.2.2.1. Mode Select with Valid Connection
  * Created by Braeden on 4/3/2016.
  */
 @RunWith(AndroidJUnit4.class)

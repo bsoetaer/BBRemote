@@ -11,7 +11,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 /**
- * A placeholder fragment containing a simple view.
+ * Fragment for the keyboard input mode. Utilizes a custom keyboard.
+ * 3.2.3. Touchscreen Keyboard Input
+ * and sub requirements
  */
 public class KeyboardFragment extends Fragment {
 

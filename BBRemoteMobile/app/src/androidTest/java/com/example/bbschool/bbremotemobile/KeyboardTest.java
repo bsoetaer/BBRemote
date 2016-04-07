@@ -46,6 +46,12 @@ import static android.support.test.espresso.intent.Intents.*;
 import static android.support.test.espresso.intent.matcher.IntentMatchers.*;
 
 /**
+ * Tests for Keyboard UI
+ * 3.2.3.2.5. Essential Extra Keys Display
+ * 3.2.3.2.6. Non-essential Extra Keys Display
+ * 3.2.6.2.1. Swap to Touchpad Mouse from Keyboard
+ * 3.2.6.2.2. Swap to Optical Mouse from Keyboard
+ * 3.2.6.2.5. Configure Default Mouse Choice
  * Created by Braeden on 4/3/2016.
  */
 public class KeyboardTest {

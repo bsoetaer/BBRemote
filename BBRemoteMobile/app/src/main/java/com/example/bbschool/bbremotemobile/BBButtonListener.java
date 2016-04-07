@@ -12,6 +12,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * Listener for all input mode buttons that have a simple down and up functionality.
+ * Required by all requirements that send these buttons.
+ * 3.2.4.2.3. Left Click
+ * 3.2.4.2.4. Right Click
+ * 3.2.5.2.4. Left Click
+ * 3.2.5.2.5. Right Click
+ * 3.2.5.2.8. Middle Mouse Button
+ * 3.2.7.2.1. Press Gamepad Button
+ * 3.2.7.2.7. Multiple Input Press
  * Created by Braeden on 3/13/2016.
  */
 public class BBButtonListener implements Button.OnTouchListener {

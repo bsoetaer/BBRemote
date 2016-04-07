@@ -12,6 +12,16 @@ import android.view.MenuItem;
 
 import java.util.HashMap;
 
+/**
+ * Activity to hold and display all possible input modes.
+ * Required by all input modes for display.
+ * 3.2.3. Touchscreen Keyboard Input
+ * 3.2.4. Touchscreen Mouse Input
+ * 3.2.5. Optical Mouse Input
+ * 3.2.7. Touchscreen Gamepad Input
+ * 3.2.9. Microphone Input
+ * 3.2.10. Camera Input
+ */
 public class InputActivity extends AppCompatActivity {
 
     private MainMenu mainMenu;

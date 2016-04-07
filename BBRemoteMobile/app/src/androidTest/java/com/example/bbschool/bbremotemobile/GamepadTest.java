@@ -20,6 +20,8 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 /**
+ * 3.2.7.2.5. Change Gamepad Layout
+ * 3.2.7.2.6. Default Gamepad Layouts
  * Created by Braeden on 4/3/2016.
  */
 public class GamepadTest {

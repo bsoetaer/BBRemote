@@ -29,6 +29,11 @@ import static org.hamcrest.Matchers.*;
 import static android.support.test.espresso.intent.Intents.*;
 import static android.support.test.espresso.intent.matcher.IntentMatchers.*;
 
+/**
+ * Tests for navigating menus while disconnected
+ * 3.2.2.2.2. Mode Select While Disconnected
+ * 3.2.2.2.3. Customize Customizable Mode While Disconnected
+ */
 public class MenuDisconnectedTest {
 
     @Rule

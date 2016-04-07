@@ -12,6 +12,11 @@ import android.view.MenuItem;
 
 import java.util.HashMap;
 
+/**
+ * Activity for customizing gamepad layouts.
+ * 3.2.8. Customize Gamepad Layout
+ * and all sub requirements of it
+ */
 public class CustomizeGamepadActivity extends AppCompatActivity implements
         SelectInputFragment.OnInputSelectedListener,
         CustomizeLayoutFragment.OnSelectInputListener {
@@ -93,7 +98,7 @@ public class CustomizeGamepadActivity extends AppCompatActivity implements
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.customize_gamepad_fragment, newFragment, fragmentTags.get(mode));
-        fragmentTransaction.addToBackStack(null);
+        //fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }
 

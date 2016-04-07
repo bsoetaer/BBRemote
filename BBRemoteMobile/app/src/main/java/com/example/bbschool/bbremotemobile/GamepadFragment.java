@@ -20,6 +20,13 @@ import android.widget.RelativeLayout;
 import java.io.File;
 
 /**
+ * Fragment for game controller input mode. Loads a gamepad layout and binds listeners to all
+ * gamepad inputs inside it.
+ * 3.2.7.2.1. Press Gamepad Button
+ * 3.2.7.2.3. Press Toggle Button
+ * 3.2.7.2.5. Change Gamepad Layout
+ * 3.2.7.2.7. Multiple Input Press
+ * 3.2.7.2.9. Rotate Phone
  * Created by Braeden-MSI on 3/31/2016.
  */
 public class GamepadFragment extends Fragment {

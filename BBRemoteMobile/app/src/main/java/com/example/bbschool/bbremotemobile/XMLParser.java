@@ -17,6 +17,12 @@ import java.util.ArrayList;
 import javax.xml.parsers.SAXParserFactory;
 
 /**
+ * XML parser for saving and loading of gamepad layouts.
+ * 3.2.7.2.5. Change Gamepad Layout
+ * 3.2.7.2.6. Default Gamepad Layouts
+ * 3.2.8.2.2. Edit Gamepad Layout
+ * 3.2.8.2.7. Save Gamepad Layout
+ *
  * Created by Braeden on 3/30/2016.
  */
 public class XMLParser {

@@ -12,13 +12,17 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * Listener for movement of phone while in optical mode to mimic mouse movement.
+ * 3.2.5.2.1. Send Mouse Movement
+ * 3.2.5.2.3. Reset Mouse Position
+ * 3.2.5.2.7. Change Mouse Sensitivity
  * Created by Braeden on 3/13/2016.
  */
 public class OpticalMotionListener implements SensorEventListener {
 
     //TODO evaluate validity of threshold with other devices
     private static final float[] noInput = {0,0};
-    private static final float[] velocityThreshold = {0.001f, 0.001f, 0.001f}; // 2 mm/s
+    private static final float[] velocityThreshold = {0.002f, 0.002f, 0.001f}; // 2 mm/s
     private static final float[] accelerationThreshold = {0.1f, 0.1f, 0.1f};; // 5 cm/s^2
     private static final float maxMovementVelocity = 1f; // 3 cm/s
     private static final String TAG = "OpticalMotionListener";
@@ -72,13 +76,13 @@ public class OpticalMotionListener implements SensorEventListener {
     private void sendMovement(SensorEvent event, float[] newV) {
         if( Math.abs(newV[2]) < velocityThreshold[2]) { // Phone not moving in z plane so it is on surface (or held very steadily)
             if (Math.abs(newV[0]) > velocityThreshold[0] || Math.abs(newV[1]) > velocityThreshold[1]) {
-                Log.d(TAG, "Acceleration: " + event.values[0] + ", " + event.values[1] + ", " + event.values[2]);
-                Log.d(TAG, "Velocity: " + newV[0] + ", " + newV[1] + ", " + newV[2]);
+                //Log.d(TAG, "Acceleration: " + event.values[0] + ", " + event.values[1] + ", " + event.values[2]);
+                //Log.d(TAG, "Velocity: " + newV[0] + ", " + newV[1] + ", " + newV[2]);
                 currentlyMoving = true;
                 sendCursorMovementData(newV);
             } else if (currentlyMoving) {
-                Log.d(TAG, "A2: " + event.values[0] + ", " + event.values[1] + ", " + event.values[2]);
-                Log.d(TAG, "V2: " + newV[0] + ", " + newV[1] + ", " + newV[2]);
+                //Log.d(TAG, "A2: " + event.values[0] + ", " + event.values[1] + ", " + event.values[2]);
+                //Log.d(TAG, "V2: " + newV[0] + ", " + newV[1] + ", " + newV[2]);
                 currentlyMoving = false;
                 sendCursorMovementData(noInput);
             }
@@ -91,8 +95,8 @@ public class OpticalMotionListener implements SensorEventListener {
         byte normalizedY = normalize(-velocity[1]);
         normalizedMovement.put(MouseAxis.X.getVal(), normalizedX);
         normalizedMovement.put(MouseAxis.Y.getVal(), normalizedY);
-            Log.w(TAG, "movement: x: " + velocity[0] + ", y: " + velocity[1]);
-            Log.w(TAG, "NormalizedMovement: x: " + normalizedX + ", y: " + normalizedY);
+            //Log.w(TAG, "movement: x: " + velocity[0] + ", y: " + velocity[1]);
+            //Log.w(TAG, "NormalizedMovement: x: " + normalizedX + ", y: " + normalizedY);
         try {
             BluetoothAxisTransmitter.sendMovement(normalizedMovement);
         } catch (IOException e) {

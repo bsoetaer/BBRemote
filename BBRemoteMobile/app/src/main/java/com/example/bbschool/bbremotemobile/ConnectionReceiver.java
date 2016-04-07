@@ -11,6 +11,9 @@ import android.content.IntentFilter;
 import android.support.v7.app.AlertDialog;
 
 /**
+ * Broadcast receiver to detect the Windows client disconnecting from bluetooth. To be added to all
+ * activities besides the connection activity.
+ * 3.2.1.2.6. Connection Lost
  * Created by Braeden-MSI on 3/24/2016.
  */
 public class ConnectionReceiver extends BroadcastReceiver implements ConnectAsyncTask.ConnectTaskListener {

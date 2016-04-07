@@ -36,6 +36,14 @@ import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.*;
 
 /**
+ * Tests for the customize gamepad fragment.
+ * 3.2.8.2.1. Create New Gamepad Layout
+ * 3.2.8.2.3. Add Gamepad Input
+ * 3.2.8.2.4. Delete Gamepad Input
+ * 3.2.8.2.5. Move Gamepad Input
+ * 3.2.8.2.7. Save Gamepad Layout
+ * 3.2.8.2.8. Delete Gamepad Layout
+ * 3.2.8.2.9. Rotate Phone
  * Created by Braeden on 4/3/2016.
  */
 public class CustomizeGamepadTest {
