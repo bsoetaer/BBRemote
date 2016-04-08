@@ -98,7 +98,7 @@ public class CustomizeGamepadActivity extends AppCompatActivity implements
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.customize_gamepad_fragment, newFragment, fragmentTags.get(mode));
-        //fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }
 
