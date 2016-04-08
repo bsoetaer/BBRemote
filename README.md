@@ -19,14 +19,14 @@
 3. The installer uses a command installed in the Windows Driver Kit. If you do not have this, you need to download it.
 4. Run the file "BBRemote\BBRemoteDesktop\install.bat" with Admin priveleges.
 5. If a warning pops up, click allow
-6. Open Devices and Printers
+6. Open Device Manager
 7. If there is no section titled "BB Remote":
   1. Open a command prompt with Admin priveleges
   2. cd to "BBRemote\BBRemoteDesktop"
   3. run: 
 ``` "C:\Program Files (x86)\Windows Kits\10\Tools\x64\devcon.exe" install BBRemoteDrivers\x64\Release\BBRemoteDrivers.inf Root\BBRemoteDrivers ```
   4. If a warning pops up, click allow
-8. In Devices and printers, open the "BBRemote" list
+8. In Device Manager, open the "BBRemote" list
 9. If there is a warning with the device:
   1. Right click the device
   2. Click "Update Driver Software..."
