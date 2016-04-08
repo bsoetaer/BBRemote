@@ -1,3 +1,8 @@
+/*
+Requirements covered:
+3.2.3.2.1. Send Key Input
+*/
+
 #include "stdafx.h"
 #include "CppUnitTest.h"
 #include "../../app/app/KeyboardProxy.hpp"

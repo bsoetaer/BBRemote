@@ -1,3 +1,10 @@
+/*
+Requirements covered:
+Note that this is an auto-generated file, and does not cover any
+explicit requirements (other than they are required to load the tests,
+so they cover the requirments of all tests implicitly).
+*/
+
 #pragma once
 
 // Including SDKDDKVer.h defines the highest available Windows platform.

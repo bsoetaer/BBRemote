@@ -1,3 +1,7 @@
+/*
+Requirements Covered: see associated header file, included below
+*/
+
 #include "BluetoothReceiver.hpp"
 #include "GlobalFile.hpp"
 

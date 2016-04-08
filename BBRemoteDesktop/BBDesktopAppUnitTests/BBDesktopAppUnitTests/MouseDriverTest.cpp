@@ -1,3 +1,14 @@
+/*
+Requirements covered:
+3.2.4.2.1. Send Mouse Movement
+3.2.4.2.2. Recognized as Device
+3.2.4.2.3. Left Click
+3.2.4.2.4. Right Click
+3.2.4.2.5. Scrolling
+3.2.5.2.1. Send Mouse Movement
+3.2.5.2.2. Recognized as Device
+*/
+
 #include "stdafx.h"
 #include "CppUnitTest.h"
 #include <Windows.h>
@@ -21,30 +32,30 @@ namespace BBMouseDriverTests
 
 	char hidReport[MOUSE_BUFFER_SIZE];
 
-	void clearBuffer()
-	{
-		hidReport[0] = (char)Mode::OPTICAL;
-		for (int i = 1; i < MOUSE_BUFFER_SIZE; i++)
-			hidReport[i] = 0;
-		FileWriter::writeData(hidReport, MOUSE_BUFFER_SIZE);
-	}
-
-	TEST_MODULE_INITIALIZE(Setup)
-	{
-		Sleep(WAIT_TIME);
-		GlobalFile::createBufferFileHandle(fileName);
-		clearBuffer();
-	}
-
-	TEST_MODULE_CLEANUP(Cleanup)
-	{
-		clearBuffer();
-		GlobalFile::closeBufferFileHandle();
-	}
-
 	TEST_CLASS(TestMouseDriver)
 	{
 	public:
+
+		void clearBuffer()
+		{
+			hidReport[0] = (char)Mode::OPTICAL;
+			for (int i = 1; i < MOUSE_BUFFER_SIZE; i++)
+				hidReport[i] = 0;
+			FileWriter::writeData(hidReport, MOUSE_BUFFER_SIZE);
+		}
+
+		TEST_METHOD_INITIALIZE(Setup)
+		{
+			GlobalFile::createBufferFileHandle(fileName);
+			clearBuffer();
+			Sleep(WAIT_TIME);
+		}
+		
+		TEST_METHOD_CLEANUP(Cleanup)
+		{
+			clearBuffer();
+			GlobalFile::closeBufferFileHandle();
+		}
 
 		void assertKeyDown(SHORT keyState)
 		{

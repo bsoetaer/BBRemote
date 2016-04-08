@@ -1,3 +1,7 @@
+/*
+Requirements Covered: see associated header file, included below
+*/
+
 #include "DriverProxy.hpp"
 
 const int DriverProxy::DATA_TYPE_MODE_CHANGE = -1;

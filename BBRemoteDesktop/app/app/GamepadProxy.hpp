@@ -1,3 +1,12 @@
+/*
+Requirements covered:
+3.2.7.2.1. Press Gamepad Button
+3.2.7.2.2. Adjust Gamepad Axis
+3.2.7.2.3. Press Toggle Button
+3.2.7.2.7. Multiple Input Press
+3.2.7.2.9. Rotate Phone
+*/
+
 #pragma once
 #include <stdio.h>
 #include <set>

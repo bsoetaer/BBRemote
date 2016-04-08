@@ -1,3 +1,16 @@
+/*
+Requirements covered:
+3.2.4.2.1. Send Mouse Movement
+3.2.4.2.3. Left Click
+3.2.4.2.4. Right Click
+3.2.4.2.5. Scrolling
+3.2.5.2.1. Send Mouse Movement
+3.2.5.2.4. Left Click
+3.2.5.2.5. Right Click
+3.2.5.2.6. Scrolling
+3.2.5.2.8. Middle Mouse Button
+*/
+
 #include "stdafx.h"
 #include "CppUnitTest.h"
 #include "../../app/app/MouseProxy.hpp"

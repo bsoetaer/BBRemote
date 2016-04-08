@@ -1,3 +1,7 @@
+/*
+Requirements Covered: see associated header file, included below
+*/
+
 #include "GlobalFile.hpp"
 
 HANDLE GlobalFile::bufferFileHandle = NULL;

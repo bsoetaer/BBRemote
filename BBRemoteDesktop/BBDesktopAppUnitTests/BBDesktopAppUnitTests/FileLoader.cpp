@@ -1,3 +1,7 @@
+/*
+Requirements covered: see header files below
+*/
+
 #include "stdafx.h"
 #include "FileLoader.hpp"
 
@@ -9,7 +13,7 @@ bool FileLoader::readData(char *output, wchar_t *fileName, int numberOfBytes)
 		NULL,
 		FILE_BEGIN
 		);
-
+	
 	return ReadFile(
 		GlobalFile::bufferFileHandle,
 		output,

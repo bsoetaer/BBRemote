@@ -1,3 +1,7 @@
+/*
+Requirements Covered: see associated header file, included below
+*/
+
 #include "KeyboardProxy.hpp"
 
 KeyboardProxy::KeyboardProxy() : DriverProxy() 

@@ -1,3 +1,7 @@
+/*
+Requirements covered: see header files below
+*/
+
 #include "stdafx.h"
 #include "FileWriter.hpp"
 

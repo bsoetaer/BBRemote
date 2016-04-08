@@ -1,3 +1,8 @@
+/*
+Requirements covered:
+See included header files
+*/
+
 #include "stdafx.h"
 #include "StubModeSwitcher.hpp"
 

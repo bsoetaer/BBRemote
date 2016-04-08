@@ -1,3 +1,9 @@
+/*
+Requirements covered:
+3.2.10.2.1. Send Video
+3.2.10.2.3. Recognized as Device
+*/
+
 #pragma once
 
 #ifndef BB_CAM_PIN_H_

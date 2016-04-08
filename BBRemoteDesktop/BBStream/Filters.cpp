@@ -1,3 +1,8 @@
+/*
+Requirements covered:
+See following header file
+*/
+
 #pragma warning(disable:4244)
 #pragma warning(disable:4711)
 

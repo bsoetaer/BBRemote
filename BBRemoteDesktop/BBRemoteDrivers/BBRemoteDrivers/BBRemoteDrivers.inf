@@ -4,7 +4,7 @@
 
 [Version]
 Signature="$WINDOWS NT$"
-Class=Sample ; TODO: edit Class
+Class=BBRemote ; TODO: edit Class
 ClassGuid={78A1C341-4539-11d3-B88D-00C04FAD5171} ; TODO: edit ClassGuid
 Provider=%ManufacturerName%
 CatalogFile=BBRemoteDrivers.cat
@@ -16,9 +16,9 @@ DefaultDestDir = 12
 ; ================= Class section =====================
 
 [ClassInstall32]
-Addreg=SampleClassReg
+Addreg=BBRemoteClassReg
 
-[SampleClassReg]
+[BBRemoteClassReg]
 HKR,,,0,%ClassName%
 HKR,,Icon,,-5
 
@@ -90,7 +90,7 @@ KmdfLibraryVersion = $KMDFVERSION$
 [Strings]
 SPSVCINST_ASSOCSERVICE= 0x00000002
 ManufacturerName="<Your manufacturer name>" ;TODO: Replace with your manufacturer name
-ClassName="Samples" ; TODO: edit ClassName
+ClassName="BBRemote" ; TODO: edit ClassName
 DiskName = "BBRemoteDrivers Installation Disk"
 BBRemoteDrivers.DeviceDesc = "BBRemoteDrivers Device"
 BBRemoteDrivers.SVCDESC = "BBRemoteDrivers Service"

@@ -1,3 +1,7 @@
+/*
+Requirements Covered: see associated header file, included below
+*/
+
 #include "MouseProxy.hpp"
 
 const map<char, char> MouseProxy::bbRemoteButtonToHID = {

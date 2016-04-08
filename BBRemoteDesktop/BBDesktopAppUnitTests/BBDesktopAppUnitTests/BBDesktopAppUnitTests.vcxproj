@@ -114,7 +114,7 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>C:\Users\Brendan\Homework\ECE_493\BBRemote\BBRemoteDesktop\app\app\x64\Debug;$(VCInstallDir)UnitTest\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>ws2_32.lib;User32.lib;..\..\app\x64\Release\app.lib;BluetoothReceiver.obj;NoInputProxy.obj;DriverProxy.obj;KeyboardProxy.obj;GlobalFile.obj;ModeSwitcher.obj;MouseProxy.obj;GamepadProxy.obj;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>ws2_32.lib;Xinput.lib;User32.lib;..\..\app\x64\Release\app.lib;BluetoothReceiver.obj;NoInputProxy.obj;DriverProxy.obj;KeyboardProxy.obj;GlobalFile.obj;ModeSwitcher.obj;MouseProxy.obj;GamepadProxy.obj;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">

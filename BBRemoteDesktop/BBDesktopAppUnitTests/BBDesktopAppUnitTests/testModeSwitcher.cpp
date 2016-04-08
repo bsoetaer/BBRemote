@@ -1,3 +1,8 @@
+/*
+Requirements covered:
+3.2.2.2.1. Mode Select with Valid Connection
+*/
+
 #include "stdafx.h"
 #include "CppUnitTest.h"
 #include "../../app/app/ModeSwitcher.hpp"

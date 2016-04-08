@@ -1,3 +1,8 @@
+/*
+Requirements covered:
+3.2.3.2.1. Send Key Input
+*/
+
 #pragma once
 #include <stdio.h>
 #include <set>

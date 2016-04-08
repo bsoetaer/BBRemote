@@ -1,3 +1,9 @@
+/*
+Requirements covered:
+3.2.3.2.1. Send Key Input
+3.2.3.2.2. Recognized as Device
+*/
+
 #include "stdafx.h"
 #include "CppUnitTest.h"
 #include <Windows.h>
@@ -21,29 +27,29 @@ namespace BBKeyboardDriverTests
 
 	char hidReport[KEYBOARD_BUFFER_SIZE];
 
-	void clearBuffer()
-	{
-		hidReport[0] = (char)Mode::KEYBOARD;
-		for (int i = 1; i < KEYBOARD_BUFFER_SIZE; i++)
-			hidReport[i] = 0;
-		FileWriter::writeData(hidReport, KEYBOARD_BUFFER_SIZE);
-	}
-	
-	TEST_MODULE_INITIALIZE(Setup)
-	{
-		GlobalFile::createBufferFileHandle(fileName);
-		clearBuffer();
-	}
-
-	TEST_MODULE_CLEANUP(Cleanup)
-	{
-		clearBuffer();
-		GlobalFile::closeBufferFileHandle();
-	}
-
 	TEST_CLASS(TestKeyboardDriver)
 	{
 	public:
+
+		void clearBuffer()
+		{
+			hidReport[0] = (char)Mode::KEYBOARD;
+			for (int i = 1; i < KEYBOARD_BUFFER_SIZE; i++)
+				hidReport[i] = 0;
+			FileWriter::writeData(hidReport, KEYBOARD_BUFFER_SIZE);
+		}
+		
+		TEST_METHOD_INITIALIZE(Setup)
+		{
+			GlobalFile::createBufferFileHandle(fileName);
+			clearBuffer();
+		}
+
+		TEST_METHOD_CLEANUP(Cleanup)
+		{
+			clearBuffer();
+			GlobalFile::closeBufferFileHandle();
+		}
 
 		void assertKeyDown(SHORT keyState)
 		{
