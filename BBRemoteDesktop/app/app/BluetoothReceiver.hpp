@@ -1,3 +1,31 @@
+/*
+Requirements covered:
+3.2.1.2.1. Connect Device Successfully
+3.2.1.2.2. Only Allow Connection Between Paired Devices
+3.2.1.2.5. Send Data from Mobile Client to Desktop Client
+3.2.1.2.7. Input Lost in Transit
+3.2.1.2.8. Auto-connect to Last Device on Startup
+3.2.3.2.1. Send Key Input
+3.2.4.2.1. Send Mouse Movement
+3.2.4.2.3. Left Click
+3.2.4.2.4. Right Click
+3.2.4.2.5. Scrolling
+3.2.5.2.1. Send Mouse Movement
+3.2.5.2.4. Left Click
+3.2.5.2.5. Right Click
+3.2.5.2.6. Scrolling
+3.2.5.2.8. Middle Mouse Button
+3.2.7.2.1. Press Gamepad Button
+3.2.7.2.2. Adjust Gamepad Axis
+3.2.7.2.3. Press Toggle Button
+3.2.7.2.7. Multiple Input Press
+3.2.7.2.9. Rotate Phone
+3.2.9.2.1. Send Sound
+3.2.10.2.1. Send Video
+3.2.10.2.2. Send Audio
+3.2.11.2.1. Use Mic and a touchscreen input together
+*/
+
 #pragma once
 #include <Winsock2.h>
 #include <ws2bth.h>
@@ -24,9 +52,15 @@ class BluetoothReceiver {
 private:
 	DriverProxy *currentProxy;
 	void cleanup();
+	ModeSwitcher *switcher;
+	void init(ModeSwitcher*);
+	void init(ModeSwitcher*, DriverProxy*);
 public:
 	BluetoothReceiver();
+	BluetoothReceiver(ModeSwitcher *switcher);
+	BluetoothReceiver(ModeSwitcher *switcher, DriverProxy *initialProxy);
 	~BluetoothReceiver();
 	void receiveData();
-	void handleData(char*,int);
+	void handleData(char*, int);
+	DriverProxy *getCurrentProxy();
 };

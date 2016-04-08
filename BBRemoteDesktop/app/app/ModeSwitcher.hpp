@@ -1,3 +1,8 @@
+/*
+Requirements covered:
+3.2.2.2.1. Mode Select with Valid Connection
+*/
+
 #pragma once
 #include "DriverProxy.hpp"
 #include "KeyboardProxy.hpp"
@@ -9,5 +14,5 @@
 class ModeSwitcher
 {
 public:
-	static DriverProxy *switchMode(char *data, DriverProxy *currentProxy);
+	virtual DriverProxy *switchMode(char *data, DriverProxy *currentProxy);
 };

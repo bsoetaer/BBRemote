@@ -1,3 +1,7 @@
+/*
+Requirements Covered: see associated header file, included below
+*/
+
 #include "ModeSwitcher.hpp"
 
 DriverProxy* ModeSwitcher::switchMode(char *data, DriverProxy *currentProxy)

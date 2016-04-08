@@ -1,3 +1,7 @@
+/*
+Requirements Covered: see associated header file, included below
+*/
+
 #include "GamepadProxy.hpp"
 
 GamepadProxy::GamepadProxy() : DriverProxy()
@@ -7,20 +11,30 @@ GamepadProxy::GamepadProxy() : DriverProxy()
 
 GamepadProxy::~GamepadProxy() {}
 
-void GamepadProxy::handleData(char *data, int bytes)
+int GamepadProxy::handleData(char *data, int bytes)
 {
+	int error;
 	UCHAR inputData[GAMEPAD_PACKET_SIZE] = { 0 };
 	if (data[0] == DATA_TYPE_BUTTON)
-		handleButton(inputData, data + 1, bytes - 1);
+		error = handleButton(inputData, data + 1, bytes - 1);
 	else if (data[0] == DATA_TYPE_AXIS)
-		handleAxis(inputData, data + 1, bytes - 1);
+		error = handleAxis(inputData, data + 1, bytes - 1);
 	else
-		return;
+		return ERROR_NOT_AXIS_OR_BUTTON;
+
+	if (error != SUCCESS)
+		return error;
 	sendDataToDriver(inputData, GAMEPAD_PACKET_SIZE);
+
+	return SUCCESS;
 }
 
-void GamepadProxy::handleAxis(_Out_ UCHAR formattedData[GAMEPAD_PACKET_SIZE], char *data, int bytes)
+int GamepadProxy::handleAxis(_Out_ UCHAR formattedData[GAMEPAD_PACKET_SIZE], char *data, int bytes)
 {
+	int error = validateAxisData(data, bytes);
+	if (error != SUCCESS)
+		return error;
+
 	UCHAR inputData[GAMEPAD_PACKET_SIZE] = { lastButtonPresses[0], lastButtonPresses[1], lastMovement[0], lastMovement[1], lastMovement[2], lastMovement[3] };
 
 	for (int i = 0; i < bytes; i += 2)
@@ -32,10 +46,16 @@ void GamepadProxy::handleAxis(_Out_ UCHAR formattedData[GAMEPAD_PACKET_SIZE], ch
 	lastMovement[3] = inputData[5];
 
 	memcpy(formattedData, inputData, GAMEPAD_PACKET_SIZE);
+	
+	return SUCCESS;
 }
 
-void GamepadProxy::handleButton(_Out_ UCHAR *formattedData, char *data, int bytes)
+int GamepadProxy::handleButton(_Out_ UCHAR *formattedData, char *data, int bytes)
 {
+	int error = validateButtonData(data, bytes);
+	if (error != SUCCESS)
+		return error;
+
 	UCHAR inputData[GAMEPAD_PACKET_SIZE] = { lastButtonPresses[0], lastButtonPresses[1], lastMovement[0], lastMovement[1], lastMovement[2], lastMovement[3] };
 
 	// For each button, if the button-pressed value is 1, include it in the inputData; else, exclude it.
@@ -51,29 +71,31 @@ void GamepadProxy::handleButton(_Out_ UCHAR *formattedData, char *data, int byte
 	lastButtonPresses[1] = inputData[1];
 
 	memcpy(formattedData, inputData, GAMEPAD_PACKET_SIZE);
+
+	return SUCCESS;
 }
 
-bool GamepadProxy::validateButtonData(char *data, int bytes)
+int GamepadProxy::validateButtonData(char *data, int bytes)
 {
 	if (bytes % 2 != 0)
-		return false;
+		return ERROR_UNEVEN_BYTE_COUNT;
 	for (int i = 1; i < bytes; i += 2)
 		if (data[i] != 0 && data[i] != -1)
-			return false;
+			return ERROR_BUTTON_VALUE_INVALID;
 	for (int i = 0; i < bytes; i += 2)
 		if (bbRemoteButtonToHID.find(data[i]) == bbRemoteButtonToHID.end())
-			return false;
-	return true;
+			return ERROR_BUTTON_DOES_NOT_EXIST;
+	return SUCCESS;
 }
 
-bool GamepadProxy::validateAxisData(char *data, int bytes)
+int GamepadProxy::validateAxisData(char *data, int bytes)
 {
 	if (bytes % 2 != 0)
-		return false;
+		return ERROR_UNEVEN_BYTE_COUNT;
 	for (int i = 0; i < bytes; i += 2)
-		if (data[i] < 0 || data[i] > 15)
-			return false;
-	return true;
+		if (data[i] < 0 || data[i] > 3)
+			return ERROR_AXIS_DOES_NOT_EXIST;
+	return SUCCESS;
 }
 
 const map<char, char> GamepadProxy::bbRemoteButtonToHID = {

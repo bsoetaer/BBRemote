@@ -1,3 +1,8 @@
+/*
+Requirements covered:
+See following header file
+*/
+
 #pragma once
 
 #include "FilterRegistrationStructures.h"

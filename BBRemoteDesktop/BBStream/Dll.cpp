@@ -1,3 +1,8 @@
+/*
+Requirements covered:
+See following header file
+*/
+
 #include "Dll.h"
 /*
 // These functions are defined in strmbasd.lib, but not in any header files.

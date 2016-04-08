@@ -1,3 +1,8 @@
+/*
+Requirements covered:
+3.2.3.2.1. Send Key Input
+*/
+
 #pragma once
 #include <stdio.h>
 #include <set>
@@ -9,12 +14,12 @@ class KeyboardProxy : public DriverProxy
 public:
 	KeyboardProxy();
 	~KeyboardProxy();
-	void handleData(char *data, int bytes);
+	int handleData(char *data, int bytes);
 protected:
 	const int packetSize = KEYBOARD_PACKET_SIZE;
 private:
 	set<UCHAR> lastKeysDown;
-	void handleRawData(char *data, int bytes);
+	int handleRawData(char *data, int bytes);
 	void copySet(set<UCHAR> *to, set<UCHAR> *from);
-	bool validateData(char *data, int bytes);
+	int validateData(char *data, int bytes);
 };

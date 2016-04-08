@@ -1,3 +1,7 @@
+/*
+Requirements Covered: see associated header file, included below
+*/
+
 #include "NoInputProxy.hpp"
 
 NoInputProxy::NoInputProxy() : DriverProxy()
@@ -7,7 +11,7 @@ NoInputProxy::NoInputProxy() : DriverProxy()
 
 NoInputProxy::~NoInputProxy() {}
 
-void NoInputProxy::handleData(char *data, int bytes)
+int NoInputProxy::handleData(char *data, int bytes)
 {
-	return;
+	return SUCCESS;
 }

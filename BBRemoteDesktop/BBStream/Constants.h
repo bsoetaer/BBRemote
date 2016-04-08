@@ -1,3 +1,9 @@
+/*
+Requirements Covered:
+3.2.10.2.1. Send Video
+3.2.10.2.2. Send Audio
+3.2.10.2.3. Recognized as Device
+*/
 #pragma once
 
 #ifndef CONSTANTS_H_

@@ -1,3 +1,7 @@
+/*
+Requirements Covered: see associated header file, included below
+*/
+
 #include "MouseProxy.hpp"
 
 const map<char, char> MouseProxy::bbRemoteButtonToHID = {
@@ -13,22 +17,27 @@ MouseProxy::MouseProxy() : DriverProxy()
 
 MouseProxy::~MouseProxy() {}
 
-void MouseProxy::handleData(char *data, int bytes)
+int MouseProxy::handleData(char *data, int bytes)
 {
+	int error;
 	UCHAR inputData[MOUSE_PACKET_SIZE] = { 0 };
 	if (data[0] == DATA_TYPE_BUTTON)
-		handleButton(inputData, data + 1, bytes - 1);
+		error = handleButton(inputData, data + 1, bytes - 1);
 	else if (data[0] == DATA_TYPE_AXIS)
-		handleAxis(inputData, data + 1, bytes - 1);
+		error = handleAxis(inputData, data + 1, bytes - 1);
 	else
-		return;
+		return ERROR_NOT_AXIS_OR_BUTTON;
+	if (error != SUCCESS)
+		return error;
 	sendDataToDriver(inputData, MOUSE_PACKET_SIZE);
+	return SUCCESS;
 }
 
-void MouseProxy::handleAxis(_Out_ UCHAR formattedData[MOUSE_PACKET_SIZE], char *data, int bytes)
+int MouseProxy::handleAxis(_Out_ UCHAR formattedData[MOUSE_PACKET_SIZE], char *data, int bytes)
 {
-	if (!validateAxisData(data, bytes))
-		return;
+	int error = validateAxisData(data, bytes);
+	if (error != SUCCESS)
+		return error;
 
 	UCHAR inputData[MOUSE_PACKET_SIZE] = { lastButtonPresses, lastMovement[0], lastMovement[1], lastMovement[2] };
 	for (int i = 0; i < bytes; i += 2)
@@ -39,12 +48,15 @@ void MouseProxy::handleAxis(_Out_ UCHAR formattedData[MOUSE_PACKET_SIZE], char *
 	lastMovement[2] = inputData[3];
 
 	memcpy(formattedData, inputData, MOUSE_PACKET_SIZE);
+
+	return SUCCESS;
 }
 
-void MouseProxy::handleButton(_Out_ UCHAR *formattedData, char *data, int bytes)
+int MouseProxy::handleButton(_Out_ UCHAR *formattedData, char *data, int bytes)
 {
-	if (!validateButtonData(data, bytes))
-		return;
+	int error = validateButtonData(data, bytes);
+	if (error != SUCCESS)
+		return error;
 
 	UCHAR inputData[MOUSE_PACKET_SIZE] = { lastButtonPresses, lastMovement[0], lastMovement[1] };
 
@@ -56,27 +68,29 @@ void MouseProxy::handleButton(_Out_ UCHAR *formattedData, char *data, int bytes)
 	lastButtonPresses = inputData[0];
 
 	memcpy(formattedData, inputData, MOUSE_PACKET_SIZE);
+
+	return SUCCESS;
 }
 
-bool MouseProxy::validateButtonData(char *data, int bytes)
+int MouseProxy::validateButtonData(char *data, int bytes)
 {
 	if (bytes % 2 != 0)
-		return false;
+		return ERROR_UNEVEN_BYTE_COUNT;
 	for (int i = 1; i < bytes; i+=2)
 		if (data[i] != 0 && data[i] != -1)
-			return false;
+			return ERROR_BUTTON_VALUE_INVALID;
 	for (int i = 0; i < bytes; i+=2)
 		if (bbRemoteButtonToHID.find(data[i]) == bbRemoteButtonToHID.end())
-			return false;
-	return true;
+			return ERROR_BUTTON_DOES_NOT_EXIST;
+	return SUCCESS;
 }
 
-bool MouseProxy::validateAxisData(char *data, int bytes)
+int MouseProxy::validateAxisData(char *data, int bytes)
 {
 	if (bytes % 2 != 0)
-		return false;
+		return ERROR_UNEVEN_BYTE_COUNT;
 	for (int i = 0; i < bytes; i+=2)
 		if (data[i] < 0 || data[i] > 2)
-			return false;
-	return true;
+			return ERROR_AXIS_DOES_NOT_EXIST;
+	return SUCCESS;
 }

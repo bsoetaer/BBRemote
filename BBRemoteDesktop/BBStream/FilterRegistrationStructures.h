@@ -1,3 +1,9 @@
+/*
+Requirements covered:
+3.2.9.2.2. Recognized as Device
+3.2.10.2.3. Recognized as Device
+*/
+
 #pragma once
 
 #ifndef FILTER_REGISTRATION_STRUCTURES_H_
