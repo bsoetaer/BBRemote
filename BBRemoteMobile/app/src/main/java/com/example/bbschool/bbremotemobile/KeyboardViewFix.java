@@ -7,8 +7,9 @@ import android.util.AttributeSet;
 
 /**
  * Created by Braeden on 3/8/2016.
- * TODO reference properly
- * http://stackoverflow.com/questions/11090629/android-unsupported-service-audio
+ * Workaround for known bug with request to get audio service from custom keyboard.
+ * 3.2.3. Touchscreen Keyboard Input
+ * and sub requirements
  */
 public class KeyboardViewFix extends KeyboardView {
     public static boolean inEditMode = true;

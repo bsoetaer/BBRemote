@@ -7,6 +7,9 @@ import java.io.IOException;
 import java.util.UUID;
 
 /**
+ * Creates bluetooth socket and connects on it.
+ * 3.2.1.2.1. Connect Device Successfully
+ * 3.2.1.2.3. Handle Failed Attempt to Connect to Computer Via Bluetooth
  * Created by Brendan on 3/13/2016.
  */
 public class InitialConnectionTranscever {

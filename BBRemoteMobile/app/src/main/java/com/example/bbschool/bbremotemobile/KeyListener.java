@@ -14,7 +14,12 @@ import java.util.HashSet;
 import java.util.Map;
 
 /**
- * TODO Reconsider separating listener from loading the keyboard into the view
+ * Listener for the custom keyboard. Needed for:
+ * 3.2.3.2.1. Send Key Input
+ * 3.2.3.2.3. Key Size
+ * 3.2.3.2.4. Multiple Key Press
+ * 3.2.3.2.5. Essential Extra Keys Display
+ * 3.2.3.2.6. Non-essential Extra Keys Display
  * Created by Braeden on 3/8/2016.
  */
 public class KeyListener implements KeyboardView.OnKeyboardActionListener {

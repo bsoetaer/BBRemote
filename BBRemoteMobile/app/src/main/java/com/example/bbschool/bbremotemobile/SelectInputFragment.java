@@ -17,6 +17,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
+ * Fragment to select a new gamepad input to add to a gamepad layout.
+ * 3.2.8.2.3. Add Gamepad Input
  * Created by Braeden on 3/30/2016.
  */
 public class SelectInputFragment extends Fragment implements ListView.OnItemClickListener{

@@ -11,6 +11,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * Listener for detecting movements on a gamepad axis and sending them to Windows. Handles both
+ * axis movements and axis toggle. Toggle performed by double tap on the axis and will remain until
+ * released.
+ * 3.2.7.2.3. Press Toggle Button
+ * 3.2.7.2.7. Multiple Input Press
  * Created by Braeden-MSI on 3/31/2016.
  */
 public class GamepadAxisListener implements View.OnTouchListener {

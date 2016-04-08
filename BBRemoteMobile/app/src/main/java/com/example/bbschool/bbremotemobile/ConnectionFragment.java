@@ -30,6 +30,14 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
+ * Fragment to allow users to connect to windows devices via bluetooth.
+ * 3.2.1. Connect to Computer Via Bluetooth
+ * and sub requirements
+ * 3.2.1.2.1. Connect Device Successfully
+ * 3.2.1.2.2. Only Allow Connection Between Paired Devices
+ * 3.2.1.2.3. Handle Failed Attempt to Connect to Computer Via Bluetooth
+ * 3.2.1.2.4. Scan for Devices
+ * 3.2.1.2.8. Auto-connect to Last Device on Startup
  * Created by Brendan on 3/13/2016.
  */
 public class ConnectionFragment extends Fragment implements ConnectAsyncTask.ConnectTaskListener {

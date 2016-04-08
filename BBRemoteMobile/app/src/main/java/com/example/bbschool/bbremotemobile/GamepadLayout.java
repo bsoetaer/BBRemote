@@ -7,6 +7,10 @@ import android.widget.RelativeLayout;
 import java.util.ArrayList;
 
 /**
+ * Layout containing gamepad inputs
+ * All requirements under
+ * 3.2.7. Touchscreen Gamepad Input
+ * 3.2.8. Customize Gamepad Layout
  * Created by Braeden on 3/29/2016.
  */
 public class GamepadLayout extends RelativeLayout {

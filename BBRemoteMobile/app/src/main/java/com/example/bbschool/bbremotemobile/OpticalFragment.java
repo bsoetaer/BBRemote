@@ -15,6 +15,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 /**
+ * Fragment for containing the optical mouse input mode.
+ * 3.2.5. Optical Mouse Input
+ * and all sub requirements
  * Created by Braeden on 3/13/2016.
  */
 public class OpticalFragment extends Fragment {
@@ -60,7 +63,8 @@ public class OpticalFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        if( getActivity().getRequestedOrientation() != ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
+            getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setupListeners();
     }
 
@@ -69,6 +73,11 @@ public class OpticalFragment extends Fragment {
         super.onStop();
         sensorManager = (SensorManager) getActivity().getSystemService(Context.SENSOR_SERVICE);
         sensorManager.unregisterListener(motionListener);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
         getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
     }
 

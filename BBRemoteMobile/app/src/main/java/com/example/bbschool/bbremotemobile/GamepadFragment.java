@@ -1,5 +1,6 @@
 package com.example.bbschool.bbremotemobile;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
@@ -19,6 +20,13 @@ import android.widget.RelativeLayout;
 import java.io.File;
 
 /**
+ * Fragment for game controller input mode. Loads a gamepad layout and binds listeners to all
+ * gamepad inputs inside it.
+ * 3.2.7.2.1. Press Gamepad Button
+ * 3.2.7.2.3. Press Toggle Button
+ * 3.2.7.2.5. Change Gamepad Layout
+ * 3.2.7.2.7. Multiple Input Press
+ * 3.2.7.2.9. Rotate Phone
  * Created by Braeden-MSI on 3/31/2016.
  */
 public class GamepadFragment extends Fragment {
@@ -39,7 +47,6 @@ public class GamepadFragment extends Fragment {
                              Bundle savedInstanceState) {
         RelativeLayout v = (RelativeLayout) inflater.inflate(R.layout.fragment_gamepad, container, false);
         changeGamepadLayout(gamepadLayout, v);
-        setOrientation(gamepadLayout.getPortrait());
         return v;
     }
 
@@ -61,8 +68,8 @@ public class GamepadFragment extends Fragment {
     }
 
     @Override
-    public void onDestroyView() {
-        super.onDestroyView();
+    public void onDestroy() {
+        super.onDestroy();
         getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
     }
 
@@ -75,19 +82,20 @@ public class GamepadFragment extends Fragment {
         v.removeAllViews();
         this.gamepadLayout = layout;
         clearLayoutParent();
-        setOrientation(gamepadLayout.getPortrait());
         v.addView(layout);
         for (GamepadInputView input : gamepadLayout.getGamepadInputs()) {
             input.setEditable(false);
             setupListener(input);
         }
+        setOrientation(gamepadLayout.getPortrait());
     }
 
     private void setOrientation(boolean portrait) {
         gamepadLayout.setPortrait(portrait);
         if(portrait) {
-            getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        } else {
+            if( getActivity().getRequestedOrientation() != ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
+                getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        } else if (getActivity().getRequestedOrientation() != ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE ){
             getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         }
     }

@@ -14,7 +14,10 @@ import android.widget.Button;
 
 import com.example.bbschool.bbremotemobile.R;
 
-
+/**
+ * Fragment for the touchpad input mode.
+ * 3.2.4. Touchscreen Mouse Input
+ */
 public class TouchpadFragment extends Fragment {
 
     @Override

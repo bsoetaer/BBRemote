@@ -6,6 +6,9 @@ import android.os.AsyncTask;
 import java.io.IOException;
 
 /**
+ * Async task for setting up bluetooth connections.
+ * 3.2.1.2.1. Connect Device Successfully
+ * 3.2.1.2.3. Handle Failed Attempt to Connect to Computer Via Bluetooth
  * Created by Braeden-MSI on 3/24/2016.
  */
 public class ConnectAsyncTask extends AsyncTask<BluetoothDevice, Integer, Exception> {

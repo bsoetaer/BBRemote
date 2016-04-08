@@ -4,6 +4,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * Mapping of the android provided keycodes from the custom keyboard to keycodes expected by Windows
+ * Needed for all keyboard requirements.
+ * 3.2.3.2.1. Send Key Input
+ * 3.2.3.2.4. Multiple Key Press
+ * 3.2.3.2.5. Essential Extra Keys Display
+ * 3.2.3.2.6. Non-essential Extra Keys Display
  * Created by Brendan on 3/31/2016.
  */
 public final class AndroidToWindowsKeyCodes {

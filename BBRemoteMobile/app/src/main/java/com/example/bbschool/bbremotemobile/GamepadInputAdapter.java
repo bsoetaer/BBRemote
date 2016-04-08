@@ -12,6 +12,8 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 /**
+ * Populates the select input list for adding additional inputs to a gamepad layout
+ * 3.2.8.2.3. Add Gamepad Input
  * Created by Braeden on 3/30/2016.
  */
 public class GamepadInputAdapter extends ArrayAdapter<GamepadInput> {

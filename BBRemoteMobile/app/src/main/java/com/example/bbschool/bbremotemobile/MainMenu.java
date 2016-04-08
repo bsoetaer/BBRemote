@@ -9,6 +9,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 /**
+ * Main menu for the app for general navigation and hiding menu items.
+ * 3.2.2. Select Input Mode
+ * and all sub requirements
  * Created by Braeden on 3/10/2016.
  */
 public class MainMenu {

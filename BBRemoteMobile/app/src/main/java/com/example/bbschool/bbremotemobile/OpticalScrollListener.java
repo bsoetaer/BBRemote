@@ -9,6 +9,8 @@ import android.widget.Button;
 import java.io.IOException;
 
 /**
+ * Listener to listen to scroll events for the optical mouse on a button.
+ * 3.2.5.2.6. Scrolling
  * Created by Braeden on 3/13/2016.
  */
 public class OpticalScrollListener implements Button.OnTouchListener {

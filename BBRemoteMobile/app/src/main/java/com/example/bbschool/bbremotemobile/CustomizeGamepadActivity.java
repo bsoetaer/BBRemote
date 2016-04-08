@@ -12,6 +12,11 @@ import android.view.MenuItem;
 
 import java.util.HashMap;
 
+/**
+ * Activity for customizing gamepad layouts.
+ * 3.2.8. Customize Gamepad Layout
+ * and all sub requirements of it
+ */
 public class CustomizeGamepadActivity extends AppCompatActivity implements
         SelectInputFragment.OnInputSelectedListener,
         CustomizeLayoutFragment.OnSelectInputListener {

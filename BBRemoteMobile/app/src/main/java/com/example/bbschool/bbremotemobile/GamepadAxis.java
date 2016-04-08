@@ -1,6 +1,8 @@
 package com.example.bbschool.bbremotemobile;
 
 /**
+ * Enum of the various axis' for gamepad input
+ * 3.2.7.2.3. Press Toggle Button
  * Created by Brendan on 4/3/2016.
  */
 public enum GamepadAxis {

@@ -7,6 +7,16 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+/**
+ * Activity to allow users to connect to windows devices via bluetooth.
+ * 3.2.1. Connect to Computer Via Bluetooth
+ * and sub requirements
+ * 3.2.1.2.1. Connect Device Successfully
+ * 3.2.1.2.2. Only Allow Connection Between Paired Devices
+ * 3.2.1.2.3. Handle Failed Attempt to Connect to Computer Via Bluetooth
+ * 3.2.1.2.4. Scan for Devices
+ * 3.2.1.2.8. Auto-connect to Last Device on Startup
+ */
 public class ConnectionActivity extends AppCompatActivity  {
 
     private MainMenu mainMenu;

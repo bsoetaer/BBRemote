@@ -15,6 +15,9 @@ import java.util.Map;
 import javax.net.ssl.KeyStoreBuilderParameters;
 
 /**
+ * Class to change between input modes and activities.
+ * 3.2.2. Select Input Mode
+ * and sub requirements
  * Created by Braeden on 3/10/2016.
  */
 public class ModeChanger {

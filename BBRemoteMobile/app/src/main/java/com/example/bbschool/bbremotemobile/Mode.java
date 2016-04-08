@@ -1,6 +1,8 @@
 package com.example.bbschool.bbremotemobile;
 
 /**
+ * Enum for different possible input modes.
+ * 3.2.2. Select Input Mode
  * Created by Braeden on 3/10/2016.
  */
 public enum Mode {

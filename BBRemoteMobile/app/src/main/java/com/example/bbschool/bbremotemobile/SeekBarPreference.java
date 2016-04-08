@@ -8,6 +8,10 @@ import android.view.View;
 import android.widget.SeekBar;
 
 /**
+ * Preference for setting sensitivities.
+ * 3.2.4.2.6. Change Mouse Sensitivity
+ * 3.2.5.2.7. Change Mouse Sensitivity
+ * 3.2.7.2.8. Change Analog Stick Sensitivity
  * Created by Braeden on 4/3/2016.
  */
 public class SeekBarPreference extends Preference implements SeekBar.OnSeekBarChangeListener {

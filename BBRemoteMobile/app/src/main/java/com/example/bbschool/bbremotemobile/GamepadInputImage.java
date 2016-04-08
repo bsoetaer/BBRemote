@@ -3,6 +3,11 @@ package com.example.bbschool.bbremotemobile;
 import java.util.HashMap;
 
 /**
+ * Mapping of images for each gamepad input.
+ * 3.2.7.2.1. Press Gamepad Button
+ * 3.2.7.2.3. Press Toggle Button
+ * 3.2.8.2.3. Add Gamepad Input
+ * 3.2.8.2.4. Delete Gamepad Input
  * Created by Braeden on 3/28/2016.
  */
 public class GamepadInputImage {

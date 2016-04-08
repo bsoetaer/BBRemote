@@ -14,6 +14,8 @@ import java.util.ArrayList;
 import java.util.Set;
 
 /**
+ * ArrayAdapter for populating paired and unpaired device lists of the ConnectionFragment.
+ * 3.2.1.2.4. Scan for Devices
  * Created by Braeden on 3/23/2016.
  */
 public class DeviceAdapter extends ArrayAdapter<BluetoothDevice>{

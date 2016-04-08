@@ -5,6 +5,7 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:id="@+id/input_mode_fragment"
+    android:keepScreenOn="true"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.example.bbschool.bbremotemobile.InputActivity"
     tools:showIn="@layout/activity_input">

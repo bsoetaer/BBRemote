@@ -10,6 +10,14 @@ import android.widget.RelativeLayout;
 import java.io.Serializable;
 
 /**
+ * A view representing a gamepad input
+ * 3.2.7.2.1. Press Gamepad Button
+ * 3.2.7.2.3. Press Toggle Button
+ * 3.2.7.2.7. Multiple Input Press
+ * 3.2.8.2.3. Add Gamepad Input
+ * 3.2.8.2.4. Delete Gamepad Input
+ * 3.2.8.2.5. Move Gamepad Input
+ * 3.2.8.2.6. Resize Gamepad Input
  * Created by Braeden on 3/27/2016.
  */
 public class GamepadInputView extends ImageView {
