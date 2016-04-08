@@ -95,6 +95,13 @@
 12. Test results will be displayed in the bottorm windows.
 
 ### Windows Side
+
+The tests for the windows client is composed of two sets:
+1. Unit tests for the app, for attempted statement coverage
+2. Functional tests for the drivers, covering use cases for the Mouse and Keyboard drivers
+
+Setup and usage information for the tests are as follows:
+
 1. Install Visual Studio from https://www.visualstudio.com/en-us/downloads/download-visual-studio-vs.aspx
 2. Open BBRemoteDesktop\app\app.sln
 3. Set the solution configuration to Release and the Solution platform to x64
