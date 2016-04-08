@@ -93,3 +93,32 @@
 10. In Android studio's project explorer got to app -> java -> com.example.bbschool.bbremotemobile(androidTest)
 11. Right click any test and choose to run it
 12. Test results will be displayed in the bottorm windows.
+
+### Windows Side
+1. Install Visual Studio from https://www.visualstudio.com/en-us/downloads/download-visual-studio-vs.aspx
+2. Open BBRemoteDesktop\app\app.sln
+3. Set the solution configuration to Release and the Solution platform to x64
+4. Click Build -> Build Solution
+5. Open BBRemoteDesktop\BBDesktopAppUnitTests\BBDesktopAppUnitTests.sln
+6. In the Solution Explorer, right click BBDesktopAppUnitTests and click properties
+7. In Configuration Properties -> Linker -> Input, ensure that Additional Dependencies include the following:
+    ```
+    
+    ws2_32.lib
+    Xinput.lib
+    User32.lib
+    ..\..\app\x64\Release\app.lib
+    BluetoothReceiver.obj
+    NoInputProxy.obj
+    DriverProxy.obj
+    KeyboardProxy.obj
+    GlobalFile.obj
+    ModeSwitcher.obj
+    MouseProxy.obj
+    GamepadProxy.obj
+    ```
+8. Set the solution configuration to Release and the Solution platform to x64
+9. Under the tab Test, click Test Settings -> Default Processor Architecture -> x64
+10. Under the tab Test, click Windows -> Test Explorer
+11. In the test explorer, click Run All.
+  1. Note that the tests rely on the state of your mouse and keyboard. Refrain from touching your mouse and keyboard while the tests are running.
