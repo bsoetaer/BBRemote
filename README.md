@@ -1,5 +1,7 @@
 # BBRemote
 
+BBRemote is an Android application that allows your phone to be used as a input device for a Windows computer. It supports use of the phone as a touchpad, keyboard, or game controller. To use BBRemote, you need both the Android application as well as the Windows Driver installed.
+
 ## Setup Instructions
 
 ### Mobile Client
